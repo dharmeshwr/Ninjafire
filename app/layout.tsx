@@ -4,9 +4,12 @@ import { Metadata } from "next";
 import { fontGeist, fontMono, fontSans } from "@/assets/fonts";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import { ThemeProvider } from "next-themes";
 
 import { metaData } from "@/config/site";
 import { cn } from "@/lib/utils";
+import Footer from "@/components/layout/footer";
+import { Navbar } from "@/components/layout/navbar";
 
 export const metadata: Metadata = {
   metadataBase: new URL(metaData.baseUrl),
@@ -73,13 +76,21 @@ export default function RootLayout({ children }: React.PropsWithChildren) {
           title="JSON Feed"
         />
       </head>
-      <body className="mx-auto mb-20 mt-2 flex flex-col items-center justify-center antialiased lg:mb-40 lg:mt-8">
-        <main className="mt-2 flex w-full min-w-0 max-w-[640px] flex-1 flex-col px-6 sm:px-4 md:mt-6 md:px-0">
-          Hello
-          {children}
-          <Analytics />
-          <SpeedInsights />
-        </main>
+      <body className="mx-auto mb-20 mt-2 flex flex-col items-center justify-center bg-background text-foreground antialiased lg:mb-40 lg:mt-8">
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <main className="mt-2 flex w-full min-w-0 max-w-[640px] flex-1 flex-col px-6 sm:px-4 md:mt-6 md:px-0">
+            <Navbar />
+            {children}
+            <Footer />
+            <Analytics />
+            <SpeedInsights />
+          </main>
+        </ThemeProvider>
       </body>
     </html>
   );

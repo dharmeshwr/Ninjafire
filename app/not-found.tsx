@@ -15,7 +15,10 @@ export default function NotFound() {
       <p className="mb-4">
         Oops! The page you&apos;re looking for doesn&apos;t seem to exist.
       </p>
-      <Link href="/">Return To Home</Link>
+      <Link href="/" className="underline">
+        {" "}
+        Return To Home
+      </Link>
     </section>
   );
 }
