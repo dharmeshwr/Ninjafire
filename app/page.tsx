@@ -17,8 +17,8 @@ export default function Page() {
 
       <p className="text-left">
         Hi! I usually go by Ninjafire on the Internet, though my real name is
-        Dharmesh. I'm an 21 year old developer, the photo you are looking is
-        just an Piece of AI.
+        Dharmesh. I&apos;m an 21 year old developer, the photo you are looking
+        is just an piece of AI.
       </p>
     </section>
   );

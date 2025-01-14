@@ -9,7 +9,7 @@ export function ClientOnly({
   useEffect(() => {
     setMounted(true);
     return () => setMounted(false);
-  });
+  }, []);
 
   if (!mounted) {
     return fallback;
