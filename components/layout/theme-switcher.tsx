@@ -4,6 +4,8 @@ import { useEffect } from "react";
 import { MoonStar, SunMedium } from "lucide-react";
 import { useTheme } from "next-themes";
 
+import { cn } from "@/lib/utils";
+
 import { ClientOnly } from "../shared/client-only";
 
 enum Theme {
@@ -100,14 +102,16 @@ export function ThemeSwitcher() {
       >
         {/*TODO: make the icons transition smoothly*/}
         <SunMedium
-          className={`size-5 transition-all duration-300 ease-in-out ${
-            theme === Theme.LIGHT ? "scale-100" : "scale-0"
-          }`}
+          className={cn(
+            "size-5 transition-all duration-300 ease-in-out",
+            theme === Theme.LIGHT ? "scale-100" : "scale-0",
+          )}
         />
         <MoonStar
-          className={`absolute size-5 transition-all duration-300 ease-in-out ${
-            theme === Theme.LIGHT ? "scale-0" : "scale-100"
-          }`}
+          className={cn(
+            "size-5 transition-all duration-300 ease-in-out",
+            theme === Theme.LIGHT ? "scale-0" : "scale-100",
+          )}
         />
         <span className="sr-only">Toggle Theme</span>
       </button>
