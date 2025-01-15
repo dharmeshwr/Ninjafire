@@ -1,4 +1,4 @@
-import "./global.css";
+import "./globals.css";
 
 import { Metadata } from "next";
 import { fontGeist, fontMono, fontSans } from "@/assets/fonts";
