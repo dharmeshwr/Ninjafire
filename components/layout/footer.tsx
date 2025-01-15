@@ -31,24 +31,26 @@ function SocialLinks() {
 
 export default function Footer() {
   return (
-    <small className="mt-16 block lg:mt-24">
-      <time>© {YEAR}</time>{" "}
-      <Link
-        className="no-underline"
-        href={socialLinks.twitter}
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        {metaData.title}
-      </Link>
-      <style jsx>{`
-        @media screen and (max-width: 480px) {
-          article {
-            padding-top: 2rem;
-            padding-bottom: 4rem;
+    <small className="mt-16 flex items-center justify-between lg:mt-24">
+      <span className="flex gap-1">
+        <time>© {YEAR}</time>
+        <Link
+          className="no-underline"
+          href={socialLinks.twitter}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          {metaData.title}
+        </Link>
+        <style jsx>{`
+          @media screen and (max-width: 480px) {
+            article {
+              padding-top: 2rem;
+              padding-bottom: 4rem;
+            }
           }
-        }
-      `}</style>
+        `}</style>
+      </span>
       <SocialLinks />
     </small>
   );

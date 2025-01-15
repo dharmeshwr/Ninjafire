@@ -52,3 +52,11 @@ table {
   overflow-x: auto;
   white-space: nowrap;
 }
+
+.profile-pic-circle {
+  @apply pointer-events-none absolute top-0 size-[160px] rounded-full border-2 border-background transition-all duration-500 ease-linear;
+}
+
+.nondraggable {
+  -webkit-user-drag: none;
+}
