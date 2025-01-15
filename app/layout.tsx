@@ -1,7 +1,7 @@
 import "./globals.css";
 
 import { Metadata } from "next";
-import { fontGeist, fontMono, fontSans } from "@/assets/fonts";
+import { fontMono, fontSans } from "@/assets/fonts";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { ThemeProvider } from "next-themes";
@@ -54,7 +54,7 @@ export default function RootLayout({ children }: React.PropsWithChildren) {
     <html
       lang="en"
       suppressHydrationWarning
-      className={cn(fontSans.variable, fontMono.variable, fontGeist.variable)}
+      className={cn(fontSans.variable, fontMono.variable)}
     >
       <head>
         <link

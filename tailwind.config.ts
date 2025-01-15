@@ -12,7 +12,6 @@ export default {
       fontFamily: {
         sans: ["var(--font-sans)", ...fontFamily.sans],
         mono: ["var(--font-mono)", ...fontFamily.mono],
-        geist: ["var(--font-geist)", ...fontFamily.sans],
       },
       typography: {
         quoteless: {
