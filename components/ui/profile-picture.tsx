@@ -65,15 +65,15 @@ export function ProfilePicture() {
           ref={ref}
           className="relative flex items-center justify-center p-16"
         >
-          <div className="duration-50 pointer-events-none absolute size-[151px] rounded-full border border-[#ebddb2] bg-[#f5bb00] transition-all ease-linear"></div>
-          <div className="duration-50 pointer-events-none absolute size-[151px] rounded-full border border-[#ebddb2] bg-[#ec9f05] transition-all ease-linear"></div>
-          <div className="duration-50 pointer-events-none absolute size-[151px] rounded-full border border-[#ebddb2] bg-[#d76a03] transition-all ease-linear"></div>
-          <div className="duration-50 pointer-events-none absolute size-[151px] rounded-full border border-[#ebddb2] bg-[#bf3100] transition-all ease-linear"></div>
-          <div className="duration-50 pointer-events-none absolute -z-0 size-[151px] transition-all ease-linear">
+          <div className="profile-pic-circle bg-[#f5bb00]"></div>
+          <div className="profile-pic-circle bg-[#ec9f05]"></div>
+          <div className="profile-pic-circle bg-[#d76a03]"></div>
+          <div className="profile-pic-circle bg-[#bf3100]"></div>
+          <div className="profile-pic-circle">
             <Image
               src="/profile.png"
               alt="Profile photo"
-              className="rounded-full border border-[#ebddb2] transition-all duration-500 ease-linear"
+              className="rounded-full"
               unoptimized
               width={160}
               height={160}

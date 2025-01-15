@@ -109,7 +109,7 @@ export function ThemeSwitcher() {
         />
         <MoonStar
           className={cn(
-            "size-5 transition-all duration-300 ease-in-out",
+            "absolute size-5 transition-all duration-300 ease-in-out",
             theme === Theme.LIGHT ? "scale-0" : "scale-100",
           )}
         />

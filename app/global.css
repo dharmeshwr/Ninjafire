@@ -2,9 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
-::selection {
+.light ::selection {
   background-color: #282828;
   color: #ebdbb2;
+}
+
+.dark ::selection {
+  background-color: #ebdbb2;
+  color: #282828;
 }
 
 .light {
@@ -54,7 +59,7 @@ table {
 }
 
 .profile-pic-circle {
-  @apply pointer-events-none absolute top-0 size-[160px] rounded-full border-2 border-background transition-all duration-500 ease-linear;
+  @apply pointer-events-none absolute size-[151px] rounded-full border border-background transition-all ease-linear;
 }
 
 .nondraggable {
