@@ -1,0 +1,87 @@
+---
+title: "MDX Example"
+description: "MDX examples."
+date: "2024-08-11"
+published: true
+image: /opengraph-image.png
+authors:
+  - Dharmesh
+---
+
+his uses for blog posts, making it easy to include JSX components such as interactive embeds, charts, or alerts directly in your markdown content.
+
+Here are some examples of using MDX:
+
+## h2 Heading
+
+### h3 Heading
+
+#### h4 Heading
+
+##### h5 Heading
+
+## Emphasis
+
+**This is bold text**
+
+_This is italic text_
+
+<del> Strikethrough </del>
+
+## Blockquotes
+
+> If today were the last day of my life, would I want to do what I am about to do today? – Steve Jobs
+
+## Links
+
+- Nextfolio is built with [Next.js](https://nextjs.org).
+- Nextfolio uses [pnpm](https://pnpm.io/) for package management.
+
+## CodeBlocks
+
+```
+// This is commented-out code
+export default function HelloWorld() {
+  return (
+    <h1>Hello, World!</h1>
+  );
+}
+```
+
+## Images
+
+This uses [Next.js Image](https://nextjs.org/docs/basic-features/image-optimization) in MDX for seamless image rendering:
+
+```
+<Image
+  src="/opengraph-image.png"
+  alt="OpenGraph image"
+  width={640}
+  height={500}
+/>
+```
+
+Renders:
+
+<Image
+  src="/opengraph-image.png"
+  alt="OpenGraph image"
+  width={640}
+  height={500}
+/>
+
+This uses [react-wrap-balancer](https://react-wrap-balancer.vercel.app/) to evenly balance captions in MDX posts.
+
+```
+<Caption>
+  Captions that flow smoothly, making your content easy to read and visually
+  appealing with a clean look.
+</Caption>
+```
+
+Renders:
+
+<Caption>
+  Captions that flow smoothly, making your content easy to read and visually
+  appealing with a clean look.
+</Caption>
