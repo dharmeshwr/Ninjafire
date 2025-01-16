@@ -24,7 +24,7 @@ export function useMediaQuery() {
 
     window.addEventListener("resize", checkDevice);
 
-    return () => window.addEventListener("resize", checkDevice);
+    return () => window.removeEventListener("resize", checkDevice);
   }, []);
 
   return {

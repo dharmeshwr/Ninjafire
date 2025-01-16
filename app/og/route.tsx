@@ -1,5 +1,7 @@
 import { ImageResponse } from "next/og";
 
+// export const runtime = "edge";
+
 export async function GET() {
   try {
     const train = await fetch(
@@ -29,6 +31,8 @@ export async function GET() {
             style: "normal",
           },
         ],
+        width: 800,
+        height: 300,
       },
     );
   } catch {

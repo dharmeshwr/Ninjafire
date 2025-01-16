@@ -4,7 +4,7 @@ export const socialLinks = {
   twitter: "https://x.com/Dharmesh177208",
   github: "https://github.com/dharmesh53/",
   linkedin: "https://www.linkedin.com/in/dharmeshxr",
-  email: "dharmeshwr@gmail.com",
+  email: "mailto:dharmeshwr@gmail.com",
 };
 
 export const metaData = {
