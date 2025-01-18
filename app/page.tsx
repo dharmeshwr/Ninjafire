@@ -15,7 +15,7 @@ export default function Page() {
         I Build Things !
       </Balancer>
 
-      <p className="text-left leading-8">
+      <p className="prose text-left leading-8 text-foreground">
         perspiciatis unde omnis iste natus error sit voluptatem accusantium
         doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo
         inventore veritatis et quasi architecto beatae vitae dicta sunt

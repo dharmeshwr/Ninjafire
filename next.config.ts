@@ -1,8 +1,20 @@
 import type { NextConfig } from "next";
-import { withContentlayer } from "next-contentlayer";
+import createMDX from "@next/mdx";
+
+const withMDX = createMDX({
+  extension: /\.mdx?$/,
+  options: {
+    remarkPlugins: [["remark-gfm", { strict: true, throwOnError: true }]],
+    rehypePlugins: [],
+  },
+});
 
 const nextConfig: NextConfig = {
   reactStrictMode: true,
+  pageExtensions: ["js", "jsx", "md", "mdx", "ts", "tsx"],
+  experimental: {
+    mdxRs: false,
+  },
   async rewrites() {
     return [
       {
@@ -37,4 +49,4 @@ const nextConfig: NextConfig = {
   },
 };
 
-export default withContentlayer(nextConfig);
+export default withMDX(nextConfig);

@@ -58,7 +58,7 @@ export function ProfilePicture() {
     <div draggable="false" className="block">
       <div
         draggable="false"
-        className="mx-auto mb-10 mt-0 sm:float-right sm:mb-5 sm:ml-5 lg:mb-5 lg:mt-5"
+        className="mx-auto mb-10 mt-0 sm:float-right sm:mb-5 sm:ml-5 lg:my-5"
       >
         <div
           draggable="false"

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { useCallback, useEffect } from "react";
 import { MoonStar, SunMedium } from "lucide-react";
 import { useTheme } from "next-themes";
 
@@ -45,10 +45,13 @@ export function ThemeSwitcher() {
   const { getSystemThemePreferences, setSystemThemePreference } =
     useSystemThemePreference();
 
-  const updateTheme = (theme: Theme) => {
-    setTheme(theme);
-    setSystemThemePreference(theme);
-  };
+  const updateTheme = useCallback(
+    (theme: Theme) => {
+      setTheme(theme);
+      setSystemThemePreference(theme);
+    },
+    [setTheme, setSystemThemePreference],
+  );
 
   const toggleTheme = () => {
     const newTheme = theme === Theme.LIGHT ? Theme.DARK : Theme.LIGHT;
@@ -87,7 +90,7 @@ export function ThemeSwitcher() {
       mediaQuery.removeEventListener("change", handleSystemThemeChange);
       document.removeEventListener("keydown", handleKeyDown);
     };
-  }, []);
+  }, [getSystemThemePreferences, updateTheme]);
 
   const Skeleton = () => {
     return <span className="size-5 rounded bg-neutral-400/20"></span>;

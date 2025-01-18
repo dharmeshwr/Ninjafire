@@ -1,53 +1,32 @@
-import Image from "next/image";
+import fs from "fs";
+import path from "path";
 import Link from "next/link";
-import { allBlogs, Blog } from "contentlayer/generated";
-import { compareDesc } from "date-fns";
 
-import { formatDate } from "@/lib/utils";
+const getAllBlogsSlug = async () => {
+  const CONTENT_PATH = path.join(process.cwd(), "app/blogs/(content)");
+  const dirs = fs.readdirSync(CONTENT_PATH);
 
-export const metadata = {
-  title: "Blog",
-  description: "Blog from my learning",
+  return Promise.all(
+    dirs.map(async (blogDir) => {
+      const { metadata } = await import(`./(content)/${blogDir}/page.mdx`);
+      return { ...metadata, href: `/blogs/${blogDir}` };
+    }),
+  );
 };
 
-function BlogCard(blog: Blog) {
-  return (
-    <div className="mb-8">
-      <h2 className="mb-1 text-xl">
-        <Link
-          href={blog.slug}
-          className="text-blue-700 hover:text-blue-900 dark:text-blue-400"
-        >
-          {blog.title}
-        </Link>
-
-        {blog.image && (
-          <Image
-            src={blog.image}
-            alt={blog.title}
-            width={804}
-            height={452}
-            className="bg-muted rounded-md border transition-colors"
-          />
-        )}
-      </h2>
-      <time dateTime={blog.date} className="mb-2 block text-xs text-gray-600">
-        {formatDate(blog.date)}
-      </time>
-    </div>
-  );
-}
-
-export default function Blogs() {
-  const blogs = allBlogs
-    .filter((blog) => blog.published)
-    .sort((a, b) => compareDesc(new Date(a.date), new Date(b.date)));
+export default async function BlogsPage() {
+  const blogs = await getAllBlogsSlug();
 
   return (
-    <div className="mx-auto max-w-xl py-8">
-      {blogs.map((blog, idx) => (
-        <BlogCard key={idx} {...blog} />
-      ))}
+    <div>
+      <h1>Listed Blogs</h1>
+      <ul>
+        {blogs.map((blog, index) => (
+          <li key={index}>
+            <Link href={`${blog.href}`}>{blog.title}</Link>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }
