@@ -33,7 +33,7 @@ const eslintConfig = [
       "@next/next/no-html-link-for-pages": "off",
       "react/jsx-key": "off",
       "tailwindcss/no-custom-classname": "off",
-      "tailwindcss/classnames-order": "warn",
+      "tailwindcss/classnames-order": "off",
     },
   },
 ];

@@ -19,10 +19,13 @@ export default async function BlogsPage() {
 
   return (
     <div>
-      <h1>Listed Blogs</h1>
-      <ul>
+      <h2 className="text-2xl">My Blogs</h2>
+      <ul className="pl-6 pt-5">
         {blogs.map((blog, index) => (
-          <li key={index}>
+          <li
+            key={index}
+            className="text-md list-disc pl-3 font-medium underline"
+          >
             <Link href={`${blog.href}`}>{blog.title}</Link>
           </li>
         ))}

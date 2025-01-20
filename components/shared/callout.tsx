@@ -17,8 +17,8 @@ export function Callout({
       className={cn(
         "my-6 flex items-start rounded-md border border-l-4 border-foreground/50 bg-foreground/5 p-4 py-2",
         {
-          "border-[#cc241d] bg-[#cc241d] bg-opacity-10": type === "danger",
-          "border-[#458588] bg-[#458588] bg-opacity-10": type === "warning",
+          "border-[#cc241d] bg-[#cc241d]/10": type === "danger",
+          "border-[#458588] bg-[#458588]/10": type === "warning",
         },
       )}
       {...props}
