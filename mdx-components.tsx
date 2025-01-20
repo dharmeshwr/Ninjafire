@@ -1,4 +1,4 @@
-import React, { ComponentPropsWithoutRef } from "react";
+import { ComponentPropsWithoutRef } from "react";
 import Link from "next/link";
 import { highlight } from "sugar-high";
 
@@ -11,43 +11,98 @@ type BlockquoteProps = ComponentPropsWithoutRef<"blockquote">;
 
 const components = {
   h1: (props: HeadingProps) => (
-    <h1 className="mb-0 pt-6 font-medium fade-in" {...props} />
+    <h1
+      style={{
+        animation: "fade-in 1s ease-in-out",
+        marginBottom: "0",
+        paddingTop: "1.5rem",
+        fontWeight: 500,
+      }}
+      {...props}
+    />
   ),
   h2: (props: HeadingProps) => (
-    <h2 className="mb-3 mt-8 font-medium text-gray-800" {...props} />
+    <h2
+      style={{
+        marginBottom: "0.75rem",
+        marginTop: "2rem",
+        fontWeight: 500,
+      }}
+      {...props}
+    />
   ),
   h3: (props: HeadingProps) => (
-    <h3 className="mb-3 mt-8 font-medium text-gray-800" {...props} />
+    <h3
+      style={{
+        marginBottom: "0.75rem",
+        marginTop: "2rem",
+        fontWeight: 500,
+      }}
+      {...props}
+    />
   ),
-  h4: (props: HeadingProps) => <h4 className="font-medium" {...props} />,
+  h4: (props: HeadingProps) => <h4 style={{ fontWeight: 500 }} {...props} />,
   p: (props: ParagraphProps) => (
-    <p className="leading-snug text-gray-800" {...props} />
+    <p
+      style={{
+        lineHeight: "1.5",
+      }}
+      {...props}
+    />
   ),
   ol: (props: ListProps) => (
-    <ol className="list-decimal space-y-2 pl-5 text-gray-800" {...props} />
+    <ol
+      style={{
+        listStyleType: "decimal",
+        paddingLeft: "1.25rem",
+        margin: 0,
+        marginBottom: "1rem",
+      }}
+      {...props}
+    />
   ),
   ul: (props: ListProps) => (
-    <ul className="list-disc space-y-1 pl-5 text-gray-800" {...props} />
+    <ul
+      style={{
+        listStyleType: "disc",
+        paddingLeft: "1.25rem",
+        margin: 0,
+        marginBottom: "1rem",
+      }}
+      {...props}
+    />
   ),
-  li: (props: ListItemProps) => <li className="pl-1" {...props} />,
+  li: (props: ListItemProps) => (
+    <li
+      style={{
+        paddingLeft: "0.25rem",
+      }}
+      {...props}
+    />
+  ),
   em: (props: ComponentPropsWithoutRef<"em">) => (
-    <em className="font-medium" {...props} />
+    <em style={{ fontWeight: 500 }} {...props} />
   ),
   strong: (props: ComponentPropsWithoutRef<"strong">) => (
-    <strong className="font-medium" {...props} />
+    <strong style={{ fontWeight: 500 }} {...props} />
   ),
   a: ({ href, children, ...props }: AnchorProps) => {
-    const className = "text-blue-500 hover:text-blue-700";
+    const commonStyle = {
+      color: "#458588",
+      textDecoration: "none",
+      transition: "color 0.2s ease-in-out",
+    } as React.CSSProperties;
+
     if (href?.startsWith("/")) {
       return (
-        <Link href={href} className={className} {...props}>
+        <Link href={href} style={commonStyle} {...props}>
           {children}
         </Link>
       );
     }
     if (href?.startsWith("#")) {
       return (
-        <a href={href} className={className} {...props}>
+        <a href={href} style={commonStyle} {...props}>
           {children}
         </a>
       );
@@ -57,7 +112,7 @@ const components = {
         href={href}
         target="_blank"
         rel="noopener noreferrer"
-        className={className}
+        style={commonStyle}
         {...props}
       >
         {children}
@@ -66,14 +121,34 @@ const components = {
   },
   code: ({ children, ...props }: ComponentPropsWithoutRef<"code">) => {
     const codeHTML = highlight(children as string);
-    return <code dangerouslySetInnerHTML={{ __html: codeHTML }} {...props} />;
+    return (
+      <code
+        style={{
+          padding: "0.2rem 0.4rem",
+          borderRadius: "4px",
+          fontSize: "0.875rem",
+        }}
+        dangerouslySetInnerHTML={{ __html: codeHTML }}
+        {...props}
+      />
+    );
   },
   Table: ({ data }: { data: { headers: string[]; rows: string[][] } }) => (
-    <table>
+    <table
+      style={{ borderCollapse: "collapse", width: "100%", margin: "1rem 0" }}
+    >
       <thead>
         <tr>
           {data.headers.map((header, index) => (
-            <th key={index}>{header}</th>
+            <th
+              key={index}
+              style={{
+                textAlign: "left",
+                padding: "0.5rem",
+              }}
+            >
+              {header}
+            </th>
           ))}
         </tr>
       </thead>
@@ -81,7 +156,15 @@ const components = {
         {data.rows.map((row, index) => (
           <tr key={index}>
             {row.map((cell, cellIndex) => (
-              <td key={cellIndex}>{cell}</td>
+              <td
+                key={cellIndex}
+                style={{
+                  borderBottom: "1px solid #e2e8f0",
+                  padding: "0.5rem",
+                }}
+              >
+                {cell}
+              </td>
             ))}
           </tr>
         ))}
@@ -90,7 +173,10 @@ const components = {
   ),
   blockquote: (props: BlockquoteProps) => (
     <blockquote
-      className="border-l-3 ml-[0.075em] border-gray-300 pl-4 text-gray-700"
+      style={{
+        marginLeft: "0.2rem",
+        paddingLeft: "1rem",
+      }}
       {...props}
     />
   ),

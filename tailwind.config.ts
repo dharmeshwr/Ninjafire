@@ -3,7 +3,6 @@ import { fontFamily } from "tailwindcss/defaultTheme";
 
 export default {
   content: [
-    "./content/**/*.{md,mdx}",
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
   ],

@@ -2,28 +2,48 @@
 @tailwind components;
 @tailwind utilities;
 
-.light ::selection {
-  background-color: #282828;
-  color: #ebdbb2;
-}
-
-.dark ::selection {
-  background-color: #ebdbb2;
-  color: #282828;
-}
-
 .light {
-  --background: 43, 59%, 81%;
-  --foreground: 0, 0%, 16%;
+  --background: 53, 74%, 91%;
+  --foreground: 195, 6%, 12%;
+  --background-alt: 53, 74%, 86%;
+  --sh-jsxliterals: #1d2021;
+  --sh-identifier: #1d2021;
+  --sh-class: #b57614;
+  --sh-sign: #d3869b;
+  --sh-string: #79740e;
+  --sh-keyword: #cc241d;
+  --sh-comment: #928374;
+  --sh-property: #427b58;
+  --sh-entity: #af3a03;
 }
 
 .dark {
-  --background: 0, 0%, 16%;
-  --foreground: 43, 59%, 81%;
+  --background: 195, 6%, 12%;
+  --foreground: 53, 74%, 91%;
+  --background-alt: 195, 6%, 16%;
+  --sh-jsxliterals: #ebdbb2;
+  --sh-identifier: #ebdbb2;
+  --sh-class: #fabd2f;
+  --sh-sign: #d3869b;
+  --sh-string: #b8bb26;
+  --sh-keyword: #fb4934;
+  --sh-comment: #928374;
+  --sh-property: #8ec07c;
+  --sh-entity: #fe8019;
+}
+
+::selection {
+  background-color: hsl(var(--foreground));
+  color: hsl(var(--background));
 }
 
 html {
   min-width: 360px;
+  scrollbar-gutter: stable;
+}
+
+body {
+  text-rendering: optimizeLegibility;
 }
 
 h2,
@@ -34,6 +54,17 @@ h6 {
   @apply font-medium tracking-tight !important;
 }
 
+pre {
+  border: 1px solid;
+  border-radius: 0.5rem;
+  overflow-x: auto;
+  padding: 1rem;
+  margin: 1.5rem 0;
+  line-height: 1;
+  border: 1px solid hsl(var(--foreground)) !important;
+  background-color: hsl(var(--background-alt)) !important;
+}
+
 pre::-webkit-scrollbar {
   display: none;
 }
@@ -41,6 +72,38 @@ pre::-webkit-scrollbar {
 pre {
   -ms-overflow-style: none;
   scrollbar-width: none;
+}
+
+pre code {
+  background-color: transparent;
+  padding: 0;
+  border: none;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+pre code > span .sh__token--identifier {
+  color: #cc241d !important;
+}
+
+pre code span {
+  font-weight: 500;
+}
+
+code {
+  font-size: calc(100% - 1px) !important;
+  padding: 0.2em 0.4em;
+  border-radius: 0.3em;
+  background-color: hsl(var(--background-alt));
+}
+
+h3 code {
+  font-size: calc(100% - 4px) !important;
+}
+
+code::before,
+code::after {
+  content: "" !important;
 }
 
 /* Remove Safari input shadow on mobile */
@@ -56,6 +119,10 @@ table {
   max-width: fit-content;
   overflow-x: auto;
   white-space: nowrap;
+}
+
+hr {
+  border-color: hal(var(--foreground)) !important;
 }
 
 .profile-pic-circle {

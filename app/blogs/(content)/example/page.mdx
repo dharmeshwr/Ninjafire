@@ -16,8 +16,33 @@ export const metadata = {
 export default function MDXPage({ children }) {
   return <MdxLayout>{children}</MdxLayout>;
 }
+ 
+# Welcome to my MDX page!
+ 
+This is some **bold** and _italics_ text.
+ 
+This is a list in markdown:
+ 
+- One
+- Two
+- Three
+ 
+Checkout my React component:
+<Callout type="default">
+  The text below is from the
+  [TailwindCSS](https://play.tailwindcss.com/uj1vGACRJA?layout=preview) docs. I
+  copied it here to test the markdown styles. **Tailwind is awesome. You should
+  use it.**
+</Callout>
 
-<Callout>
+<Callout type="warning">
+  The text below is from the
+  [TailwindCSS](https://play.tailwindcss.com/uj1vGACRJA?layout=preview) docs. I
+  copied it here to test the markdown styles. **Tailwind is awesome. You should
+  use it.**
+</Callout>
+
+<Callout type="danger">
   The text below is from the
   [TailwindCSS](https://play.tailwindcss.com/uj1vGACRJA?layout=preview) docs. I
   copied it here to test the markdown styles. **Tailwind is awesome. You should
@@ -79,7 +104,13 @@ Something a wise person once told me about typography is:
 
 It's probably important that images look okay here by default as well:
 
-<Image src="/opengraph-image.png" width="718" height="404" alt="Image" />
+<Image
+  src="/opengraph-image.png"
+  width="718"
+  height="404"
+  alt="Image"
+  className="rounded"
+/>
 
 Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.
 
@@ -123,7 +154,7 @@ I think most people are going to use [highlight.js](https://highlightjs.org/) or
 
 Here's what a default `tailwind.config.js` file looks like at the time of writing:
 
-```js
+```javascript
 module.exports = {
   purge: [],
   theme: {
