@@ -54,6 +54,15 @@ h6 {
   @apply font-medium tracking-tight !important;
 }
 
+nav::after {
+  content: "";
+  margin-top: 1.8rem;
+  /* display: block; */
+  border-top: 1px solid hsl(var(--background-alt));
+  border-bottom: 1px solid hsl(var(--background-alt));
+  border-radius: 4px;
+}
+
 pre {
   border: 1px solid;
   border-radius: 0.5rem;
