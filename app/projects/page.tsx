@@ -5,6 +5,7 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 import { projects, type Project } from "@/config/projects";
 import { capatilize, cn, createQueryString } from "@/lib/utils";
+import { ProjectList } from "@/components/ui/projects-list";
 
 enum CategoryType {
   DATE = "date",
@@ -22,6 +23,17 @@ export default function ProjectsPage() {
 
   if (!Categories.includes(category)) {
     category = CategoryType.TYPE;
+  }
+
+  function sortProjectsByYear(projects: Record<string, Project[]>) {
+    const sortedKeys = Object.keys(projects).sort(
+      (a, b) => Number(b) - Number(a),
+    );
+
+    return sortedKeys.reduce((acc, key) => {
+      acc[`Year ${key}`] = projects[key];
+      return acc;
+    }, {});
   }
 
   const categorizedProjects = useMemo(() => {
@@ -76,42 +88,4 @@ export default function ProjectsPage() {
       <ProjectList data={categorizedProjects} />
     </div>
   );
-}
-
-function ProjectList({ data }: { data: Record<string, Project[]> }) {
-  return (
-    <div className="mt-6 space-y-3">
-      {Object.entries(data).map(([categoryName, projects]) => {
-        return (
-          <div key={categoryName} className="flex flex-col gap-2">
-            <span className="text-xl font-semibold">{categoryName}</span>
-            <ul>
-              {projects.map((project) => (
-                <li
-                  key={project.title}
-                  className="flex cursor-pointer flex-col justify-between rounded p-1 hover:bg-foreground/5 md:flex-row"
-                >
-                  <span>{project.title}</span>
-                  <span className="text-sm text-foreground/60">
-                    {project.date.join(" - ")}
-                  </span>
-                </li>
-              ))}
-            </ul>
-          </div>
-        );
-      })}
-    </div>
-  );
-}
-
-function sortProjectsByYear(projects: Record<string, Project[]>) {
-  const sortedKeys = Object.keys(projects).sort(
-    (a, b) => Number(b) - Number(a),
-  );
-
-  return sortedKeys.reduce((acc, key) => {
-    acc[`Year ${key}`] = projects[key];
-    return acc;
-  }, {});
 }

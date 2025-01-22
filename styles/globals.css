@@ -74,11 +74,16 @@ pre {
   background-color: hsl(var(--background-alt)) !important;
 }
 
+.noscrollbar ::-webkit-scrollbar {
+  display: none;
+}
+
 pre::-webkit-scrollbar {
   display: none;
 }
 
-pre {
+pre,
+.noscrollbar {
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
