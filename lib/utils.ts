@@ -1,5 +1,6 @@
 import fs from "fs";
 import path from "path";
+import { RefObject } from "react";
 import clsx, { type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
 
@@ -50,4 +51,8 @@ export const formatDate = (input: string | number): string => {
     day: "numeric",
     year: "numeric",
   });
+};
+
+export const getFocusableElements = (ref: any) => {
+  return ref.current?.querySelectorAll("button, [href]");
 };

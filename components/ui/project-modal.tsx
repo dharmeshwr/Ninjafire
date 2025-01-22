@@ -4,7 +4,7 @@ import { useEffect, useRef } from "react";
 import Image from "next/image";
 import { Github, Radio, X } from "lucide-react";
 
-import { cn } from "@/lib/utils";
+import { cn, getFocusableElements } from "@/lib/utils";
 
 interface ModalProps extends React.HTMLProps<HTMLDivElement> {
   isOpen: boolean;
@@ -41,13 +41,37 @@ const ProjectModal = ({
       }
     };
 
+    const handleTabs = (event: KeyboardEvent) => {
+      const focusableElement = getFocusableElements(modalRef);
+
+      if (!focusableElement) return;
+
+      const firstElement = focusableElement[0] as HTMLElement;
+      const lastElement = focusableElement[
+        focusableElement?.length - 1
+      ] as HTMLElement;
+
+      if (event.key === "Tab") {
+        if (event.shiftKey && document.activeElement == firstElement) {
+          event.preventDefault();
+          lastElement.focus();
+        } else if (!event.shiftKey && document.activeElement === lastElement) {
+          event.preventDefault();
+          firstElement.focus();
+        }
+      }
+    };
+
     if (isOpen) {
+      modalRef.current?.focus();
       document.addEventListener("click", handleClose);
       document.addEventListener("keydown", handleClose);
+      document.addEventListener("keydown", handleTabs);
 
       return () => {
         document.removeEventListener("click", handleClose);
         document.removeEventListener("keydown", handleClose);
+        document.removeEventListener("keydown", handleTabs);
       };
     }
   }, [close, isOpen]);
@@ -63,6 +87,7 @@ const ProjectModal = ({
     >
       <div
         ref={modalRef}
+        tabIndex={-1}
         className={cn(
           `relative rounded-xl border border-foreground/20`,
           "transition-all duration-300 ease-out",
@@ -87,8 +112,8 @@ const ProjectModal = ({
                   href={github}
                   className="inline-flex w-full justify-center gap-4 rounded border border-foreground/60 py-1 hover:bg-foreground/5"
                 >
-                  <Github />
-                  <button>Github</button>
+                  <Github className="not-sr-only" />
+                  Github
                 </a>
               )}
               {live?.length !== 0 && (
@@ -96,8 +121,8 @@ const ProjectModal = ({
                   href={live}
                   className="inline-flex w-full justify-center gap-4 rounded border border-foreground/60 py-1 hover:bg-foreground/5"
                 >
-                  <Radio />
-                  <button>Preview</button>
+                  <Radio className="not-sr-only" />
+                  Preview
                 </a>
               )}
             </div>
