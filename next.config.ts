@@ -35,7 +35,7 @@ const nextConfig: NextConfig = {
       },
       {
         source: "/feed",
-        destination: "/feed/rss.xml",
+        destination: "/feed/feed.json",
       },
       {
         source: "/atom",

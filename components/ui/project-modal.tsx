@@ -55,7 +55,7 @@ const ProjectModal = ({
   return (
     <div
       className={cn(
-        "fixed inset-0 z-50 flex items-center justify-center overflow-y-auto overflow-x-hidden bg-foreground/50 outline-none backdrop-blur-sm focus:outline-none",
+        "fixed inset-0 z-50 flex items-center justify-center overflow-y-auto overflow-x-hidden bg-neutral-900/70 outline-none backdrop-blur-sm focus:outline-none",
         !isOpen && "pointer-events-none opacity-0",
         className,
       )}
@@ -64,7 +64,7 @@ const ProjectModal = ({
       <div
         ref={modalRef}
         className={cn(
-          `relative rounded-xl border border-foreground/50`,
+          `relative rounded-xl border border-foreground/20`,
           "transition-all duration-300 ease-out",
           isOpen ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0",
         )}

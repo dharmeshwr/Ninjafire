@@ -1,8 +1,26 @@
+import fs from "fs";
+import path from "path";
 import clsx, { type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
 
+import { metaData } from "@/config/site";
+
 export const cn = (...classes: ClassValue[]) => {
   return twMerge(clsx(classes));
+};
+
+export const getAllBlogsMetadata = async () => {
+  const CONTENT_PATH = path.join(process.cwd(), "app/blogs/(content)");
+  const dirs = fs.readdirSync(CONTENT_PATH);
+
+  return Promise.all(
+    dirs.map(async (blogDir) => {
+      const { metadata } = await import(
+        `@/app/blogs/(content)/${blogDir}/page.mdx`
+      );
+      return { ...metadata, href: `/blogs/${blogDir}` };
+    }),
+  );
 };
 
 export const createQueryString = (
@@ -13,6 +31,12 @@ export const createQueryString = (
   const params = new URLSearchParams(existingSearchParams.toString());
   params.set(name, value);
   return params.toString();
+};
+
+export const getBaseURL = () => {
+  return metaData.baseUrl.endsWith("/")
+    ? metaData.baseUrl
+    : `${metaData.baseUrl}/`;
 };
 
 export const capatilize = (string: string) => {

@@ -1,21 +1,9 @@
-import fs from "fs";
-import path from "path";
 import Link from "next/link";
 
-const getAllBlogsSlug = async () => {
-  const CONTENT_PATH = path.join(process.cwd(), "app/blogs/(content)");
-  const dirs = fs.readdirSync(CONTENT_PATH);
-
-  return Promise.all(
-    dirs.map(async (blogDir) => {
-      const { metadata } = await import(`./(content)/${blogDir}/page.mdx`);
-      return { ...metadata, href: `/blogs/${blogDir}` };
-    }),
-  );
-};
+import { getAllBlogsMetadata } from "@/lib/utils";
 
 export default async function BlogsPage() {
-  const blogs = await getAllBlogsSlug();
+  const blogs = await getAllBlogsMetadata();
 
   return (
     <div>
