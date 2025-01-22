@@ -41,49 +41,56 @@ const ProjectModal = ({
       }
     };
 
-    document.addEventListener("click", handleClose);
-    document.addEventListener("keydown", handleClose);
+    if (isOpen) {
+      document.addEventListener("click", handleClose);
+      document.addEventListener("keydown", handleClose);
 
-    return () => {
-      document.removeEventListener("click", handleClose);
-      document.removeEventListener("keydown", handleClose);
-    };
+      return () => {
+        document.removeEventListener("click", handleClose);
+        document.removeEventListener("keydown", handleClose);
+      };
+    }
   }, [close, isOpen]);
-
-  if (!isOpen) {
-    return null;
-  }
 
   return (
     <div
       className={cn(
         "fixed inset-0 z-50 flex items-center justify-center overflow-y-auto overflow-x-hidden bg-foreground/50 outline-none backdrop-blur-sm focus:outline-none",
+        !isOpen && "pointer-events-none opacity-0",
         className,
       )}
       {...rest}
     >
       <div
         ref={modalRef}
-        className="relative rounded border border-foreground/50"
+        className={cn(
+          `relative rounded-xl border border-foreground/50`,
+          "transition-all duration-300 ease-out",
+          isOpen ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0",
+        )}
       >
-        <div className="noscrollbar flex max-h-[45rem] min-w-80 max-w-[50rem] flex-col overflow-scroll rounded bg-background">
-          <Image
-            src={media}
-            alt="*"
-            width={800}
-            height={800}
-            className="rounded-t"
-          />
+        <div className="noscrollbar flex max-h-[45rem] min-w-[17rem] max-w-[50rem] flex-col overflow-scroll rounded-xl bg-background">
+          {media.length !== 0 && (
+            <Image
+              src={media}
+              alt="*"
+              width={800}
+              height={800}
+              className="rounded-t"
+            />
+          )}
 
           <div className="my-4 flex w-full flex-col md:flex-row">
             <div className="justify-star flex w-full flex-row items-center gap-2 px-4 py-1 md:w-1/3 md:flex-col">
-              <a
-                href={github}
-                className="inline-flex w-full justify-center gap-4 rounded border border-foreground/60 py-1 hover:bg-foreground/5"
-              >
-                <Github />
-                <button>Github</button>
-              </a>
+              {github?.length !== 0 && (
+                <a
+                  href={github}
+                  className="inline-flex w-full justify-center gap-4 rounded border border-foreground/60 py-1 hover:bg-foreground/5"
+                >
+                  <Github />
+                  <button>Github</button>
+                </a>
+              )}
               {live?.length !== 0 && (
                 <a
                   href={live}
