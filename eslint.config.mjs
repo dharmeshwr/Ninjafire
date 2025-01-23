@@ -34,6 +34,7 @@ const eslintConfig = [
       "react/jsx-key": "off",
       "tailwindcss/no-custom-classname": "off",
       "tailwindcss/classnames-order": "off",
+      "@typescript-eslint/no-explicit-any": "warn",
     },
   },
 ];
