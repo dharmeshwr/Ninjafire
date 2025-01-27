@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { Github, Linkedin, Mail, Rss, Twitter } from "lucide-react";
 
-import { metaData, socialLinks } from "@/config/site";
+import { socialLinks } from "@/config/site";
 
 const YEAR = new Date().getFullYear();
 
