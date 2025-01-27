@@ -11,7 +11,12 @@ export const cn = (...classes: ClassValue[]) => {
 
 export const getAllBlogsMetadata = async () => {
   const CONTENT_PATH = path.join(process.cwd(), "app/blogs/(content)");
-  const dirs = fs.readdirSync(CONTENT_PATH);
+  const content = fs.readdirSync(CONTENT_PATH);
+
+  const dirs = content.filter((item) => {
+    const blogPath = path.join(CONTENT_PATH, item);
+    return fs.statSync(blogPath).isDirectory();
+  });
 
   return Promise.all(
     dirs.map(async (blogDir) => {

@@ -8,16 +8,11 @@ export const socialLinks = {
 };
 
 export const metaData = {
-  title: "Ninjafire",
-  name: "Ninjafire",
+  title: "Dharmesh's Portfolio",
+  name: "Dharmesh",
   baseUrl: site_url,
   description: "This is all about myself.",
   ogImage: "/opengraph-image.png",
   links: { ...socialLinks },
   mailSupport: "dharmeshwr@gmail.com",
-};
-
-export const ratings = {
-  totalRatedPersonCount: 0,
-  rating: 0,
 };

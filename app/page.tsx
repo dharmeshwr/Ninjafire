@@ -8,7 +8,10 @@ export default function Page() {
   return (
     <section>
       <Link href={socialLinks.twitter} target="_blank">
-        <ProfilePicture />
+        <ProfilePicture
+          imageSrc="/profile.png"
+          circles={["#f5bb00", "#ec9f05", "#d76a03", "#bf3100"]}
+        />
       </Link>
 
       <Balancer className="mb-8 font-sans text-2xl font-medium tracking-tight">
