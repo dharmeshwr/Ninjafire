@@ -14,7 +14,7 @@ enum CategoryType {
 
 const Categories = [CategoryType.TYPE, CategoryType.DATE];
 
-export default function ProjectsPage() {
+export default function Page() {
   const router = useRouter();
   const pathname = usePathname();
   const searchparams = useSearchParams();
@@ -63,13 +63,21 @@ export default function ProjectsPage() {
       <div className="flex justify-between">
         <h2 className="text-2xl">My Projects</h2>
 
-        <div className="flex justify-center rounded-full border border-foreground/40 bg-foreground/5 p-1 text-sm font-semibold">
+        <div className="relative flex justify-center rounded-full border border-foreground/40 bg-foreground/5 p-1 text-sm font-semibold">
+          <span
+            className={cn(
+              "absolute -z-10 h-[calc(100%-0.50rem)] w-[calc(50%-0.25rem)] rounded-full bg-foreground px-2 transition-all duration-200",
+              category === CategoryType.TYPE && "left-1",
+              category === CategoryType.DATE && "left-[3.2rem]",
+            )}
+          />
+
           {Categories.map((key) => (
             <button
               key={key}
               className={cn(
-                "inline-flex items-center rounded-full px-2 py-1",
-                category === key && "bg-foreground text-background",
+                category === key && "text-background",
+                "duration-50 px-2 py-1 transition-all",
               )}
               onClick={() =>
                 router.push(

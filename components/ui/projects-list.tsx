@@ -54,7 +54,7 @@ export function ProjectList({ data }: { data: Record<string, Project[]> }) {
                 {projects.map((project) => (
                   <button
                     key={project.title}
-                    className="flex w-full cursor-pointer flex-col justify-between rounded p-1 hover:bg-foreground/5 md:flex-row"
+                    className="flex w-full cursor-pointer flex-col items-start rounded p-1 hover:bg-foreground/5 md:flex-row md:justify-between"
                     onClick={() => UpdateModalData(project)}
                   >
                     <span>{project.title}</span>
