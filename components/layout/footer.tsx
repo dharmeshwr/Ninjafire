@@ -34,14 +34,16 @@ export default function Footer() {
     <small className="mt-16 flex items-center justify-between lg:mt-24">
       <span className="flex gap-1">
         <time>© {YEAR}</time>
-        <Link
-          className="no-underline"
-          href={socialLinks.twitter}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          {metaData.title}
-        </Link>
+        {
+          // <Link
+          //   className="no-underline"
+          //   href={socialLinks.twitter}
+          //   target="_blank"
+          //   rel="noopener noreferrer"
+          // >
+          //   {metaData.title}
+          // </Link>
+        }
         <style jsx>{`
           @media screen and (max-width: 480px) {
             article {
