@@ -100,8 +100,9 @@ pre code > span .sh__token--identifier {
   color: #cc241d !important;
 }
 
-pre code span {
-  font-weight: 500;
+code > span .sh__token--identifier {
+  font-weight: 200 !important;
+  font-size: inherit;
 }
 
 code {
@@ -141,6 +142,8 @@ hr {
 
 .profile-pic-circle {
   @apply pointer-events-none absolute size-[151px] rounded-full border border-background transition-all ease-linear;
+  position: absolute;
+  will-change: transform;
 }
 
 .nondraggable {

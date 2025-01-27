@@ -1,5 +1,7 @@
 import Image from "next/image";
 
+import { format } from "date-fns";
+
 import { Callout } from "@/components/shared/callout";
 import MdxLayout from "@/components/shared/mdx-layout";
 
@@ -7,17 +9,17 @@ export const metadata = {
   title: "Example title",
   description: "about page",
   publishedAt: "2025-01-20",
-  openGraph: {
-    title: "Blog",
-    images: ["./image.jpg"],
-  },
 };
 
 export default function MDXPage({ children }) {
-  return <MdxLayout>{children}</MdxLayout>;
+  return (
+    <>
+      <span className="text-3xl mb-1 block">{metadata.title}</span>
+      <span className="text-sm mb-8 block">{format(new Date(metadata.publishedAt), "MMMM d, yyyy")}</span>
+      <MdxLayout>{children}</MdxLayout>;
+    </>
+  )
 }
- 
-# Welcome to my MDX page!
  
 This is some **bold** and _italics_ text.
  
