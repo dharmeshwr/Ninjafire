@@ -9,21 +9,20 @@ export const useMouseHoverEffect = (
     const mouseY = event.clientY;
 
     const target = event.target as HTMLElement;
+    const { left, right, bottom, top } = target?.getBoundingClientRect();
+    const originX = left + (right - left) / 2,
+      originY = top + (bottom - top) / 2;
     const innerDivs = target.querySelectorAll("div");
 
     if (!innerDivs) return;
 
     innerDivs.forEach((div, index) => {
-      const { left, right, bottom, top } = div.getBoundingClientRect();
-      const offsetLeft = mouseX - left;
-      const offsetRight = mouseX - right;
-      const offsetBottom = mouseY - bottom;
-      const offsetTop = mouseY - top;
+      const offsetX = originX - mouseX;
+      const offsetY = originY - mouseY;
 
-      const offsetX = Math.max(Math.abs(offsetRight), Math.abs(offsetLeft));
-      const offsetY = Math.max(Math.abs(offsetTop), Math.abs(offsetBottom));
+      const multiplier = 45;
 
-      div.style.transform = `translate(${(offsetX * 15 * (index + 1)) / div.offsetWidth}px, ${(offsetY * 15 * (index + 1)) / div.offsetHeight}px)`;
+      div.style.transform = `translate(${(offsetX * multiplier * (index + 1)) / div.offsetWidth}px, ${(offsetY * multiplier * (index + 1)) / div.offsetHeight}px)`;
     });
   }, []);
 
