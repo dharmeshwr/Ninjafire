@@ -18,11 +18,7 @@ export default function Page() {
         I Build Things !
       </Balancer>
 
-      <p className="prose text-left leading-8 text-foreground">
-        {summary.split("").map((char: string, index) => (
-          <span key={index}>{char}</span>
-        ))}
-      </p>
+      <p className="prose text-left leading-8 text-foreground">{summary}</p>
     </section>
   );
 }

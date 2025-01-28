@@ -32,6 +32,10 @@
   --sh-entity: #fe8019;
 }
 
+* {
+  box-sizing: border-box;
+}
+
 ::selection {
   background-color: hsl(var(--foreground));
   color: hsl(var(--background));

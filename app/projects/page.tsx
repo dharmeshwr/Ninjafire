@@ -79,13 +79,14 @@ export default function Page() {
                 category === key && "text-background",
                 "duration-50 px-2 py-1 transition-all",
               )}
-              onClick={() =>
-                router.push(
-                  pathname +
-                    "?" +
-                    createQueryString("category", key, searchparams),
-                )
-              }
+              onClick={() => {
+                const queryString = createQueryString(
+                  "category",
+                  key,
+                  searchparams,
+                );
+                router.push(`${pathname}?${queryString}`);
+              }}
             >
               {capatilize(key)}
             </button>
