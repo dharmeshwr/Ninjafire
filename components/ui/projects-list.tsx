@@ -34,7 +34,7 @@ export function ProjectList({ data }: { data: Record<string, Project[]> }) {
         openModal: true,
         media: project?.media,
         title: project.title,
-        body: project.description,
+        body: project.description as string,
         github: project.github,
         live: project.live || "",
         close: CloseModal,
