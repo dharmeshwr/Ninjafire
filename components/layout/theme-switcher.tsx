@@ -1,10 +1,11 @@
 "use client";
 
-import { useCallback, useEffect } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { MoonStar, SunMedium } from "lucide-react";
 import { useTheme } from "next-themes";
 
 import { cn } from "@/lib/utils";
+import { useMediaQuery } from "@/hooks/use-media-query";
 
 import { ClientOnly } from "../shared/client-only";
 
@@ -41,7 +42,11 @@ const useSystemThemePreference = () => {
 };
 
 export function ThemeSwitcher() {
+  const [showToolTip, setShowTooltip] = useState(false);
   const { theme, setTheme } = useTheme();
+  const { isMobile } = useMediaQuery();
+  const buttonRef = useRef<HTMLButtonElement>(null);
+
   const { getSystemThemePreferences, setSystemThemePreference } =
     useSystemThemePreference();
 
@@ -59,6 +64,7 @@ export function ThemeSwitcher() {
   };
 
   useEffect(() => {
+    const button = buttonRef.current;
     updateTheme(getSystemThemePreferences());
 
     const handleKeyDown = (event: KeyboardEvent) => {
@@ -82,28 +88,33 @@ export function ThemeSwitcher() {
       updateTheme(newTheme);
     };
 
+    const handleTooltip = () => setShowTooltip((prev) => !prev);
+
     const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
     mediaQuery.addEventListener("change", handleSystemThemeChange);
     document.addEventListener("keydown", handleKeyDown);
+    if (button) {
+      button.addEventListener("mouseover", handleTooltip);
+      button.addEventListener("mouseout", handleTooltip);
+    }
 
     return () => {
       mediaQuery.removeEventListener("change", handleSystemThemeChange);
       document.removeEventListener("keydown", handleKeyDown);
+      if (button) {
+        button.removeEventListener("mouseout", handleTooltip);
+        button.removeEventListener("mouseover", handleTooltip);
+      }
     };
   }, [getSystemThemePreferences, updateTheme]);
-
-  const Skeleton = () => {
-    return <span className="size-5 rounded bg-neutral-400/20"></span>;
-  };
 
   return (
     <ClientOnly fallback={<Skeleton />}>
       <button
-        aria-label={`${theme} mode`}
         onClick={toggleTheme}
         className="relative flex items-center justify-center outline-none"
+        ref={buttonRef}
       >
-        {/*TODO: make the icons transition smoothly*/}
         <SunMedium
           className={cn(
             "size-5 transition-all duration-300 ease-in-out",
@@ -117,7 +128,29 @@ export function ThemeSwitcher() {
           )}
         />
         <span className="sr-only">Toggle Theme</span>
+        {!isMobile && <Tooltip show={showToolTip} />}
       </button>
     </ClientOnly>
   );
 }
+
+const Tooltip = ({ show }: { show: boolean }) => {
+  return (
+    <span
+      className={cn(
+        "pointer-events-none absolute bottom-[-38] inline-flex w-24 items-center justify-center rounded border border-foreground/40 bg-foreground/5 p-1 text-sm",
+        "transition-all duration-200 ease-in-out",
+        show ? "translate-y-0 opacity-100" : "-translate-y-2 opacity-0",
+      )}
+    >
+      <span className="mr-1 inline-flex items-center justify-center rounded border border-foreground/40 bg-foreground/5 px-1 shadow-sm shadow-gray-800">
+        M
+      </span>
+      to Toggle
+    </span>
+  );
+};
+
+const Skeleton = () => {
+  return <span className="size-5 rounded bg-neutral-400/20"></span>;
+};
