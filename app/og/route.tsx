@@ -20,7 +20,7 @@ export async function GET() {
           tw="w-full h-full bg-[#ebdbb2] text-[#282828] p-8 flex items-center justify-center relative"
         >
           <div tw="flex flex-col">
-            <h1 tw="text-5xl font-bold">DHARMESH KUMAR</h1>
+            <h1 tw="text-5xl font-bold">DHARMESH</h1>
           </div>
         </div>
       ),
