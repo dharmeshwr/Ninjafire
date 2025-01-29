@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import Image from "next/image";
 import { Github, Radio, X } from "lucide-react";
 
@@ -13,7 +13,6 @@ interface ModalProps extends React.HTMLProps<HTMLDivElement> {
   github?: string;
   live?: string;
   title?: string;
-  body?: string;
 }
 
 const ProjectModal = ({
@@ -23,8 +22,8 @@ const ProjectModal = ({
   title,
   github,
   live,
-  body,
   className,
+  children,
   ...rest
 }: ModalProps) => {
   const modalRef = useRef<HTMLDivElement>(null);
@@ -111,6 +110,7 @@ const ProjectModal = ({
                 <a
                   href={github}
                   className="inline-flex w-full justify-center gap-4 rounded border border-foreground/60 py-1 hover:bg-foreground/5"
+                  target="_blank"
                 >
                   <Github className="not-sr-only" />
                   Github
@@ -120,6 +120,7 @@ const ProjectModal = ({
                 <a
                   href={live}
                   className="inline-flex w-full justify-center gap-4 rounded border border-foreground/60 py-1 hover:bg-foreground/5"
+                  target="_blank"
                 >
                   <Radio className="not-sr-only" />
                   Preview
@@ -128,7 +129,7 @@ const ProjectModal = ({
             </div>
             <div className="w-full px-4 py-1 md:w-2/3">
               <span className="text-md font-medium md:text-xl">{title}</span>
-              <p className="pt-3">{body}</p>
+              <p className="pt-3">{children}</p>
             </div>
           </div>
 

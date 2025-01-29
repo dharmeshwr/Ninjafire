@@ -9,9 +9,9 @@ const YEAR = new Date().getFullYear();
 
 function SocialLink({ href, icon: Icon }) {
   return (
-    <Link href={href} target="_blank" rel="noopener noreferrer">
+    <a href={href} target="_blank" rel="noopener noreferrer">
       <Icon />
-    </Link>
+    </a>
   );
 }
 
@@ -35,14 +35,14 @@ export default function Footer() {
       <span className="flex gap-1">
         <time>© {YEAR}</time>
         {
-          // <Link
+          // <a
           //   className="no-underline"
           //   href={socialLinks.twitter}
           //   target="_blank"
           //   rel="noopener noreferrer"
           // >
           //   {metaData.title}
-          // </Link>
+          // </a>
         }
         <style jsx>{`
           @media screen and (max-width: 480px) {

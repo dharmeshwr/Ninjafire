@@ -73,11 +73,12 @@ export function ProjectList({ data }: { data: Record<string, Project[]> }) {
         isOpen={modalData.openModal}
         media={modalData.media}
         title={modalData.title}
-        body={modalData.body}
         github={modalData.github}
         live={modalData.live}
         close={CloseModal}
-      />
+      >
+        {modalData.body}
+      </ProjectModal>
     </>
   );
 }

@@ -1,6 +1,7 @@
 import fs from "fs";
 import path from "path";
 import clsx, { type ClassValue } from "clsx";
+import { intervalToDuration } from "date-fns";
 import { twMerge } from "tailwind-merge";
 
 import { metaData } from "@/config/site";
@@ -59,4 +60,18 @@ export const formatDate = (input: string | number): string => {
 
 export const getFocusableElements = (ref: any) => {
   return ref.current?.querySelectorAll("button, [href]");
+};
+
+export const getMyAge = () => {
+  const today = new Date();
+  const dob = new Date("10-31-2003");
+  const duration = intervalToDuration({
+    start: dob,
+    end: today,
+  });
+  let age = "";
+  Object.entries(duration).forEach(([key, value]) => {
+    age += `${value} ${key} `;
+  });
+  return age;
 };
