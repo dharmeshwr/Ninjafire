@@ -1,7 +1,6 @@
 import "../styles/globals.css";
 
 import { Metadata } from "next";
-import { fontMono, fontSans } from "@/assets/fonts";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { ThemeProvider } from "next-themes";
@@ -11,6 +10,8 @@ import { cn } from "@/lib/utils";
 import Rating from "@/components/ui/rating";
 import Footer from "@/components/layout/footer";
 import { Navbar } from "@/components/layout/navbar";
+
+import { fontMono, fontSans } from "./fonts";
 
 export const metadata: Metadata = {
   metadataBase: new URL(metaData.baseUrl),

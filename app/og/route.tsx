@@ -1,11 +1,13 @@
 import { ImageResponse } from "next/og";
 
-// export const runtime = "edge";
+import { getBaseURL } from "@/lib/utils";
+
+export const runtime = "nodejs";
 
 export async function GET() {
   try {
     const train = await fetch(
-      new URL("../../assets/fonts/TrainOne-Regular.ttf", import.meta.url),
+      new URL("fonts/TrainOne-Regular.ttf", getBaseURL()),
     ).then((res) => res.arrayBuffer());
 
     return new ImageResponse(
@@ -27,7 +29,7 @@ export async function GET() {
           {
             name: "TrainOne",
             data: train,
-            weight: 800,
+            weight: 400,
             style: "normal",
           },
         ],
@@ -35,7 +37,8 @@ export async function GET() {
         height: 300,
       },
     );
-  } catch {
+  } catch (e) {
+    console.log(e);
     return new Response("Failed to generate OG Image", { status: 500 });
   }
 }
