@@ -57,7 +57,7 @@ export function Name() {
         this.angle = 0;
         this.distance = 0;
         this.friction = Math.random() * 0.6 + 0.15;
-        this.ease = Math.random() * 0.2 + 0.005;
+        this.ease = Math.random() * 0.8 + 0.07;
       }
 
       draw() {
@@ -108,11 +108,11 @@ export function Name() {
         this.canvasHeight = canvasHeight;
         this.textX = this.canvasWidth / 2;
         this.textY = this.canvasHeight / 2 + 10;
-        this.fontSize = 40;
+        this.fontSize = 30;
         this.maxTextWidth = canvas.width;
         this.lineHeight = this.fontSize * 0.8;
         this.particles = [];
-        this.step = 2;
+        this.step = 1;
         this.mouse = {
           radius: 1000,
           x: -100,
@@ -253,7 +253,7 @@ export function Name() {
   }, [text, theme]);
 
   return (
-    <div className="absolute -left-16 -top-12 mb-6 md:mb-0">
+    <div className="absolute -top-12 left-[-5.3rem] mb-6 md:mb-0">
       <canvas ref={canvasRef}></canvas>
     </div>
   );
