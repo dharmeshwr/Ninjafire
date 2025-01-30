@@ -82,7 +82,12 @@ export const getMyAge = () => {
   return age;
 };
 
-export const throttle = (fn: Function, delay: number) => {
+type SomeFunction = (...args: unknown[]) => void;
+
+export const throttle = <Func extends SomeFunction>(
+  fn: Func,
+  delay: number,
+) => {
   let inThrottle = false;
 
   return (...args: unknown[]) => {
@@ -94,7 +99,10 @@ export const throttle = (fn: Function, delay: number) => {
   };
 };
 
-export const debounce = (fn: Function, delay: number) => {
+export const debounce = <Func extends SomeFunction>(
+  fn: Func,
+  delay: number,
+) => {
   let timeoutId: NodeJS.Timeout;
 
   return (...args: unknown[]) => {

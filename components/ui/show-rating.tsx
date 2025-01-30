@@ -34,7 +34,7 @@ export function ShowRating() {
     fetcher();
 
     if (pathname == "/") {
-      const throttledMouseHandler = throttle(handleMouseMove, 100);
+      const throttledMouseHandler = throttle(handleMouseMove, 150);
 
       window.addEventListener("mousemove", throttledMouseHandler);
       return () =>
