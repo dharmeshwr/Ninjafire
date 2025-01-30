@@ -69,9 +69,15 @@ export const getMyAge = () => {
     start: dob,
     end: today,
   });
-  let age = "";
+  let age = "",
+    isSecondAvailable = false;
+
   Object.entries(duration).forEach(([key, value]) => {
     age += `${value} ${key} `;
+    if (key === "seconds") isSecondAvailable = true;
   });
+
+  if (!isSecondAvailable) age += `0 second `;
+
   return age;
 };

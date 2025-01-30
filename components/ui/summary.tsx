@@ -53,8 +53,7 @@ export function Summary() {
       integration.
       <p>
         Beyond tech, I enjoy watching webseries and animes shows and I&apos;m
-        also into editing and graphic designing. If you still haven&apos;t
-        hovered over image, what are you doing ?
+        also into editing and graphic designing.
       </p>
     </div>
   );

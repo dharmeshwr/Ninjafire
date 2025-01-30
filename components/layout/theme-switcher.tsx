@@ -138,7 +138,7 @@ const Tooltip = ({ show }: { show: boolean }) => {
   return (
     <span
       className={cn(
-        "pointer-events-none absolute bottom-[-38] inline-flex min-w-[6.3rem] items-center justify-center rounded border border-foreground/40 bg-foreground/5 p-1 text-sm",
+        "pointer-events-none absolute bottom-[-38px] inline-flex min-w-[6.3rem] items-center justify-center rounded border border-foreground/40 bg-foreground/5 p-1 text-sm",
         "transition-all duration-200 ease-in-out",
         show ? "translate-y-0 opacity-100" : "-translate-y-2 opacity-0",
       )}

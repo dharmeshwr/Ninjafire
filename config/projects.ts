@@ -19,7 +19,7 @@ export const projects: Project[] = [
     type: "Websites",
     github: "https://github.com/Dharmesh53/promanage",
     live: "https://promanage-ten.vercel.app",
-    media: "/gifs/p1.gif",
+    media: "/projects/promanage-1.webp",
   },
   {
     title: "Havns : A Venue Booking Platform",
@@ -29,7 +29,7 @@ export const projects: Project[] = [
     type: "Websites",
     github: "https://github.com/Dharmesh53/havns",
     live: "https://havns.vercel.app",
-    media: "/gifs/p1.gif",
+    media: "/projects/havns.webp",
   },
   {
     title: "Production Crate : UI Clone",
@@ -58,7 +58,7 @@ export const projects: Project[] = [
     type: "Websites",
     github: "https://github.com/Dharmesh53/ProductionCrate-CSS-Clone",
     live: "https://dharmesh53.github.io/ProductionCrate-CSS-Clone",
-    media: "/gifs/p1.gif",
+    media: "/projects/production-crate.webp",
   },
   {
     title: "IP Based Server And Client Model Using Raw Sockets",
@@ -67,7 +67,7 @@ export const projects: Project[] = [
       "I developed a basic IP-based server and client system in C, utilizing raw sockets for low-level network communication. The system communicates by sending messages using IP packets directly between the server and client. By leveraging sys/socket.h, linux/ip.h, unistd.h, and arpa/inet.h, I implemented a solution that interacts with the network layer of the OSI model, bypassing higher-level protocols. This was achieved by manually crafting IP headers to encapsulate data and transmitting it over raw sockets. The server and client communicate efficiently while directly managing network interactions, providing a deeper understanding of the fundamental mechanisms that drive network communication. The project helped me explore and work with low-level network protocols, providing hands-on experience in socket programming and data encapsulation at the IP layer.",
     type: "Foundational Concepts",
     github: "https://github.com/Dharmesh53/IP-Server-And-Client-Model",
-    media: "/gifs/p1.gif",
+    media: "/projects/ip.webp",
   },
   {
     title: "Sorting Algorithms",
@@ -76,7 +76,7 @@ export const projects: Project[] = [
       "One day, while working on a LeetCode problem that required knowledge of a sorting algorithm, I realized I didn't fully understand it. This prompted me to revisit the algorithm, and during that process, I decided to revise all the algorithms I knew. As I continued exploring different algorithms, I got more curious about their differences and performance. This led me to write out all the algorithms and compare them. I analyzed their time and space complexities, and performance. In the end, I not only gained a deeper understanding of sorting algorithms but also enhanced my knowledge of various other algorithms, which improved my problem-solving skills and gave me a better perspective on choosing the right algorithm for different problems.",
     type: "Foundational Concepts",
     github: "https://github.com/Dharmesh53/All-Sorting-Methods",
-    media: "/gifs/p1.gif",
+    media: "/projects/sort.webp",
   },
   {
     title: "Authentication And Authorization",
@@ -85,6 +85,6 @@ export const projects: Project[] = [
       "This project was created to gain a thorough understanding of Authentication and Authorization. It features three different methods of handling authentication. First, it implements session token-based authentication to manage user sessions. The second method uses JWT-based authentication, where I followed all the necessary security parameters mentioned on owasp.org and even implemented CSRF protection from scratch, storing the token in memory within the JavaScript code. The third method incorporates Google OAuth authentication in a Next.js application, handling sign-ins via Google. Additionally, I added features like password recovery, email verification, two-factor authentication, and role-based authentication. This project not only helped me understand the core principles of securing applications but also provided hands-on experience with various advanced techniques, ensuring a robust and secure authentication system for users.",
     type: "Foundational Concepts",
     github: "https://github.com/Dharmesh53/Authentication",
-    media: "/gifs/p1.gif",
+    media: "/projects/auth.webp",
   },
 ];

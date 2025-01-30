@@ -79,7 +79,7 @@ const ProjectModal = ({
     <div
       className={cn(
         "fixed inset-0 z-50 flex items-center justify-center overflow-y-auto overflow-x-hidden bg-neutral-900/70 outline-none backdrop-blur-sm focus:outline-none",
-        !isOpen && "pointer-events-none opacity-0",
+        isOpen ? "opacity-100" : "pointer-events-none opacity-0",
         className,
       )}
       {...rest}
@@ -97,10 +97,10 @@ const ProjectModal = ({
           {media.length !== 0 && (
             <Image
               src={media}
-              alt="*"
+              alt={media}
               width={800}
               height={800}
-              className="rounded-t"
+              className="rounded-t border-b border-foreground/40"
             />
           )}
 
@@ -135,7 +135,7 @@ const ProjectModal = ({
 
           <button
             onClick={close}
-            className="absolute right-4 top-4 rounded bg-background"
+            className="absolute right-4 top-4 rounded border border-foreground/40 bg-background"
           >
             <X />
           </button>
