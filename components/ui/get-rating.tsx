@@ -7,7 +7,7 @@ import { Star } from "lucide-react";
 
 import { cn } from "@/lib/utils";
 
-export default function Rating() {
+export function GetRating() {
   const [starHover, setStarHover] = useState(-1);
   const [rating, setRating] = useState(-1);
   const [showHand, setShowHand] = useState(false);

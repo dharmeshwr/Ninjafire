@@ -7,7 +7,8 @@ import { ThemeProvider } from "next-themes";
 
 import { metaData } from "@/config/site";
 import { cn } from "@/lib/utils";
-import Rating from "@/components/ui/rating";
+import { GetRating } from "@/components/ui/get-rating";
+import { ShowRating } from "@/components/ui/show-rating";
 import Footer from "@/components/layout/footer";
 import { Navbar } from "@/components/layout/navbar";
 
@@ -78,7 +79,7 @@ export default function RootLayout({ children }: React.PropsWithChildren) {
           title="JSON Feed"
         />
       </head>
-      <body className="relative mx-auto mb-20 mt-2 flex flex-col items-center justify-center bg-background text-foreground antialiased lg:mb-40 lg:mt-8">
+      <body className="relative mx-auto mb-20 mt-2 flex flex-col items-center justify-center bg-background text-foreground antialiased lg:mt-8">
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
@@ -92,7 +93,8 @@ export default function RootLayout({ children }: React.PropsWithChildren) {
             <Analytics />
             <SpeedInsights />
           </main>
-          <Rating />
+          <GetRating />
+          <ShowRating />
         </ThemeProvider>
       </body>
     </html>

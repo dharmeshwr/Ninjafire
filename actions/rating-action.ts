@@ -20,3 +20,15 @@ export const UpdateRating = async (rating: number) => {
     return { success: false };
   }
 };
+
+export const GetRatingWithPeople = async () => {
+  try {
+    const rating = await redis.get("rating");
+    const people = await redis.get("total_people_rated");
+
+    return { success: true, rating, people };
+  } catch (error) {
+    console.error("Something went wrong: ", error);
+    return { success: false };
+  }
+};

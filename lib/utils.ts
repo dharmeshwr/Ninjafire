@@ -81,3 +81,26 @@ export const getMyAge = () => {
 
   return age;
 };
+
+export const throttle = (fn: Function, delay: number) => {
+  let inThrottle = false;
+
+  return (...args: unknown[]) => {
+    if (inThrottle == false) {
+      fn.call(this, ...args);
+      inThrottle = true;
+      setTimeout(() => (inThrottle = false), delay);
+    }
+  };
+};
+
+export const debounce = (fn: Function, delay: number) => {
+  let timeoutId: NodeJS.Timeout;
+
+  return (...args: unknown[]) => {
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(() => {
+      fn.call(this, ...args);
+    }, delay);
+  };
+};
