@@ -92,11 +92,15 @@ pre,
   scrollbar-width: none;
 }
 
+pre {
+  border-color: hsl(var(--background-alt)) !important;
+}
+
 pre code {
   background-color: transparent;
   padding: 0;
   border: none;
-  font-size: 14px;
+  font-size: 1rem !important;
   line-height: 1.5;
 }
 

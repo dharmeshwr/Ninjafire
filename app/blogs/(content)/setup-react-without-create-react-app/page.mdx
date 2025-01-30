@@ -1,0 +1,284 @@
+import Image from "next/image";
+
+import { format } from "date-fns";
+
+import { Callout } from "@/components/shared/callout";
+import MdxLayout from "@/components/shared/mdx-layout";
+
+export const metadata = {
+  title: "Setup react project without using create-react-app",
+  description:
+    "After reading this, you'll understand why we set up our React project using `create-react-app` command",
+  publishedAt: "2025-01-30",
+};
+
+export default function MDXPage({ children }) {
+  return (
+    <>
+      <span className="mb-1 block text-4xl">{metadata.title}</span>
+      <span className="mb-8 block text-sm">
+        {format(new Date(metadata.publishedAt), "MMMM d, yyyy")}
+      </span>
+      <MdxLayout>{children}</MdxLayout>
+    </>
+  );
+}
+
+In this blog, I'm sharing my experience when trying to setup react project from scratch, what errors I got and how I resolved them.
+After reading this blog, you will understand why we don't setup our project from scratch.
+
+### The Simple Start
+
+Till now you were building websites using simple HTML,CSS and JavaScript, so again you begin with pure JavaScript:
+
+index.html
+
+```html
+<!DOCTYPE html>
+<html>
+  <body>
+    <div id="root"></div>
+    <script src="index.js"></script>
+  </body>
+</html>
+```
+
+index.js
+
+```javascript
+const div = document.createElement("div");
+div.textContent = "Hello world";
+document.getElementById("root").appendChild(div);
+```
+
+You open `index.html` directly in the browser using `file://` protocol something like `file://path/to/the/index.html`, and voilà! A **nice** "Hello world" appears.
+
+---
+
+Someone suggests why don't you use React for building your websites. You naively add:
+
+```javascript
+const react = require("react");
+```
+
+**Error:** `require` is not defined.
+
+Why? because `require()` and `module.exports()` comes from CommanJS module system that was primarily designed for Node.js environment.
+So Browser's javascript engine don't natively understand it but if you still want to use it you need to use a bundler eg: Webpack
+or parcel that can bundle `require()` into browser compactible code. Without a bundler like Webpack, this is like speaking French
+to someone who only knows Mandarin.
+
+Now you decided to move on ES Modules that browser supports natively:
+
+```javascript
+import react from "react";
+```
+
+Congrats, you get a new error:
+
+```
+Uncaught SyntaxError: import declarations may only appear at top level of a module.
+```
+
+This error occur because using import/export that are part of ES modules and using them in a plain JS script, make script a module too, so
+scripts using import/export must be explicitly marked as modules in HTML
+
+```html
+<script src="index.js" type="module"></script>
+```
+
+##### Let's just clear the mist between Classic Script and Modules.
+
+**Classic script**
+
+- Variable and function are added to the global scope(window object), All top level declaration are global.
+- Code runs immediately as it is loaded.
+- Executes in the order it appears in the HTML document.
+- `<script src='index.js'></script>`
+
+**Modules**
+
+- Each module has its own scope, meaning variables and functions declared at the top level are not added to the global scope.
+- Can be loaded asynchronously,
+- Execution order is managed by the module dependencies.
+- `<script src='index.js' type="module"></script>`
+
+**What is a Module?**
+A piece of code, that designed to be reusable, allowing it to be imported in other part of application.
+
+In JavaScript, there are two main types of modules:
+
+1. **ES Modules (ESM)** - Modules are loaded asynchronously.
+2. **CommonJS Modules (CJS)** - Modules are loaded synchronously, that is not efficient for browsers, but works well in Node JS.
+
+---
+
+Now, After opening `index.html` via `file://` throws a stupid **CORS error**.
+
+**Why?**
+This is because of how browsers handle loading file via `file://` protocol. In our case we are trying to open `index.html` file
+directly in browser using `file://`, and in our file we have a script that we marked as `module` and that's the twist, browser
+treats these module as a cross origin request that requires special security checks, even though they are on your local machine,
+And each file that you load treated as having its own origin,and when `index.js` is trying to load, it is going from one origin
+to another origin that will cause `CORS error`.
+
+**Fix: Use a local server**
+Install `http-server`:
+
+```bash
+pnpm add http-server
+pnpm exec http-server .
+```
+
+So the CORS error is gone now,
+
+---
+
+As you were importing react directly, you get:
+
+```javascript
+import react from "react";
+```
+
+New error:
+
+```
+The specifier “react” was a bare specifier. but was not remapped to anything. Relative module specifiers must start with “./”, “../” or “/”.
+```
+
+**Why?**
+Browser is confused here, that bro where I can find `react`, In normal case this line work because
+behind the scene we had a bundler that simplify the things for us but here until now we have nothing like bundler.
+Browsers can’t resolve npm paths without help.
+
+So you need to put the actual path here, Use the UMD(Universal Module Defination) build from node_modules.
+
+```javascript
+import "./node_modules/react/umd/react.development.js";
+
+const React = window.React; // Now React is global!
+console.log("React version:", React.version);
+```
+
+For our actual `index.js` code, we can change that to something like:
+
+```javascript
+import "../node_modules/react/umd/react.development.js";
+import "../node_modules/react-dom/umd/react-dom.development.js";
+
+const React = window.React;
+const ReactDOM = window.ReactDOM;
+
+const div = React.createElement("div", null, "Hello world");
+const root = ReactDOM.createRoot(document.getElementById("root"));
+
+root.render(div);
+```
+
+But this feels **dirty**. Now this is not the code we see in `create-react-app` boilerplate code.
+To make our code to look like that we need to add few more dependencies.
+
+---
+
+- **Webpack**: It is a module bundler, that will take multiple JS files and their dependencies and packages them into one single optimized bundle for use in web browser.
+
+```bash
+pnpm add -D webpack webpack-cli webpack-dev-server
+```
+
+- **Babel**: It is JS compiler, that can convert latest version of JS, Typescript, JSX into a simple JS that can run into browser and different environments
+
+```zsh
+pnpm add -D @babel/core babel-loader @babel/cli @babel/preset-env @babel/preset-react
+```
+
+and for to simplify the creation of HTML files to serve your Webpack bundles.
+
+```bash
+pnpm add -D html-webpack-plugin
+```
+
+We also need to configure babel and webpack here,
+
+Configure Babel (`.babelrc`):
+
+```json
+{
+  "presets": [
+    ["@babel/preset-env"],
+    ["@babel/preset-react", { "runtime": "automatic" }]
+  ]
+}
+```
+
+Webpack Config (`webpack.config.js`):
+
+```javascript
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+const path = require("path");
+
+module.exports = {
+  entry: "./index.jsx",
+  mode: "development",
+  output: {
+    path: path.resolve(__dirname, "./dist"),
+    filename: "index_bundle.js",
+  },
+  devServer: {
+    port: "5000",
+    static: { directory: path.join(__dirname, "public") },
+  },
+  resolve: { extensions: [".js", ".jsx"] },
+  module: {
+    rules: [
+      { test: /\.(js|jsx)$/, exclude: /node_modules/, use: "babel-loader" },
+    ],
+  },
+  plugins: [new HtmlWebpackPlugin({ template: "./public/index.html" })],
+};
+```
+
+---
+
+### React Code, Finally! 🎉
+
+`public/index.html`
+
+```html
+<!DOCTYPE html>
+<html>
+  <body>
+    <div id="root"></div>
+  </body>
+</html>
+```
+
+`src/app.jsx`
+
+```javascript
+const App = () => {
+  return React.createElement("div", null, "Hello world in React");
+};
+export default App;
+```
+
+`index.jsx`
+
+```javascript
+import { createRoot } from "react-dom/client";
+
+import App from "./src/app";
+
+const root = createRoot(document.getElementById("root"));
+root.render(<App />);
+```
+
+---
+
+###### Here we go!!
+
+```bash
+npx webpack serve
+```
+
+Open [http://localhost:5000](http://localhost:5000), and there it is—**Hello world in React!** No more errors, no more tears. You’ve survived the React setup and now you knwo why we use the create-react-app. 🚀
