@@ -45,7 +45,7 @@ export function ShowRating() {
   return (
     <div
       className={cn(
-        "fixed bottom-0 right-0 m-2 cursor-pointer rounded border border-foreground/40 bg-background p-1 shadow-lg",
+        "fixed bottom-0 right-0 z-20 m-2 cursor-pointer rounded border border-foreground/40 bg-background p-1 shadow-lg",
         "transition-transform duration-300 ease-in-out",
         show == false
           ? "translate-x-12 translate-y-12"
