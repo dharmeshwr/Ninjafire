@@ -18,7 +18,7 @@ export function GetRating() {
       .some((cookie) => cookie.trim().startsWith(`hasRated=`));
     if (hasRated) return;
 
-    const timeoutId = setTimeout(() => setRating(0), 60000);
+    const timeoutId = setTimeout(() => setRating(0), 30000);
     return () => clearTimeout(timeoutId);
   }, []);
 
