@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import Link from "next/link";
 
 import { Name } from "../ui/name";
@@ -10,11 +11,17 @@ const navItems = {
 
 export function Navbar() {
   return (
-    <nav className="sticky top-0 z-30 mb-4 bg-background py-5 lg:mb-12">
+    <nav className="sticky top-0 z-10 mb-4 bg-background py-5 lg:mb-12">
       <div className="flex flex-col justify-between md:flex-row md:items-center">
         <Link href="/">
           <div className="relative">
-            <Name />
+            <Suspense
+              fallback={
+                <span className="text-2xl text-foreground">Dharmesh</span>
+              }
+            >
+              <Name />
+            </Suspense>
           </div>
         </Link>
         <div className="mt-6 flex flex-row items-center gap-4 md:ml-auto md:mt-0">

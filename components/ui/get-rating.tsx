@@ -18,7 +18,7 @@ export function GetRating() {
       .some((cookie) => cookie.trim().startsWith(`hasRated=`));
     if (hasRated) return;
 
-    const timeoutId = setTimeout(() => setRating(0), 30000);
+    const timeoutId = setTimeout(() => setRating(0), 45000);
     return () => clearTimeout(timeoutId);
   }, []);
 
@@ -44,7 +44,7 @@ export function GetRating() {
     <>
       <div
         className={cn(
-          "fixed bottom-10 min-w-[19rem] rounded-lg border border-foreground/10 bg-background p-4 shadow-lg transition-all duration-500",
+          "fixed bottom-10 z-50 min-w-[19rem] rounded-lg border border-foreground/10 bg-background p-4 shadow-lg transition-all duration-500",
           rating == 0 ? "translate-y-0" : "pointer-events-none translate-y-36",
         )}
       >
