@@ -11,7 +11,7 @@ const navItems = {
 
 export function Navbar() {
   return (
-    <nav className="sticky top-0 z-10 mb-4 bg-background py-5 lg:mb-12">
+    <nav className="sticky top-0 z-20 mb-4 bg-background py-3 sm:py-5 lg:mb-12">
       <div className="flex flex-col justify-between md:flex-row md:items-center">
         <Link href="/">
           <div className="relative">
