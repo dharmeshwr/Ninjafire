@@ -71,7 +71,6 @@ export function ProjectList({ data }: { data: Record<string, Project[]> }) {
 
       <ProjectModal
         isOpen={modalData.openModal}
-        media={modalData.media}
         title={modalData.title}
         github={modalData.github}
         live={modalData.live}

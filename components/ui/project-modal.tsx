@@ -9,7 +9,7 @@ import { cn, getFocusableElements } from "@/lib/utils";
 interface ModalProps extends React.HTMLProps<HTMLDivElement> {
   isOpen: boolean;
   close: () => void;
-  media: string;
+  media?: string;
   github?: string;
   live?: string;
   title?: string;
@@ -94,7 +94,7 @@ const ProjectModal = ({
         )}
       >
         <div className="noscrollbar flex max-h-[45rem] min-w-[17rem] max-w-[50rem] flex-col overflow-scroll rounded-xl bg-background">
-          {media.length !== 0 && (
+          {media && media?.length !== 0 && (
             <Image
               src={media}
               alt={media}
