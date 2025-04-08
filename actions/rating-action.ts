@@ -23,7 +23,7 @@ export const UpdateRating = async (rating: number) => {
 
 export const GetRatingWithPeople = async () => {
   try {
-    const rating = await redis.get("rating");
+    const rating = Number(await redis.get("rating")).toFixed(1);
     const people = await redis.get("total_people_rated");
 
     return { success: true, rating, people };
