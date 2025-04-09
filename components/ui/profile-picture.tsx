@@ -1,7 +1,8 @@
 "use client";
 
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
+import { getGIF } from "@/actions/gif-action";
 
 import { useMediaQuery } from "@/hooks/use-media-query";
 import { useMouseHoverEffect } from "@/hooks/use-mousehover-effect";
@@ -14,36 +15,38 @@ interface ProfileictureProps {
 export function ProfilePicture({ imageSrc, circles }: ProfileictureProps) {
   const ref = useRef(null);
   const { isMobile } = useMediaQuery();
+  const { isHovering } = useMouseHoverEffect(ref, isMobile);
 
-  useMouseHoverEffect(ref, isMobile);
+  const [gif, setGif] = useState("/loading.gif");
+
+  useEffect(() => {
+    getGIF().then((data) => {
+      setGif(data.gif);
+    });
+  }, []);
 
   return (
     <div draggable="false" className="block cursor-pointer">
-      <div
-        draggable="false"
-        className="mx-auto mb-10 mt-0 sm:float-right sm:mb-5 sm:ml-5 lg:my-5"
-      >
+      <div className="mx-auto mb-10 mt-0 sm:float-right sm:mb-5 sm:ml-5 lg:my-5">
         <div
-          draggable="false"
           ref={ref}
           className="relative flex items-center justify-center rounded-full p-[4.7rem]"
         >
           {circles.map((color, index) => (
             <div
               key={index}
-              className={`profile-pic-circle`}
+              className="profile-pic-circle"
               style={{ backgroundColor: color }}
             ></div>
           ))}
-          <div className="profile-pic-circle">
+          <div className="profile-pic-circle overflow-hidden">
             <Image
-              src={imageSrc}
-              alt="Profile photo"
-              className="rounded-full"
+              src={isHovering ? imageSrc : gif}
+              alt="PFP"
+              style={{ objectFit: "cover" }}
               unoptimized
-              width={160}
-              height={160}
               priority
+              fill
             />
           </div>
         </div>

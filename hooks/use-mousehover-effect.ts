@@ -1,10 +1,14 @@
-import { useCallback, useEffect } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 export const useMouseHoverEffect = (
   ref: React.RefObject<HTMLDivElement | null>,
   isDisabled: boolean,
 ) => {
+  const [isHovering, setHovering] = useState(false);
+
   const handleMouseMove = useCallback((event: MouseEvent) => {
+    setHovering(true);
+
     const mouseX = event.clientX;
     const mouseY = event.clientY;
 
@@ -27,6 +31,7 @@ export const useMouseHoverEffect = (
   }, []);
 
   const handleMouseLeave = useCallback((event: MouseEvent) => {
+    setHovering(false);
     const container = event.target as HTMLElement;
     container.querySelectorAll("div").forEach((div) => {
       div.style.transform = `translate(0,0)`;
@@ -47,4 +52,6 @@ export const useMouseHoverEffect = (
       container.removeEventListener("mouseleave", handleMouseLeave);
     };
   }, [ref, isDisabled]);
+
+  return { isHovering };
 };
