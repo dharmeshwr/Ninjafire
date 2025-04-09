@@ -28,7 +28,7 @@ export function GetRating() {
     const { success } = await UpdateRating(index);
 
     if (success) {
-      document.cookie = `hasRated=true; max-age=${365 * 24 * 60 * 60}; path=/`;
+      document.cookie = `hasRated=true; max-age=${365 * 24 * 60 * 60}; SameSite=None; Secure; path=/`;
     }
 
     setTimeout(() => {

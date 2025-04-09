@@ -18,7 +18,7 @@ export function ProfilePicture({ imageSrc, circles }: ProfileictureProps) {
   useMouseHoverEffect(ref, isMobile);
 
   return (
-    <div draggable="false" className="z-50 block cursor-pointer">
+    <div draggable="false" className="block cursor-pointer">
       <div
         draggable="false"
         className="mx-auto mb-10 mt-0 sm:float-right sm:mb-5 sm:ml-5 lg:my-5"

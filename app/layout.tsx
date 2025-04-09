@@ -79,14 +79,14 @@ export default function RootLayout({ children }: React.PropsWithChildren) {
           title="JSON Feed"
         />
       </head>
-      <body className="relative mx-auto mb-20 mt-2 flex flex-col items-center justify-center bg-background text-foreground antialiased lg:mt-8">
+      <body className="relative mx-auto mb-10 flex flex-col items-center justify-center bg-background text-foreground antialiased md:py-10 lg:mb-0">
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
           enableSystem
           disableTransitionOnChange
         >
-          <main className="mt-2 flex w-full min-w-0 max-w-screen-sm flex-1 flex-col px-6 sm:px-4 md:mt-6 md:px-0">
+          <main className="flex w-full min-w-0 max-w-screen-sm flex-1 flex-col px-6 sm:px-4 md:px-0 lg:pt-12">
             <Navbar />
             {children}
             <Footer />
