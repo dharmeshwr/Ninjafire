@@ -8,11 +8,10 @@ export const socialLinks = {
 };
 
 export const metaData = {
-  title: "Dharmesh's Portfolio",
+  title: "Home | Ninjafire",
   name: "Dharmesh",
   baseUrl: site_url,
   description: "This is all about myself.",
-  ogImage: "/opengraph-image.png",
   links: { ...socialLinks },
   mailSupport: "dharmeshwr@gmail.com",
 };

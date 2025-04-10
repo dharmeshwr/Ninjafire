@@ -1,6 +1,16 @@
 import Link from "next/link";
 
+import { metaData } from "@/config/site";
 import { getAllBlogsMetadata } from "@/lib/utils";
+
+export const metadata = {
+  title: "Blogs | Ninjafire",
+  description: "Some of my writings about stuffs",
+  metadataBase: new URL(metaData.baseUrl),
+  openGraph: {
+    images: "/og?title=Blogs",
+  },
+};
 
 export default async function BlogsPage() {
   const blogs = await getAllBlogsMetadata();

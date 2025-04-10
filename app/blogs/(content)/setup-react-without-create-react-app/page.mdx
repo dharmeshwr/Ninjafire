@@ -2,14 +2,40 @@ import Image from "next/image";
 
 import { format } from "date-fns";
 
+import { metaData } from "@/config/site";
 import { Callout } from "@/components/shared/callout";
 import MdxLayout from "@/components/shared/mdx-layout";
 
-export const metadata = {
+export const data = {
   title: "Setup react project without using create-react-app",
   description:
     "After reading this, you'll understand why we set up our React project using `create-react-app` command",
   publishedAt: "2025-01-30",
+};
+
+export const metadata = {
+  title: data.title,
+  description: data.description,
+  metadataBase: new URL(metaData.baseUrl),
+  openGraph: {
+    title: data.title,
+    description: data.description,
+    images: `/og?title=${data.title}&font=vt323`,
+    locale: "en_US",
+    type: "article",
+    url: metaData.baseUrl,
+    publishedTime: data.publishedAt,
+  },
+  twitter: {
+    title: data.title,
+    description: data.description,
+    title: "@Dharmesh177208",
+    card: "summary_large_image",
+  },
+  icons: {
+    icon: "/favicon.ico",
+  },
+  publishedAt: data.publishedAt,
 };
 
 export default function MDXPage({ children }) {

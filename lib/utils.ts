@@ -21,10 +21,10 @@ export const getAllBlogsMetadata = async () => {
 
   return Promise.all(
     dirs.map(async (blogDir) => {
-      const { metadata } = await import(
+      const { data } = await import(
         `@/app/blogs/(content)/${blogDir}/page.mdx`
       );
-      return { ...metadata, href: `/blogs/${blogDir}` };
+      return { ...data, href: `/blogs/${blogDir}` };
     }),
   );
 };
