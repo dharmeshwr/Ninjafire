@@ -12,7 +12,7 @@ export const metaData = {
   name: "Dharmesh",
   baseUrl: site_url,
   description: "This is all about myself.",
-  /* ogImage: "/opengraph-image.png", instead of providing the image, Now we are generating th image. */
+  ogImage: "/opengraph-image.png",
   links: { ...socialLinks },
   mailSupport: "dharmeshwr@gmail.com",
 };
