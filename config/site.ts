@@ -8,7 +8,7 @@ export const socialLinks = {
 };
 
 export const metaData = {
-  title: "Ninjafire | Home",
+  title: "Home | Ninjafire",
   name: "Dharmesh",
   baseUrl: site_url,
   description: "This is all about myself.",
