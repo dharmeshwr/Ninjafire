@@ -29,7 +29,7 @@ export function Summary() {
         terminal(ST), tiling window managers(DWM) and doing everything possible
         from command line, here are the
         <ExternalLink href={`${metaData.links.github}dotfiles`}>
-          dotfiles
+          Dotfiles
         </ExternalLink>
         if you want to have a look.
       </p>
@@ -39,8 +39,7 @@ export function Summary() {
           {" "}
           ReactJS, NextJS, ExpressJS, WebSockets{" "}
         </strong>{" "}
-        and both relational and non relational databases also exploring things
-        in <i> microservices. </i>
+        and both <i>relational and non relational databases</i>.
       </p>
       I have built
       <ExternalLink href={"https://promanage-ten.vercel.app"}>
@@ -50,10 +49,11 @@ export function Summary() {
       and
       <ExternalLink href={"https://havns.vercel.app"}>Havns</ExternalLink>, a
       venue booking palatform using NextJS with Leaflet, Stripe API and Zoom API
-      integration.
+      integration. You can find more information about my studies and project
+      work in my <ExternalLink href="/resume">Resume</ExternalLink>.
       <p>
-        Beyond tech, I enjoy watching webseries and animes shows and I&apos;m
-        also into editing and graphic designing.
+        Beyond tech, I enjoy watching webseries and animes shows and I love
+        talking to friends.
       </p>
     </div>
   );

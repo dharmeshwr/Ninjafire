@@ -18,6 +18,10 @@ const nextConfig: NextConfig = {
   async rewrites() {
     return [
       {
+        source: "/cv",
+        destination: "/resume",
+      },
+      {
         source: "/rss.xml",
         destination: "/feed/rss.xml",
       },
