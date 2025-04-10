@@ -1,5 +1,3 @@
-import { readFile } from "node:fs/promises";
-import { join } from "node:path";
 import { ImageResponse } from "next/og";
 
 import { getBaseURL } from "@/lib/utils";
@@ -13,9 +11,9 @@ export const size = {
 export const contentType = "image/png";
 
 export default async function Image() {
-  const fontBuffer = await readFile(
-    join(getBaseURL(), "fonts/TrainOne-Regular.ttf"),
-  );
+  const fontBuffer = await fetch(
+    new URL("fonts/TrainOne-Regular.ttf", getBaseURL()),
+  ).then((res) => res.arrayBuffer());
 
   return new ImageResponse(
     (
@@ -38,7 +36,7 @@ export default async function Image() {
       ...size,
       fonts: [
         {
-          name: "Inter",
+          name: "Train",
           data: fontBuffer,
           style: "normal",
           weight: 400,
