@@ -20,9 +20,11 @@ export function ProfilePicture({ imageSrc, circles }: ProfileictureProps) {
   const [gif, setGif] = useState("/loading.gif");
 
   useEffect(() => {
-    getGIF().then((data) => {
-      setGif(data.gif);
-    });
+    getGIF()
+      .then((data) => {
+        setGif(data.gif);
+      })
+      .catch((error) => console.error(error));
   }, []);
 
   return (
