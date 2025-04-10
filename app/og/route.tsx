@@ -13,7 +13,7 @@ export async function GET(request) {
   try {
     const { searchParams } = new URL(request.url);
     const title = searchParams.get("title");
-    const font = Number(searchParams.get("font"));
+    const font = searchParams.get("font");
 
     const train = await fetch(
       new URL("fonts/TrainOne-Regular.ttf", getBaseURL()),
@@ -38,7 +38,7 @@ export async function GET(request) {
         fonts: [
           {
             name: "font",
-            data: font === 1 ? vt323 : font === 2 ? train : stm,
+            data: font === "vt323" ? vt323 : font === "train" ? train : stm,
             weight: 400,
             style: "normal",
           },

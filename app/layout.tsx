@@ -18,11 +18,11 @@ export const metadata: Metadata = {
   metadataBase: new URL(metaData.baseUrl),
   title: {
     default: metaData.title,
-    template: `%s | ${metaData.title}`,
+    template: `%s | Dharmesh`,
   },
   description: metaData.description,
   openGraph: {
-    images: metaData.ogImage,
+    images: "/og?title=Dharmesh&font=train",
     title: metaData.title,
     description: metaData.description,
     url: metaData.baseUrl,
