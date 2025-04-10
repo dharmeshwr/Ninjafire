@@ -33,9 +33,5 @@ export const getGIF = async () => {
     return Math.random() < 0.5 ? tenor() : giphy();
   }
 
-  try {
-    return randomGIFProvider();
-  } catch (error) {
-    return { error };
-  }
+  return randomGIFProvider();
 };
