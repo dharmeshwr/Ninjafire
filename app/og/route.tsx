@@ -3,13 +3,13 @@ import { join } from "node:path";
 import { ImageResponse } from "next/og";
 
 export const runtime = "nodejs";
-export const alt = "DHARMESH";
-export const size = {
-  width: 800,
-  height: 300,
-};
 
 export async function GET() {
+  const size = {
+    width: 800,
+    height: 300,
+  };
+
   try {
     /*
       const train = await fetch(
