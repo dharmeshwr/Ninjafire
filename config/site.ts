@@ -1,8 +1,8 @@
 const site_url = process.env.NEXT_PUBLIC_APP_URL ?? "http://localhost:3000";
 
 export const socialLinks = {
-  twitter: "https://x.com/Dharmesh177208",
-  github: "https://github.com/dharmesh53/",
+  twitter: "https://x.com/Dharmeshwr",
+  github: "https://github.com/dharmeshwr/",
   linkedin: "https://www.linkedin.com/in/dharmeshxr",
   email: "mailto:dharmeshwr@gmail.com",
 };
