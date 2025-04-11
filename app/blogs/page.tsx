@@ -8,7 +8,7 @@ export const metadata = {
   description: "Some of my writings about stuffs",
   metadataBase: new URL(metaData.baseUrl),
   openGraph: {
-    images: "/og?title=Blogs",
+    images: "/og?title=Blogs&font=vt323",
   },
 };
 
