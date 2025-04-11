@@ -6,8 +6,8 @@ export const runtime = "nodejs";
 
 export async function GET(request) {
   const size = {
-    width: 800,
-    height: 300,
+    width: 700,
+    height: 500,
   };
 
   try {
@@ -29,7 +29,7 @@ export async function GET(request) {
 
     return new ImageResponse(
       (
-        <div tw="w-full h-full bg-[#ebdbb2] text-5xl text-[#282828] p-8 flex items-center justify-center text-center relative">
+        <div tw="w-full h-full bg-[#ebdbb2] text-5xl text-[#282828] p-24 flex items-center justify-center text-center relative">
           {title ?? "Dharmesh"}
         </div>
       ),
