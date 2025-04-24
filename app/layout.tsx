@@ -43,7 +43,7 @@ export const metadata: Metadata = {
     },
   },
   twitter: {
-    title: "@Dharmesh177208",
+    title: "@Dharmeshwr",
     card: "summary_large_image",
   },
   icons: {

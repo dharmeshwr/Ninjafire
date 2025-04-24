@@ -3,13 +3,12 @@
 import { useEffect, useRef } from "react";
 import { useTheme } from "next-themes";
 
-import { metaData } from "@/config/site";
-
 export function Name() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const { theme } = useTheme();
-
-  const text = metaData.name;
+  const text = String(window.location).includes("ninjafire")
+    ? "Ninjafire"
+    : "Dharmesh";
 
   useEffect(() => {
     if (!canvasRef.current) return;
