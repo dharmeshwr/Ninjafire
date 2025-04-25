@@ -8,11 +8,10 @@ import { useMediaQuery } from "@/hooks/use-media-query";
 import { useMouseHoverEffect } from "@/hooks/use-mousehover-effect";
 
 interface ProfileictureProps {
-  imageSrc: string;
   circles: string[];
 }
 
-export function ProfilePicture({ imageSrc, circles }: ProfileictureProps) {
+export function ProfilePicture({ circles }: ProfileictureProps) {
   const ref = useRef(null);
   const { isMobile } = useMediaQuery();
 
@@ -36,6 +35,7 @@ export function ProfilePicture({ imageSrc, circles }: ProfileictureProps) {
           ))}
           <div className="profile-pic-circle overflow-hidden">
             <Image
+              suppressHydrationWarning
               src={gif}
               alt="PFP"
               style={{ objectFit: "cover" }}
