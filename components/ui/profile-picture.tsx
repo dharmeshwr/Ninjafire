@@ -3,6 +3,7 @@
 import { useRef } from "react";
 import Image from "next/image";
 
+import { getGIFfromLocal } from "@/lib/utils";
 import { useMediaQuery } from "@/hooks/use-media-query";
 import { useMouseHoverEffect } from "@/hooks/use-mousehover-effect";
 
@@ -16,6 +17,8 @@ export function ProfilePicture({ imageSrc, circles }: ProfileictureProps) {
   const { isMobile } = useMediaQuery();
 
   useMouseHoverEffect(ref, isMobile);
+
+  const gif = useRef(getGIFfromLocal()).current;
 
   return (
     <div draggable="false" className="block cursor-pointer">
@@ -33,7 +36,7 @@ export function ProfilePicture({ imageSrc, circles }: ProfileictureProps) {
           ))}
           <div className="profile-pic-circle overflow-hidden">
             <Image
-              src={imageSrc}
+              src={gif}
               alt="PFP"
               style={{ objectFit: "cover" }}
               unoptimized
