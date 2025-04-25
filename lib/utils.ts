@@ -112,3 +112,9 @@ export const debounce = <Func extends SomeFunction>(
     }, delay);
   };
 };
+
+export const getGIFfromLocal = () => {
+  const random = Math.floor(Math.random() * 76);
+  console.log(random);
+  return `/gifs/${random}.gif`;
+};

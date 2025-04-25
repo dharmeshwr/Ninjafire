@@ -1,9 +1,9 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useRef } from "react";
 import Image from "next/image";
-import { getGIF } from "@/actions/gif-action";
 
+import { getGIFfromLocal } from "@/lib/utils";
 import { useMediaQuery } from "@/hooks/use-media-query";
 import { useMouseHoverEffect } from "@/hooks/use-mousehover-effect";
 
@@ -17,15 +17,7 @@ export function ProfilePicture({ imageSrc, circles }: ProfileictureProps) {
   const { isMobile } = useMediaQuery();
   const { isHovering } = useMouseHoverEffect(ref, isMobile);
 
-  const [gif, setGif] = useState("/loading.gif");
-
-  useEffect(() => {
-    getGIF()
-      .then((data) => {
-        setGif(data.gif);
-      })
-      .catch((error) => console.error(error));
-  }, []);
+  const gif = useRef(getGIFfromLocal()).current;
 
   return (
     <div draggable="false" className="block cursor-pointer">

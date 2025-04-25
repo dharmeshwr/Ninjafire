@@ -41,7 +41,9 @@ export const metadata = {
 export default function MDXPage({ children }) {
   return (
     <>
-      <span className="mb-1 block text-4xl">{metadata.title}</span>
+      <span className="mb-1 block font-informal text-5xl">
+        {metadata.title}
+      </span>
       <span className="mb-8 block text-sm">
         {format(new Date(metadata.publishedAt), "MMMM d, yyyy")}
       </span>
@@ -307,4 +309,4 @@ root.render(<App />);
 npx webpack serve
 ```
 
-Open [http://localhost:5000](http://localhost:5000), and there it is—**Hello world in React!** No more errors, no more tears. You’ve survived the React setup and now you knwo why we use the create-react-app. 🚀
+Open [http://localhost:5000](http://localhost:5000), and there it is—**Hello world in React!** No more errors, no more tears. You’ve survived the React setup and now you know why we use the create-react-app. 🚀

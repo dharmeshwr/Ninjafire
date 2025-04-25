@@ -2,7 +2,7 @@
 
 import axios from "axios";
 
-export const getGIF = async () => {
+export const getGIFfromTenor = async () => {
   const keywords = ["one+piece", "bleach+anime", "bankai", "jujustu+kaisen"];
 
   const selectedKeywords =

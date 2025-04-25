@@ -6,7 +6,7 @@ import { Summary } from "@/components/ui/summary";
 
 export default function Page() {
   return (
-    <section>
+    <section className="z-0 md:z-30">
       <a href={socialLinks.twitter} target="_blank">
         <ProfilePicture
           imageSrc="/profile.png"
