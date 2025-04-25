@@ -20,8 +20,8 @@ export function Summary() {
     <div className="prose text-left leading-8 text-foreground">
       <p>
         Hi! I usually go by Dharmesh on the internet, I&apos;m an{" "}
-        <span>{age}</span>
-        old developer deeply passionate about building websites.
+        <span>{age}</span> old developer deeply passionate about building
+        websites.
       </p>
       <p>
         My interests resides in scripting, open-source softwares, games,

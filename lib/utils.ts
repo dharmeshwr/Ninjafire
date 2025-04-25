@@ -69,17 +69,20 @@ export const getMyAge = () => {
     start: dob,
     end: today,
   });
-  let age = "",
-    isSecondAvailable = false;
 
-  Object.entries(duration).forEach(([key, value]) => {
-    age += `${value} ${key} `;
-    if (key === "seconds") isSecondAvailable = true;
-  });
+  const units = ["years", "months", "days", "hours", "minutes", "seconds"];
 
-  if (!isSecondAvailable) age += `0 second `;
+  const formatted = units
+    .filter((unit) => {
+      if (unit === "seconds") {
+        return process.env.NODE_ENV === "production";
+      }
+      return true;
+    })
+    .map((unit) => `${duration[unit] ?? 0} ${unit}`)
+    .join(" ");
 
-  return age;
+  return formatted;
 };
 
 type SomeFunction = (...args: unknown[]) => void;
@@ -114,7 +117,6 @@ export const debounce = <Func extends SomeFunction>(
 };
 
 export const getGIFfromLocal = () => {
-  const random = Math.floor(Math.random() * 76);
-  console.log(random);
+  const random = Math.floor(Math.random() * 78);
   return `/gifs/${random}.gif`;
 };
