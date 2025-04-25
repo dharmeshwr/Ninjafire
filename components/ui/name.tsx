@@ -9,13 +9,10 @@ export function Name() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const { theme } = useTheme();
   const fallbackText = metaData.name;
-  const isNinjafireDomain = String(document?.location).includes("ninjafire");
-  const text =
-    typeof document === "undefined"
-      ? fallbackText
-      : isNinjafireDomain
-        ? "Ninjafire"
-        : fallbackText;
+  const isNinjafireDomain =
+    typeof document !== "undefined" &&
+    String(document?.location).includes("ninjafire");
+  const text = isNinjafireDomain ? "Ninjafire" : fallbackText;
 
   useEffect(() => {
     if (!canvasRef.current) return;
