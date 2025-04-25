@@ -9,10 +9,11 @@ export function Name() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const { theme } = useTheme();
   const fallbackText = metaData.name;
+  const isNinjafireDomain = String(document?.location).includes("ninjafire");
   const text =
     typeof document === "undefined"
       ? fallbackText
-      : String(document?.location).includes("ninjafire")
+      : isNinjafireDomain
         ? "Ninjafire"
         : fallbackText;
 
@@ -23,7 +24,7 @@ export function Name() {
       willReadFrequently: true,
     });
 
-    canvas.width = 300;
+    canvas.width = isNinjafireDomain ? 275 : 300;
     canvas.height = 100;
 
     if (!ctx) return;
