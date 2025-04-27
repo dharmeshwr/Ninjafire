@@ -14,7 +14,7 @@ export function Summary() {
     }, 1000);
 
     return () => clearInterval(intervalId);
-  });
+  }, []);
 
   return (
     <div className="prose text-left leading-8 text-foreground">

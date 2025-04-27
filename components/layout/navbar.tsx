@@ -15,13 +15,7 @@ export function Navbar() {
       <div className="flex flex-col justify-between md:flex-row md:items-center">
         <Link href="/">
           <div className="relative">
-            <Suspense
-              fallback={
-                <span className="text-2xl text-foreground">Dharmesh</span>
-              }
-            >
-              <Name />
-            </Suspense>
+            <Name />
           </div>
         </Link>
         <div className="mt-6 flex flex-row items-center gap-4 md:ml-auto md:mt-0">

@@ -2,6 +2,7 @@ import Balancer from "react-wrap-balancer";
 
 import { socialLinks, tagline } from "@/config/site";
 import { ProfilePicture } from "@/components/ui/profile-picture";
+import { Quote } from "@/components/ui/quote";
 import { Summary } from "@/components/ui/summary";
 
 export default function Page() {
@@ -18,6 +19,8 @@ export default function Page() {
       </Balancer>
 
       <Summary />
+
+      <Quote />
     </section>
   );
 }

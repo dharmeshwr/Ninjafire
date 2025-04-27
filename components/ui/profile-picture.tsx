@@ -20,7 +20,7 @@ export function ProfilePicture({ circles }: ProfileictureProps) {
   const gif = useRef(getGIFfromLocal()).current;
 
   return (
-    <div draggable="false" className="block cursor-pointer">
+    <div draggable="false" className="relative block cursor-pointer">
       <div className="mx-auto mb-10 mt-0 sm:float-right sm:mb-5 sm:ml-5 lg:my-5">
         <div
           ref={ref}

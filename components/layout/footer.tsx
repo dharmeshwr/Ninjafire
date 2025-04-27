@@ -31,7 +31,7 @@ function SocialLinks() {
 
 export default function Footer() {
   return (
-    <small className="mt-16 flex items-center justify-between lg:mt-24">
+    <small className="mt-16 flex items-center justify-between">
       <span className="flex gap-1">
         <time>© {YEAR}</time>
         {
