@@ -22,7 +22,7 @@ export const Quote = () => {
   useEffect(() => {
     (async () => {
       try {
-        const data = localStorage.getItem(QUOTE_KEY) || "";
+        const data = localStorage.getItem(QUOTE_KEY) ?? "{}";
         const savedQuote = JSON.parse(data);
 
         if (data.length > 0 && savedQuote.date === quote.date) {
