@@ -12,7 +12,7 @@ import { ShowRating } from "@/components/ui/show-rating";
 import Footer from "@/components/layout/footer";
 import { Navbar } from "@/components/layout/navbar";
 
-import { fontInformal, fontMono, fontSans } from "./fonts";
+import { fontCursive, fontInformal, fontMono, fontSans } from "./fonts";
 
 export const metadata: Metadata = {
   metadataBase: new URL(metaData.baseUrl),
@@ -61,6 +61,7 @@ export default function RootLayout({ children }: React.PropsWithChildren) {
         fontSans.variable,
         fontMono.variable,
         fontInformal.variable,
+        fontCursive.variable,
       )}
     >
       <head>

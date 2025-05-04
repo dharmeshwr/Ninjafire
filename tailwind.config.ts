@@ -12,6 +12,7 @@ export default {
         sans: ["var(--font-sans)", ...fontFamily.sans],
         mono: ["var(--font-mono)", ...fontFamily.mono],
         informal: ["var(--font-informal)"],
+        cursive: ["var(--font-cursive)"],
       },
       typography: {
         quoteless: {
