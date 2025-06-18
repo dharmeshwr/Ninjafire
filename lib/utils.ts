@@ -116,7 +116,7 @@ export const debounce = <Func extends SomeFunction>(
   };
 };
 
-export const getGIFfromLocal = () => {
+export const getGIFfromLocal = (): string => {
   const random = Math.floor(Math.random() * 78);
   return `/gifs/${random}.gif`;
 };

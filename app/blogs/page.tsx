@@ -4,7 +4,7 @@ import { metaData } from "@/config/site";
 import { getAllBlogsMetadata } from "@/lib/utils";
 
 export const metadata = {
-  title: "Blogs | Ninjafire",
+  title: "Blogs",
   description: "Some of my writings about stuffs",
   metadataBase: new URL(metaData.baseUrl),
   openGraph: {

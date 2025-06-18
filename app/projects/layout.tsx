@@ -3,7 +3,7 @@ import { Suspense } from "react";
 import { metaData } from "@/config/site";
 
 export const metadata = {
-  title: "Projects | Ninjafire",
+  title: "Projects",
   description: "Some of my projects I made",
   metadataBase: new URL(metaData.baseUrl),
   openGraph: {

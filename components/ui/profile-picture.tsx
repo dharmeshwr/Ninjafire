@@ -1,9 +1,9 @@
 "use client";
 
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 
-import { getGIFfromLocal } from "@/lib/utils";
+import { cn, getGIFfromLocal } from "@/lib/utils";
 import { useMediaQuery } from "@/hooks/use-media-query";
 import { useMouseHoverEffect } from "@/hooks/use-mousehover-effect";
 
@@ -13,11 +13,14 @@ interface ProfileictureProps {
 
 export function ProfilePicture({ circles }: ProfileictureProps) {
   const ref = useRef(null);
+  const [image, setImage] = useState("");
   const { isMobile } = useMediaQuery();
 
   useMouseHoverEffect(ref, isMobile);
 
-  const gif = useRef(getGIFfromLocal()).current;
+  useEffect(() => {
+    setImage(getGIFfromLocal());
+  }, []);
 
   return (
     <div draggable="false" className="relative block cursor-pointer">
@@ -33,16 +36,23 @@ export function ProfilePicture({ circles }: ProfileictureProps) {
               style={{ backgroundColor: color }}
             ></div>
           ))}
-          <div className="profile-pic-circle overflow-hidden">
-            <Image
-              suppressHydrationWarning
-              src={gif}
-              alt="PFP"
-              style={{ objectFit: "cover" }}
-              unoptimized
-              priority
-              fill
-            />
+          <div
+            className={cn(
+              "profile-pic-circle overflow-hidden",
+              image.length === 0 && "animate-pulse bg-black/30 duration-500",
+            )}
+          >
+            {image.length > 0 && (
+              <Image
+                suppressHydrationWarning
+                src={image}
+                alt="PFP"
+                style={{ objectFit: "cover" }}
+                unoptimized
+                priority
+                fill
+              />
+            )}
           </div>
         </div>
       </div>
