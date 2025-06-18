@@ -27,7 +27,15 @@ const ShiftDescription = () => (
     <code className="text-orange-600">Gruvbox</code>,{" "}
     <code className="text-pink-600">TokyoNight</code>, <code>Nord</code>, and{" "}
     <code className="text-yellow-600">Solarized</code> for a visually appealing
-    experience.
+    experience. You can track the checkpoint I completed through my{" "}
+    <a
+      target="_blank"
+      className="underline"
+      href="https://x.com/Dharmeshwr/status/1931336370905116852"
+    >
+      tweets
+    </a>
+    .
   </span>
 );
 
