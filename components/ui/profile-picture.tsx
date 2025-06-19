@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useLayoutEffect, useRef, useState } from "react";
 import Image from "next/image";
 
 import { cn, getGIFfromLocal } from "@/lib/utils";
@@ -18,7 +18,7 @@ export function ProfilePicture({ circles }: ProfileictureProps) {
 
   useMouseHoverEffect(ref, isMobile);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     setImage(getGIFfromLocal());
   }, []);
 
