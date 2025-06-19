@@ -21,7 +21,7 @@ export function Summary() {
       <p>
         Hi! I usually go by Dharmesh on the internet, I&apos;m an{" "}
         <span>{age}</span> old developer deeply passionate about building
-        websites.
+        softwares.
       </p>
       <p>
         My interests resides in scripting, open-source softwares, games,
@@ -45,7 +45,7 @@ export function Summary() {
       <ExternalLink href={"https://promanage-ten.vercel.app"}>
         Promanage
       </ExternalLink>
-      , a work management platform using ReactJS and ExpressJS with Socket.io
+      , a project management platform using ReactJS and ExpressJS with Socket.io
       and
       <ExternalLink href={"https://havns.vercel.app"}>Havns</ExternalLink>, a
       venue booking palatform using NextJS with Leaflet, Stripe API and Zoom API

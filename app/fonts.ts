@@ -2,12 +2,19 @@ import {
   Corinthia as FontCursive,
   Gamja_Flower as FontInformal,
   JetBrains_Mono as FontMono,
-  Inter as FontSans,
+  Onest as FontSans,
+  Instrument_Serif as FontSerif,
 } from "next/font/google";
 
 export const fontSans = FontSans({
   subsets: ["latin"],
   variable: "--font-sans",
+});
+
+export const fontSerif = FontSerif({
+  subsets: ["latin"],
+  variable: "--font-serif",
+  weight: "400",
 });
 
 export const fontMono = FontMono({

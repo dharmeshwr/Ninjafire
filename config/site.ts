@@ -8,7 +8,7 @@ export const socialLinks = {
 };
 
 export const metaData = {
-  title: "Home",
+  title: "Home | Ninjafire",
   name: "Dharmesh",
   baseUrl: site_url,
   description: "This is all about myself.",
@@ -16,4 +16,4 @@ export const metaData = {
   mailSupport: "dharmeshwr@gmail.com",
 };
 
-export const tagline = `I work with websites`;
+export const tagline = `I work with softwares`;

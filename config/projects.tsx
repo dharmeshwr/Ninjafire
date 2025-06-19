@@ -132,19 +132,6 @@ const IPModelDescription = () => (
   </span>
 );
 
-const SortingAlgorithmsDescription = () => (
-  <span>
-    Sparked by a <code>LeetCode</code> problem, I revisited{" "}
-    <code className="font-mono">sorting algorithms</code> to deepen my
-    understanding. I analyzed and compared their{" "}
-    <code className="text-purple-600">time and space complexities</code> and
-    performance, implementing various algorithms to enhance my{" "}
-    <code className="font-mono">problem-solving skills</code>. This project
-    improved my ability to select the right algorithm for different scenarios,
-    broadening my knowledge of algorithmic efficiency.
-  </span>
-);
-
 const AuthenticationDescription = () => (
   <span>
     This project explored{" "}
@@ -181,7 +168,7 @@ export const projects: Project[] = [
     media: "/projects/RPM.webp",
   },
   {
-    title: "Promanage : A Work Management Platform",
+    title: "Promanage : A Project Management Platform",
     description: <PromanageDescription />,
     date: ["Mar 2024", "Aug 2024"],
     type: "Websites",
@@ -214,14 +201,6 @@ export const projects: Project[] = [
     type: "Foundational Concepts",
     github: "https://github.com/dharmeshwr/IP-Server-And-Client-Model",
     media: "/projects/ip.webp",
-  },
-  {
-    title: "Sorting Algorithms",
-    description: <SortingAlgorithmsDescription />,
-    date: ["Jul 2024"],
-    type: "Foundational Concepts",
-    github: "https://github.com/dharmeshwr/All-Sorting-Methods",
-    media: "/projects/sort.webp",
   },
   {
     title: "Authentication And Authorization",
