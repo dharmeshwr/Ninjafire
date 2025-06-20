@@ -7,6 +7,7 @@ import { metaData } from "@/config/site";
 
 export function Name() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+
   const { theme } = useTheme();
   const fallbackText = metaData.name;
   const isNinjafireDomain =
@@ -115,7 +116,7 @@ export function Name() {
         this.maxTextWidth = canvas.width;
         this.lineHeight = this.fontSize * 0.8;
         this.particles = [];
-        this.step = 1;
+        this.step = 2;
         this.mouse = {
           radius: 1000,
           x: -100,

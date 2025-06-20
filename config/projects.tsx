@@ -6,23 +6,22 @@ export type Project = {
   github: string;
   live?: string;
   media: string;
+  badges: string[];
 };
 
 const ShiftDescription = () => (
   <span>
-    To learn more about <code className="font-mono">file systems</code> and
-    their underlying mechanics, I built a Desktop File Manager using{" "}
-    <code className="font-mono">Electron</code> for the backend and{" "}
-    <code className="font-mono text-green-600">React</code> for the frontend.
-    The interface features a{" "}
+    To learn more about <code>file systems</code> and their underlying
+    mechanics, I built a Desktop File Manager using <code>Electron</code> for
+    the backend and <code className="font-mono text-green-600">React</code> for
+    the frontend. The interface features a{" "}
     <code className="italic text-purple-600">sidebar</code> with two views: a{" "}
-    <code className="font-mono">Places view</code> displaying common folders
-    like <code>Downloads, Pictures, Documents</code>, and a{" "}
-    <code className="font-mono">Directory Tree</code>, inspired by VS Code, for
-    deep folder navigation. The <code className="font-mono">header</code>{" "}
-    includes navigation buttons for <code>back, forward, and home</code>, plus a{" "}
-    <code className="font-mono">search bar</code> for quick path access. The{" "}
-    <code className="font-mono">footer</code> shows the selected file&apos;s
+    <code>Places view</code> displaying common folders like{" "}
+    <code>Downloads, Pictures, Documents</code>, and a{" "}
+    <code>Directory Tree</code>, inspired by VS Code, for deep folder
+    navigation. The <code>header</code> includes navigation buttons for{" "}
+    <code>back, forward, and home</code>, plus a <code>search bar</code> for
+    quick path access. The <code>footer</code> shows the selected file&apos;s
     size and total/free disk space. The app supports themes like{" "}
     <code className="text-orange-600">Gruvbox</code>,{" "}
     <code className="text-pink-600">TokyoNight</code>, <code>Nord</code>, and{" "}
@@ -46,9 +45,8 @@ const RPMDescription = () => (
     and <code className="font-mono text-green-600">React</code> for the frontend
     to make jotting down ideas quick and easy. The app generates{" "}
     <code>Markdown files</code> for each note and provides a clean editor
-    powered by <code className="font-mono">@mdxeditor/editor</code>. A{" "}
-    <code className="font-mono">sidebar</code> lists all Markdown files, with{" "}
-    <code className="text-purple-600">Create</code> and{" "}
+    powered by <code>@mdxeditor/editor</code>. A <code>sidebar</code> lists all
+    Markdown files, with <code className="text-purple-600">Create</code> and{" "}
     <code className="text-red-600">Delete</code> buttons for easy note
     management. Global state is managed with{" "}
     <code className="font-mono text-orange-600">Jotai</code>, ensuring a smooth
@@ -67,10 +65,9 @@ const PromanageDescription = () => (
     <code>MongoDB</code>. Users can create teams, assign roles, and manage tasks
     displayed on a personalized{" "}
     <code className="font-mono text-purple-600">Kanban board</code>. The{" "}
-    <code className="font-mono">workflow editor</code>, powered by ReactFlow,
-    visualizes tasks with real-time updates via Socket.io. The{" "}
-    <code className="font-mono">file-sharing system</code> uses AWS S3 for
-    secure storage of PDFs and images, while{" "}
+    <code>workflow editor</code>, powered by ReactFlow, visualizes tasks with
+    real-time updates via Socket.io. The <code>file-sharing system</code> uses
+    AWS S3 for secure storage of PDFs and images, while{" "}
     <code className="text-purple-600">NodeMailer</code> sends email
     notifications for task deadlines and assignments, boosting productivity and
     accountability.
@@ -89,16 +86,15 @@ const HavnsDescription = () => (
     venues through <code>Cloudinary</code>-hosted images and{" "}
     <code>Leaflet</code> maps, take virtual tours via{" "}
     <code className="text-purple-600">Zoom API</code>-generated links, save
-    venues to a <code className="font-mono">wishlist</code>, and leave reviews.
-    Hosts can list venues by submitting details and uploading images.{" "}
-    <code>Framer Motion</code> enhances the experience with smooth animations.
+    venues to a <code>wishlist</code>, and leave reviews. Hosts can list venues
+    by submitting details and uploading images. <code>Framer Motion</code>{" "}
+    enhances the experience with smooth animations.
   </span>
 );
 
 const ProductionCrateDescription = () => (
   <span>
-    Built during my 2nd semester of undergrad, this{" "}
-    <code className="font-mono">UI clone</code> of{" "}
+    Built during my 2nd semester of undergrad, this <code>UI clone</code> of{" "}
     <a
       href="https://www.productioncrate.com"
       target="_blank"
@@ -119,16 +115,15 @@ const ProductionCrateDescription = () => (
 
 const IPModelDescription = () => (
   <span>
-    I developed an IP-based{" "}
-    <code className="font-mono">server-client system</code> in{" "}
+    I developed an IP-based <code>server-client system</code> in{" "}
     <code className="font-mono text-green-600">C</code> using{" "}
     <code>raw sockets</code> for low-level network communication. By leveraging{" "}
     <code>sys/socket.h, linux/ip.h, unistd.h, arpa/inet.h</code>, I crafted{" "}
-    <code className="font-mono">IP headers</code> to encapsulate and transmit
-    data, bypassing higher-level protocols. This project deepened my
-    understanding of <code className="text-purple-600">network layer</code>{" "}
-    operations and <code className="text-purple-600">socket programming</code>,
-    offering hands-on experience with data encapsulation at the IP layer.
+    <code>IP headers</code> to encapsulate and transmit data, bypassing
+    higher-level protocols. This project deepened my understanding of{" "}
+    <code className="text-purple-600">network layer</code> operations and{" "}
+    <code className="text-purple-600">socket programming</code>, offering
+    hands-on experience with data encapsulation at the IP layer.
   </span>
 );
 
@@ -152,47 +147,85 @@ const AuthenticationDescription = () => (
 
 export const projects: Project[] = [
   {
-    title: "Shift : File Manager",
+    title: "Shift :: File Manager",
     description: <ShiftDescription />,
     date: ["May 2025", "ongoing"],
     type: "Desktop Apps",
     github: "https://github.com/dharmeshwr/shift",
     media: "/projects/shift.webp",
+    badges: [
+      "Electron",
+      "Electron-vite",
+      "ReactJS",
+      "Jotai",
+      "Typescript",
+      "TailwindCSS",
+    ],
   },
   {
-    title: "RPM : Note App",
+    title: "RPM :: Note App",
     description: <RPMDescription />,
     date: ["April 2025"],
     type: "Desktop Apps",
     github: "https://github.com/dharmeshwr/RPM",
     media: "/projects/RPM.webp",
+    badges: [
+      "Electron",
+      "Electron-vite",
+      "ReactJS",
+      "Jotai",
+      "Typescript",
+      "TailwindCSS",
+    ],
   },
   {
-    title: "Promanage : A Project Management Platform",
+    title: "Promanage :: A Project Management Platform",
     description: <PromanageDescription />,
     date: ["Mar 2024", "Aug 2024"],
     type: "Websites",
     github: "https://github.com/dharmeshwr/promanage",
     live: "https://promanage-ten.vercel.app",
     media: "/projects/promanage-1.webp",
+    badges: [
+      "ReactJS",
+      "ReactFlow",
+      "Framer Motion",
+      "ExpressJS",
+      "Socket.io",
+      "NodeMailer",
+      "AWS(S3)",
+      "Mongoose",
+    ],
   },
   {
-    title: "Havns : A Venue Booking Platform",
+    title: "Havns :: A Venue Booking Platform",
     description: <HavnsDescription />,
     date: ["Jun 2023", "Oct 2023"],
     type: "Websites",
     github: "https://github.com/dharmeshwr/havns",
     live: "https://havns.vercel.app",
     media: "/projects/havns.webp",
+    badges: [
+      "NextJS",
+      "TailwindCSS",
+      "Mongoose",
+      "NextAuth",
+      "Cloudinary",
+      "Leaflet",
+      "Stripe API",
+      "Zoom API",
+      "Framer Motion",
+    ],
   },
   {
-    title: "Production Crate : UI Clone",
+    title: "Production Crate :: UI Clone",
     description: <ProductionCrateDescription />,
     date: ["Sept 2022"],
     type: "Websites",
     github: "https://github.com/dharmeshwr/ProductionCrate-CSS-Clone",
     live: "https://dharmesh53.github.io/ProductionCrate-CSS-Clone",
     media: "/projects/production-crate.webp",
+    badges: ["HTML", "CSS", "Javascript"],
   },
   {
     title: "IP Based Server And Client Model Using Raw Sockets",
@@ -201,6 +234,13 @@ export const projects: Project[] = [
     type: "Foundational Concepts",
     github: "https://github.com/dharmeshwr/IP-Server-And-Client-Model",
     media: "/projects/ip.webp",
+    badges: [
+      "sys/socket.h",
+      "stdlib.h",
+      "netint/in.h",
+      "arpa/inet.h",
+      "linux/ip.h",
+    ],
   },
   {
     title: "Authentication And Authorization",
@@ -209,5 +249,12 @@ export const projects: Project[] = [
     type: "Foundational Concepts",
     github: "https://github.com/dharmeshwr/Authentication",
     media: "/projects/auth.webp",
+    badges: [
+      "Session based Authentication",
+      "JWT based Authentication",
+      "NextAuth",
+      "Two Factor Authentication",
+      "Email Verification",
+    ],
   },
 ];

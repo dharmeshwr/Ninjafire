@@ -5,7 +5,8 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 import { projects, type Project } from "@/config/projects";
 import { capatilize, cn, createQueryString } from "@/lib/utils";
-import { ProjectList } from "@/components/ui/projects-list";
+
+import { ProjectList } from "./_(components)/projects-list";
 
 enum CategoryType {
   DATE = "date",

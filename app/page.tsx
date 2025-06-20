@@ -14,7 +14,7 @@ export default function Page() {
         />
       </a>
 
-      <Balancer className="mb-8 font-sans text-2xl font-medium tracking-tight">
+      <Balancer className="mb-8 font-serif text-2xl font-medium tracking-tight">
         {tagline}
       </Balancer>
 

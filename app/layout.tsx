@@ -91,7 +91,7 @@ export default function RootLayout({ children }: React.PropsWithChildren) {
           title="JSON Feed"
         />
       </head>
-      <body className="relative mx-auto mb-1 flex flex-col items-center justify-center bg-background text-foreground antialiased md:py-10 lg:mb-0">
+      <body className="relative mx-auto mb-1 flex flex-col items-center justify-center overflow-x-hidden bg-background text-foreground antialiased md:py-10 lg:mb-0">
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
