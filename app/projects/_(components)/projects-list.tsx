@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { globalZIndexAtom } from "@/store";
-import { useAtom, useAtomValue } from "jotai";
+import { useAtomValue } from "jotai";
 import { createPortal } from "react-dom";
 
 import { type Project } from "@/config/projects";
@@ -20,8 +20,11 @@ export function ProjectList({ data }: ProjectListProps) {
   const [openProjects, setOpenProjects] = useState<ProjectModal[]>([]);
   const globalZIndex = useAtomValue(globalZIndexAtom);
 
+  const isAlreadyOpen = (title: string) =>
+    openProjects.find((p) => p.title === title);
+
   const openModal = (project) => {
-    if (!openProjects.find((p) => p.title === project.title)) {
+    if (!isAlreadyOpen(project.title)) {
       if (openProjects.length === 0) {
         project.zIndex = globalZIndex;
         project.offset = 0;
@@ -50,7 +53,7 @@ export function ProjectList({ data }: ProjectListProps) {
                   key={project.title}
                   className={cn(
                     "flex w-full cursor-pointer flex-col items-start rounded p-1 text-left hover:bg-foreground/5 md:flex-row md:justify-between",
-                    openProjects.includes(project) &&
+                    isAlreadyOpen(project.title) &&
                       "border border-foreground/20",
                   )}
                   onClick={() => openModal(project)}
@@ -70,7 +73,6 @@ export function ProjectList({ data }: ProjectListProps) {
         createPortal(
           <ProjectModal
             key={project.title}
-            isOpen={true}
             title={project.title}
             github={project.github}
             live={project.live}

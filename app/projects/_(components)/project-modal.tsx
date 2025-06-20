@@ -9,7 +9,6 @@ import { useDraggableEffect } from "@/hooks/use-draggable-effect";
 import { Badges } from "@/components/ui/badge";
 
 interface ModalProps extends React.HTMLProps<HTMLDivElement> {
-  isOpen: boolean;
   close: () => void;
   media?: string;
   github?: string;
@@ -21,7 +20,6 @@ interface ModalProps extends React.HTMLProps<HTMLDivElement> {
 }
 
 const ProjectModal = ({
-  isOpen,
   close,
   media,
   title,

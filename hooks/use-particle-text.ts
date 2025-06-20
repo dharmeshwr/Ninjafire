@@ -8,7 +8,7 @@ export const useParticleText = (
   useEffect(() => {
     if (!canvasRef.current) return;
     const canvas = canvasRef.current;
-    const ctx = canvas.getContext("webgl", {
+    const ctx = canvas.getContext("2d", {
       willReadFrequently: true,
     });
 
