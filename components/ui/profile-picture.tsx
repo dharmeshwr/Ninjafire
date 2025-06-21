@@ -15,7 +15,7 @@ export function ProfilePicture({ circles }: ProfileictureProps) {
   const ref = useRef(null);
   const [image, setImage] = useState("");
   const { isMobile } = useMediaQuery();
-  const string = "||||||||||||||||||||||||||||||||||||||||||";
+  const string = "|".repeat(40);
 
   useMouseHoverEffect(ref, isMobile);
 
@@ -24,7 +24,10 @@ export function ProfilePicture({ circles }: ProfileictureProps) {
   }, []);
 
   return (
-    <div draggable="false" className="relative block cursor-pointer">
+    <div
+      draggable="false"
+      className="relative block cursor-pointer select-none"
+    >
       <div className="mx-auto mb-10 mt-0 sm:float-right sm:mb-5 sm:ml-5 lg:my-5">
         <div
           ref={ref}
