@@ -13,6 +13,7 @@ export default {
         mono: ["var(--font-mono)", ...fontFamily.mono],
         informal: ["var(--font-informal)"],
         cursive: ["var(--font-cursive)"],
+        broader: ["var(--font-broader)"],
       },
       typography: {
         quoteless: {

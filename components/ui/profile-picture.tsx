@@ -15,6 +15,7 @@ export function ProfilePicture({ circles }: ProfileictureProps) {
   const ref = useRef(null);
   const [image, setImage] = useState("");
   const { isMobile } = useMediaQuery();
+  const string = "||||||||||||||||||||||||||||||||||||||||||";
 
   useMouseHoverEffect(ref, isMobile);
 
@@ -27,7 +28,7 @@ export function ProfilePicture({ circles }: ProfileictureProps) {
       <div className="mx-auto mb-10 mt-0 sm:float-right sm:mb-5 sm:ml-5 lg:my-5">
         <div
           ref={ref}
-          className="relative flex items-center justify-center rounded-full p-[4.7rem]"
+          className="group relative flex items-center justify-center rounded-full p-[4.7rem]"
         >
           {circles.map((color, index) => (
             <div
@@ -53,6 +54,21 @@ export function ProfilePicture({ circles }: ProfileictureProps) {
                 fill
               />
             )}
+          </div>
+          <div className="rotater pointer-events-none absolute -z-50 origin-center p-[4.7rem] opacity-10 transition-opacity ease-in-out group-hover:opacity-15">
+            <div className="absolute top-[-1.9rem] origin-center">
+              {string.split("").map((letter, i) => (
+                <span
+                  key={i}
+                  className={`absolute origin-[0px_105px] font-broader text-xl font-bold`}
+                  style={{
+                    transform: `rotate(${i * Number((360 / string.length).toFixed(2))}deg)`,
+                  }}
+                >
+                  {letter}
+                </span>
+              ))}
+            </div>
           </div>
         </div>
       </div>

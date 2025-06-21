@@ -13,6 +13,7 @@ import Footer from "@/components/layout/footer";
 import { Navbar } from "@/components/layout/navbar";
 
 import {
+  fontBroader,
   fontCursive,
   fontInformal,
   fontMono,
@@ -69,6 +70,7 @@ export default function RootLayout({ children }: React.PropsWithChildren) {
         fontSerif.variable,
         fontInformal.variable,
         fontCursive.variable,
+        fontBroader.variable,
       )}
     >
       <head>

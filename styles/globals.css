@@ -151,10 +151,23 @@ hr {
 
 .profile-pic-circle {
   @apply pointer-events-none absolute size-[151px] rounded-full border border-background transition-all ease-linear;
-  position: absolute;
   will-change: transform;
 }
 
 .nondraggable {
   -webkit-user-drag: none;
+}
+
+.rotater {
+  animation: anim 90s linear infinite;
+}
+
+@keyframes anim {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
 }

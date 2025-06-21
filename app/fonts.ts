@@ -1,4 +1,5 @@
 import {
+  Protest_Guerrilla as FontBroader,
   Corinthia as FontCursive,
   Gamja_Flower as FontInformal,
   JetBrains_Mono as FontMono,
@@ -32,5 +33,11 @@ export const fontInformal = FontInformal({
 export const fontCursive = FontCursive({
   subsets: ["latin"],
   variable: "--font-cursive",
+  weight: "400",
+});
+
+export const fontBroader = FontBroader({
+  subsets: ["latin"],
+  variable: "--font-broader",
   weight: "400",
 });

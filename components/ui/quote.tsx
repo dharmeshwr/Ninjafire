@@ -29,9 +29,11 @@ export const Quote = () => {
           setQuote(savedQuote);
         } else {
           const data: QuoteProp = await getQuote();
-          setQuote(data);
-          data["date"] = new Date().getDate();
-          localStorage.setItem(QUOTE_KEY, JSON.stringify(data));
+          if (data) {
+            setQuote(data);
+            data["date"] = new Date().getDate();
+            localStorage.setItem(QUOTE_KEY, JSON.stringify(data));
+          }
         }
       } catch (error) {
         console.error("Failed to load quote:", error);
@@ -39,7 +41,7 @@ export const Quote = () => {
     })();
   }, []);
 
-  if (!quote.q.length) {
+  if (!quote?.q.length) {
     return (
       <div className="mx-auto flex w-full max-w-md flex-col items-center pt-10">
         <div className="mb-2 h-4 w-3/4 animate-pulse rounded bg-neutral-400/20"></div>
