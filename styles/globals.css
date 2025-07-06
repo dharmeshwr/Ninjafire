@@ -159,7 +159,7 @@ hr {
 }
 
 .rotater {
-  animation: anim 90s linear infinite;
+  animation: anim 60s linear infinite;
 }
 
 @keyframes anim {

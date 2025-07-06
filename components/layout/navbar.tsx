@@ -1,4 +1,10 @@
+"use client";
+
 import Link from "next/link";
+import { hoverStateAtom } from "@/store";
+import { useAtomValue } from "jotai";
+
+import { cn } from "@/lib/utils";
 
 import { Name } from "../ui/name";
 import { ThemeSwitcher } from "./theme-switcher";
@@ -9,9 +15,16 @@ const navItems = {
 };
 
 export function Navbar() {
+  const isHovered = useAtomValue(hoverStateAtom);
+
   return (
-    <nav className="sticky top-0 z-50 mb-4 bg-background py-3 pt-6 sm:py-5 md:z-10 md:pt-3 lg:mb-12">
-      <div className="flex flex-col justify-between md:flex-row md:items-center">
+    <nav
+      className={cn(
+        `sticky top-0 z-50 mb-4 flex w-full justify-center bg-background py-3 pt-6 sm:py-5 md:pt-3 lg:mb-12`,
+        isHovered ? "md:z-10" : "md:z-50",
+      )}
+    >
+      <div className="flex w-full max-w-screen-sm flex-col justify-between md:flex-row md:items-center">
         <Link href="/">
           <div className="relative">
             <Name />

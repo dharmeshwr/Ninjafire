@@ -1,9 +1,13 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect } from "react";
+import { hoverStateAtom } from "@/store";
+import { useSetAtom } from "jotai";
 
 export const useMouseHoverEffect = (
   ref: React.RefObject<HTMLDivElement | null>,
   isDisabled: boolean,
 ) => {
+  const setIsHovered = useSetAtom(hoverStateAtom);
+
   const handleMouseMove = useCallback((event: MouseEvent) => {
     const mouseX = event.clientX;
     const mouseY = event.clientY;
@@ -26,12 +30,20 @@ export const useMouseHoverEffect = (
     });
   }, []);
 
-  const handleMouseLeave = useCallback((event: MouseEvent) => {
-    const container = event.target as HTMLElement;
-    container.querySelectorAll("div").forEach((div) => {
-      div.style.transform = `translate(0,0)`;
-    });
-  }, []);
+  const handleMouseEnter = useCallback(() => {
+    setIsHovered(true);
+  }, [setIsHovered]);
+
+  const handleMouseLeave = useCallback(
+    (event: MouseEvent) => {
+      const container = event.target as HTMLElement;
+      container.querySelectorAll("div").forEach((div) => {
+        div.style.transform = `translate(0,0)`;
+      });
+      setIsHovered(false);
+    },
+    [setIsHovered],
+  );
 
   useEffect(() => {
     if (isDisabled) return;
@@ -40,11 +52,13 @@ export const useMouseHoverEffect = (
     if (!container) return;
 
     container.addEventListener("mousemove", handleMouseMove);
+    container.addEventListener("mouseenter", handleMouseEnter);
     container.addEventListener("mouseleave", handleMouseLeave);
 
     return () => {
       container.removeEventListener("mousemove", handleMouseMove);
+      container.removeEventListener("mouseenter", handleMouseEnter);
       container.removeEventListener("mouseleave", handleMouseLeave);
     };
-  }, [ref, isDisabled]);
+  }, [ref, isDisabled, handleMouseMove, handleMouseEnter, handleMouseLeave]);
 };

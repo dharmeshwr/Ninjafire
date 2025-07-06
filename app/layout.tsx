@@ -100,8 +100,8 @@ export default function RootLayout({ children }: React.PropsWithChildren) {
           enableSystem
           disableTransitionOnChange
         >
+          <Navbar />
           <main className="flex w-full min-w-0 max-w-screen-sm flex-1 flex-col px-6 sm:px-4 md:px-0">
-            <Navbar />
             {children}
             <Footer />
             <Analytics />
