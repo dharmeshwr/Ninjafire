@@ -67,7 +67,7 @@ export function GetRating() {
       </div>
       <div
         className={cn(
-          "fixed bottom-10 block rounded-lg border border-foreground/10 bg-background p-4 shadow-lg transition-all duration-500",
+          "fixed bottom-10 z-50 block rounded-lg border border-foreground/10 bg-background p-4 shadow-lg transition-all duration-500",
           rating > 0 ? "translate-y-0" : "pointer-events-none translate-y-36",
         )}
       >
@@ -79,7 +79,7 @@ export function GetRating() {
         width={60}
         height={60}
         className={cn(
-          "fixed bottom-10 transition-all duration-500",
+          "fixed bottom-10 z-50 transition-all duration-500",
           showHand ? "translate-y-12 rotate-12" : "translate-y-36 rotate-45",
         )}
       />
