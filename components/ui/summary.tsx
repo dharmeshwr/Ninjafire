@@ -1,12 +1,16 @@
 "use client";
 
-import { PropsWithChildren, useEffect, useState } from "react";
+import { PropsWithChildren, useEffect } from "react";
+import { ageAtom } from "@/store";
+import { useAtom } from "jotai";
 
 import { metaData } from "@/config/site";
 import { getMyAge } from "@/lib/utils";
 
+import { ClientOnly } from "../shared/client-only";
+
 export function Summary() {
-  const [age, setAge] = useState(getMyAge);
+  const [age, setAge] = useAtom(ageAtom);
 
   useEffect(() => {
     const intervalId = setInterval(() => {
@@ -20,8 +24,10 @@ export function Summary() {
     <div className="prose text-left leading-8 text-foreground">
       <p>
         Hi! I usually go by Dharmesh on the internet, I&apos;m an{" "}
-        <span>{age}</span> old developer deeply passionate about building
-        softwares.
+        <ClientOnly fallback={" years months days hours mintues seconds"}>
+          <span> {age.formatted} </span>
+        </ClientOnly>
+        old human deeply passionate about building softwares.
       </p>
       <p>
         My interests resides in scripting, open-source softwares, games,
@@ -38,7 +44,7 @@ export function Summary() {
           {" "}
           ReactJS, NextJS, ExpressJS, ElectronJS, WebSockets{" "}
         </strong>{" "}
-        and both <i>relational and non relational databases</i>.
+        and both <i>relational</i> and <i>non relational databases</i>.
       </p>
       <p>
         As a{" "}

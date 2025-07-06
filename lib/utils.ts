@@ -73,16 +73,10 @@ export const getMyAge = () => {
   const units = ["years", "months", "days", "hours", "minutes", "seconds"];
 
   const formatted = units
-    .filter((unit) => {
-      if (unit === "seconds") {
-        return process.env.NODE_ENV === "production";
-      }
-      return true;
-    })
     .map((unit) => `${duration[unit] ?? 0} ${unit}`)
     .join(" ");
 
-  return formatted;
+  return { formatted, seconds: duration["seconds"] ?? 0 };
 };
 
 type SomeFunction = (...args: unknown[]) => void;

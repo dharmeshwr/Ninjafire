@@ -1,7 +1,9 @@
 "use client";
 
-import { useLayoutEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import Image from "next/image";
+import { ageAtom } from "@/store";
+import { useAtomValue } from "jotai";
 
 import { cn, getGIFfromLocal } from "@/lib/utils";
 import { useMediaQuery } from "@/hooks/use-media-query";
@@ -16,8 +18,14 @@ export function ProfilePicture({ circles }: ProfileictureProps) {
   const [image, setImage] = useState("");
   const { isMobile } = useMediaQuery();
   const string = "|".repeat(60);
+  const age = useAtomValue(ageAtom);
+  const [degree, setDegree] = useState(0);
 
   useMouseHoverEffect(ref, isMobile);
+
+  useEffect(() => {
+    setDegree(age.seconds * Number((360 / string.length).toFixed(2)));
+  }, [age]);
 
   useLayoutEffect(() => {
     setImage(getGIFfromLocal());
@@ -58,12 +66,15 @@ export function ProfilePicture({ circles }: ProfileictureProps) {
               />
             )}
           </div>
-          <div className="rotater pointer-events-none absolute -z-50 origin-center p-[4.7rem] opacity-10 transition-opacity ease-in-out group-hover:opacity-15">
+          <div className="rotater pointer-events-none absolute -z-50 origin-center p-[4.7rem] transition-all ease-in-out">
             <div className="absolute top-[-1.9rem] origin-center">
               {string.split("").map((letter, i) => (
                 <span
                   key={i}
-                  className={`absolute origin-[0px_105px] font-broader text-xl font-bold`}
+                  className={cn(
+                    `absolute origin-[0px_105px] font-broader text-xl font-bold opacity-10`,
+                    i == 0 && "opacity-20",
+                  )}
                   style={{
                     transform: `rotate(${i * Number((360 / string.length).toFixed(2))}deg)`,
                   }}
@@ -71,6 +82,14 @@ export function ProfilePicture({ circles }: ProfileictureProps) {
                   {letter}
                 </span>
               ))}
+              <span
+                className={`absolute origin-[0px_105px] font-broader text-xl text-red-800 opacity-100 dark:text-red-600`}
+                style={{
+                  transform: `rotate(${degree}deg)`,
+                }}
+              >
+                {string[0]}
+              </span>
             </div>
           </div>
         </div>

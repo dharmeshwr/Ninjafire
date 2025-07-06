@@ -9,7 +9,6 @@ import { metaData } from "@/config/site";
 import { cn } from "@/lib/utils";
 import { GetRating } from "@/components/ui/get-rating";
 import { ShowRating } from "@/components/ui/show-rating";
-import Footer from "@/components/layout/footer";
 import { Navbar } from "@/components/layout/navbar";
 
 import {
@@ -103,7 +102,6 @@ export default function RootLayout({ children }: React.PropsWithChildren) {
           <Navbar />
           <main className="flex w-full min-w-0 max-w-screen-sm flex-1 flex-col px-6 sm:px-4 md:px-0">
             {children}
-            <Footer />
             <Analytics />
             <SpeedInsights />
           </main>

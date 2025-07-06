@@ -5,6 +5,7 @@ import { ProfilePicture } from "@/components/ui/profile-picture";
 import { Quote } from "@/components/ui/quote";
 import { Summary } from "@/components/ui/summary";
 import { ClickSpark } from "@/components/layout/click-spark";
+import Footer from "@/components/layout/footer";
 
 export default function Page() {
   return (
@@ -24,6 +25,8 @@ export default function Page() {
         <Summary />
 
         <Quote />
+
+        <Footer />
       </section>
     </>
   );
