@@ -30,9 +30,10 @@ export function Summary() {
         old human deeply passionate about building softwares.
       </p>
       <p>
-        My interests resides in scripting, open-source softwares, games,
-        low-level and hardware stuff and I love linux, neovim, suckless simple
-        terminal(ST), tiling window managers(DWM) and here are the
+        My interests resides in scripting, computer graphics, open-source
+        softwares, games, low-level and hardware stuff and I love linux, neovim,
+        suckless simple terminal(ST), tiling window managers(DWM) and here are
+        the
         <ExternalLink href={`${metaData.links.github}dotfiles`}>
           dotfiles
         </ExternalLink>

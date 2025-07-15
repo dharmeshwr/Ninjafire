@@ -1,10 +1,11 @@
-import { useEffect } from "react";
+"use client";
 
-// for playground use
-export const useParticleText = (
-  canvasRef: React.RefObject<HTMLCanvasElement | null>,
-  text: string,
-) => {
+import { useEffect, useRef } from "react";
+
+export default function Page() {
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const text = "Hello Everynyyan!!! How are you ? fine, thank you";
+
   useEffect(() => {
     if (!canvasRef.current) return;
     const canvas = canvasRef.current;
@@ -250,5 +251,12 @@ export const useParticleText = (
       effect.resize(canvas.width, canvas.height);
       effect.addText(text);
     });
-  }, [canvasRef, text]);
-};
+  }, [canvasRef]);
+
+  return (
+    <canvas
+      className="fixed inset-0 z-[100] bg-background"
+      ref={canvasRef}
+    ></canvas>
+  );
+}

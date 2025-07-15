@@ -105,7 +105,7 @@ export default function RootLayout({ children }: React.PropsWithChildren) {
             <Analytics />
             <SpeedInsights />
           </main>
-          <GetRating />
+          {process.env.NODE_ENV === "production" && <GetRating />}
           <ShowRating />
         </ThemeProvider>
       </body>
