@@ -10,7 +10,7 @@ export default function Page() {
   const artPieces: ArtPiece[] = [
     { id: 1, title: "Particle Effect on Text", href: "/playground/1" },
     { id: 2, title: "Random Circles", href: "/playground/2" },
-    { id: 3, title: "In progress (Not complete)", href: "/playground/3" },
+    { id: 3, title: "Perlin Noise 1D", href: "/playground/3" },
   ];
 
   return (

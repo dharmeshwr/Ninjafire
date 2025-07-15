@@ -111,6 +111,9 @@ export default function Page() {
     let circles: Circle[] = [];
     let animationFrameId: number;
     let lastCircleCount = configRef.current.circleCount;
+    let lastTime = performance.now();
+    let frameCount = 0;
+    let fps = 0;
 
     const resizeCanvas = () => {
       canvas.width = window.innerWidth;
@@ -129,13 +132,29 @@ export default function Page() {
     };
 
     const animate = () => {
+      const currentTime = performance.now();
+      frameCount++;
+      const deltaTime = currentTime - lastTime;
+      if (deltaTime >= 1000) {
+        fps = frameCount;
+        frameCount = 0;
+        lastTime = currentTime;
+      }
+
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      circles.forEach((circle) => circle.update());
+
+      ctx.font = "16px Monospace";
+      ctx.fillStyle = "white";
+      ctx.textAlign = "right";
+      ctx.textBaseline = "bottom";
+      ctx.fillText(`FPS: ${fps}`, canvas.width - 10, canvas.height - 10);
+
       if (lastCircleCount !== configRef.current.circleCount) {
         init();
         lastCircleCount = configRef.current.circleCount;
       }
 
-      ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
-      circles.forEach((circle) => circle.update());
       animationFrameId = requestAnimationFrame(animate);
     };
 
