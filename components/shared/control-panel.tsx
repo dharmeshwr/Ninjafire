@@ -48,7 +48,7 @@ const ControlPanel = ({ children, collapsed = 1 }: ControlPanelProps) => {
       className={`fixed right-4 top-4 z-[999] rounded border border-gray-700 bg-gray-800 font-mono ${isCollapsed == 2 ? "w-[1.55rem]" : "w-96"}`}
     >
       <div
-        className="flex select-none items-center justify-between border-b border-gray-700 p-1"
+        className="flex select-none items-center justify-between border-b border-gray-700 bg-gray-700 p-1"
         onClick={() => setIsCollapsed((prev) => (prev === 1 ? 0 : 1))}
       >
         {isCollapsed <= 1 && (

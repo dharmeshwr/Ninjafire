@@ -3,18 +3,25 @@
 import { useEffect, useRef, useState } from "react";
 
 import { PerlinNoise } from "@/lib/perlin";
-import ControlPanel, { RangeSlider } from "@/components/shared/control-panel";
+import ControlPanel, {
+  RangeSlider,
+  Toggle,
+} from "@/components/shared/control-panel";
 
 interface Config {
   scale: number;
   amplitude: number;
+  cell_size: number;
+  show_grid: boolean;
 }
 
 export default function Page() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [config, setConfig] = useState<Config>({
     scale: 0.01, // Controls noise frequency
-    amplitude: 100, // Controls noise height
+    amplitude: 1, // Controls noise height
+    cell_size: 40,
+    show_grid: false,
   });
   const configRef = useRef<Config>(config);
   const noiseRef = useRef(new PerlinNoise(Math.random()));
@@ -26,19 +33,37 @@ export default function Page() {
     const c = canvas.getContext("2d");
     if (!c || !configRef.current) return;
 
+    const { scale, amplitude, cell_size, show_grid } = configRef.current;
+
     c.clearRect(0, 0, canvas.width, canvas.height);
 
     c.beginPath();
-    c.strokeStyle = "#ebddb2";
-    c.moveTo(0, canvas.height / 2);
+    c.strokeStyle = "black";
 
-    for (let x = 1; x < canvas.width; x++) {
-      const val =
-        noiseRef.current.perlin1(x * configRef.current.scale) *
-        configRef.current.amplitude;
-      c.lineTo(x, val + canvas.height / 2);
+    if (show_grid) {
+      for (let x = cell_size; x <= canvas.width; x += cell_size) {
+        c.moveTo(x, 0);
+        c.lineTo(x, canvas.height);
+      }
+
+      for (let y = cell_size; y <= canvas.height; y += cell_size) {
+        c.moveTo(0, y);
+        c.lineTo(canvas.width, y);
+      }
     }
+
     c.stroke();
+    for (let x = 0; x < canvas.width; x += cell_size) {
+      for (let y = 0; y < canvas.height; y += cell_size) {
+        c.beginPath();
+        const noise =
+          noiseRef.current.perlin2(x * scale, y * scale) * amplitude;
+        const opacity = (noise + 1) / 2; // Maps [-1, 1] to [0, 1]
+        c.fillStyle = `rgba(0, 0, 0, ${opacity})`;
+        c.rect(x, y, cell_size, cell_size);
+        c.fill();
+      }
+    }
   }
 
   useEffect(() => {
@@ -65,16 +90,16 @@ export default function Page() {
   return (
     <>
       <canvas
-        className="fixed inset-0 z-[500] bg-background"
+        className="fixed inset-0 z-[500] bg-white"
         ref={canvasRef}
       ></canvas>
-      <ControlPanel>
+      <ControlPanel collapsed={0}>
         <RangeSlider
           label="Scale"
           value={config.scale}
           onChange={(v: number) => setConfig((prev) => ({ ...prev, scale: v }))}
           min={0.001}
-          max={1}
+          max={0.13}
           step={0.009}
         />
         <RangeSlider
@@ -83,9 +108,24 @@ export default function Page() {
           onChange={(v: number) =>
             setConfig((prev) => ({ ...prev, amplitude: v }))
           }
-          min={10}
-          max={900}
-          step={5}
+          min={0}
+          max={10}
+          step={1}
+        />
+        <RangeSlider
+          label="Cell Size"
+          value={config.cell_size}
+          onChange={(v: number) =>
+            setConfig((prev) => ({ ...prev, cell_size: v }))
+          }
+          min={4}
+          max={100}
+          step={1}
+        />
+        <Toggle
+          label="Show grid"
+          checked={config.show_grid}
+          onChange={(v) => setConfig((prev) => ({ ...prev, show_grid: v }))}
         />
       </ControlPanel>
     </>
