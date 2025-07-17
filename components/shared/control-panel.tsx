@@ -31,7 +31,7 @@ interface SelectProps {
   label: string;
   value: string;
   onChange: (value: string) => void;
-  options: Option[];
+  options: Readonly<Option[]>;
 }
 
 interface ColorPickerProps {

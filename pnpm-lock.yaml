@@ -4,6 +4,11 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
+patchedDependencies:
+  jotai:
+    hash: f3e41a84fc3fa7724cb1c79a70a9938802393ded9ad862b824d56f0d62246796
+    path: patches/jotai.patch
+
 importers:
 
   .:
@@ -49,7 +54,7 @@ importers:
         version: 0.0.2
       jotai:
         specifier: ^2.12.5
-        version: 2.12.5(@types/react@19.0.7)(react@19.0.0)
+        version: 2.12.5(patch_hash=f3e41a84fc3fa7724cb1c79a70a9938802393ded9ad862b824d56f0d62246796)(@types/react@19.0.7)(react@19.0.0)
       lucide-react:
         specifier: ^0.471.2
         version: 0.471.2(react@19.0.0)
@@ -4854,7 +4859,7 @@ snapshots:
 
   jiti@2.4.2: {}
 
-  jotai@2.12.5(@types/react@19.0.7)(react@19.0.0):
+  jotai@2.12.5(patch_hash=f3e41a84fc3fa7724cb1c79a70a9938802393ded9ad862b824d56f0d62246796)(@types/react@19.0.7)(react@19.0.0):
     optionalDependencies:
       '@types/react': 19.0.7
       react: 19.0.0

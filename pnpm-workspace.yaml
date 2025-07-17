@@ -1,0 +1,2 @@
+patchedDependencies:
+  jotai: patches/jotai.patch
