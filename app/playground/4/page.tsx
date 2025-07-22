@@ -74,6 +74,7 @@ export default function Page() {
     }
 
     c.stroke();
+
     for (let x = 0; x < canvas.width; x += cell_size) {
       for (let y = 0; y < canvas.height; y += cell_size) {
         c.beginPath();
@@ -230,8 +231,8 @@ export default function Page() {
               setConfig((prev) => ({ ...prev, speed: v }))
             }
             min={0.001}
-            max={0.05}
-            step={0.005}
+            max={0.01}
+            step={0.001}
           />
         )}
       </ControlPanel>
