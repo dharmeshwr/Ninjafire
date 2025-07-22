@@ -73,7 +73,7 @@ export default function Page() {
     c.clearRect(0, 0, canvas.width, canvas.height);
 
     c.beginPath();
-    c.strokeStyle = "black";
+    c.strokeStyle = "#ebddb244";
 
     if (show_grid) {
       for (let x = cell_size; x <= canvas.width; x += cell_size) {
@@ -109,6 +109,7 @@ export default function Page() {
         const angle = noise * Math.PI * 2; // map to [0, 2π]
         const center_x = x + cell_size / 2;
         const center_y = y + cell_size / 2;
+        c.strokeStyle = "#ebddb2";
         drawArrow(c, center_x, center_y, angle, cell_size * 0.4);
         c.rect(x, y, cell_size, cell_size);
       }
@@ -162,7 +163,7 @@ export default function Page() {
   return (
     <>
       <canvas
-        className="fixed inset-0 z-[500] bg-white"
+        className="fixed inset-0 z-[500] bg-background"
         ref={canvasRef}
       ></canvas>
       <ControlPanel collapsed={0}>
