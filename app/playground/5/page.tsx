@@ -38,8 +38,6 @@ export default function Page() {
   });
   const configRef = useRef<Config>(config);
   const noiseRef = useRef(new PerlinNoise(Math.random()));
-  const arrowImage = new Image();
-  arrowImage.src = "/arrow.png";
   const animationFrameRef = useRef<number | null>(null);
   const timeRef = useRef<number>(0);
 
