@@ -8,7 +8,16 @@ interface ArtPiece {
 
 export default function Page() {
   const artPieces: ArtPiece[] = [
-    { id: 5, title: "Flow field using Perlin Noise", href: "/playground/5" },
+    {
+      id: 6,
+      title: "Flow field using Perlin Noise (variant 2)",
+      href: "/playground/6",
+    },
+    {
+      id: 5,
+      title: "Flow field using Perlin Noise (variant 1)",
+      href: "/playground/5",
+    },
     { id: 4, title: "Perlin Noise 2D", href: "/playground/4" },
     { id: 3, title: "Perlin Noise 1D", href: "/playground/3" },
     { id: 2, title: "Random Circles", href: "/playground/2" },
