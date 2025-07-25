@@ -11,11 +11,11 @@ export const DEFAULT_CONFIG = {
   cellSize: 40,
   radius: 5,
   showGrid: false,
-  animated: ANIMATION_OPTIONS[0].value,
+  animated: ANIMATION_OPTIONS[1].value,
   fieldSpeed: 0.0005,
   particleSpeed: 5,
   showParticles: true,
-  particleCount: 100,
+  particleCount: 1400,
 } as const;
 
 export const GRID_COLOR = "#ebddb244";
