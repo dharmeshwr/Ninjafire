@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 import { PerlinNoise } from "@/lib/perlin";
 import ControlPanel, {
@@ -9,206 +9,220 @@ import ControlPanel, {
   Toggle,
 } from "@/components/shared/control-panel";
 
-const animationOptions = [
-  { label: "Off", value: "off" },
-  { label: "X-axis", value: "xaxis" },
-  { label: "Y-axis", value: "yaxis" },
-  { label: "Diagonal", value: "diagonal" },
-  { label: "3D", value: "3d" },
-] as const;
-
-type AnimationType = (typeof animationOptions)[number]["value"];
-
-interface Config {
-  scale: number;
-  cell_size: number;
-  show_grid: boolean;
-  animated: AnimationType;
-  speed: number;
-}
+import { ANIMATION_OPTIONS, DEFAULT_CONFIG } from "./constants";
+import { createParticles, Particle } from "./particle";
+import { AnimationType, FlowFieldConfig } from "./types";
+import { drawFlowField, useCanvas } from "./use-canvas";
 
 export default function Page() {
-  const canvasRef = useRef<HTMLCanvasElement>(null);
-  const [config, setConfig] = useState<Config>({
-    scale: 0.001, // Controls noise frequency
-    cell_size: 40,
-    show_grid: false,
-    animated: animationOptions[0].value,
-    speed: 0.001,
-  });
-  const configRef = useRef<Config>(config);
+  const { canvasRef, getDrawingContext, updateCanvasSize } = useCanvas();
+  const [config, setConfig] = useState<FlowFieldConfig>(DEFAULT_CONFIG);
+
+  const configRef = useRef<FlowFieldConfig>(config);
   const noiseRef = useRef(new PerlinNoise(Math.random()));
   const animationFrameRef = useRef<number | null>(null);
   const timeRef = useRef<number>(0);
+  const particlesRef = useRef<Particle[]>([]);
+  const flowFieldRef = useRef<number[][]>([]);
 
-  function drawArrow(
-    c: CanvasRenderingContext2D,
-    x: number,
-    y: number,
-    angle: number,
-    length: number,
-  ) {
-    c.save();
-    c.translate(x, y);
-    c.rotate(angle);
-    c.beginPath();
-    c.moveTo(0, 0);
-    c.lineTo(length, 0);
-    c.lineTo(length - 5, -3);
-    c.moveTo(length, 0);
-    c.lineTo(length - 5, 3);
-    c.stroke();
-    c.restore();
-  }
+  const updateConfig = useCallback((updates: Partial<FlowFieldConfig>) => {
+    setConfig((prev) => ({ ...prev, ...updates }));
+  }, []);
 
-  function draw(time: number = 0) {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-
-    const c = canvas.getContext("2d");
-    if (!c || !configRef.current) return;
-
-    const { scale, cell_size, show_grid, animated, speed } = configRef.current;
-
-    c.clearRect(0, 0, canvas.width, canvas.height);
-
-    c.beginPath();
-    c.strokeStyle = "#ebddb244";
-
-    if (show_grid) {
-      for (let x = cell_size; x <= canvas.width; x += cell_size) {
-        c.moveTo(x, 0);
-        c.lineTo(x, canvas.height);
-      }
-
-      for (let y = cell_size; y <= canvas.height; y += cell_size) {
-        c.moveTo(0, y);
-        c.lineTo(canvas.width, y);
-      }
-    }
-
-    c.stroke();
-    for (let x = 0; x < canvas.width; x += cell_size) {
-      for (let y = 0; y < canvas.height; y += cell_size) {
-        c.beginPath();
-        let noise: number;
-        if (animated === "off") {
-          noise = noiseRef.current.perlin2(x * scale, y * scale);
-        } else if (animated === "xaxis") {
-          noise = noiseRef.current.perlin2(x * scale + time * speed, y * scale);
-        } else if (animated === "yaxis") {
-          noise = noiseRef.current.perlin2(x * scale, y * scale + time * speed);
-        } else if (animated === "diagonal") {
-          noise = noiseRef.current.perlin2(
-            x * scale + time * speed,
-            y * scale + time * speed,
-          );
-        } else {
-          noise = noiseRef.current.perlin3(x * scale, y * scale, time * speed);
-        }
-        const angle = noise * Math.PI * 2; // map to [0, 2π]
-        const center_x = x + cell_size / 2;
-        const center_y = y + cell_size / 2;
-        c.strokeStyle = "#ebddb2";
-        drawArrow(c, center_x, center_y, angle, cell_size * 0.4);
-        c.rect(x, y, cell_size, cell_size);
-      }
-    }
-  }
-
-  function animate(currentTime: number) {
-    timeRef.current = currentTime;
-    draw(currentTime);
-    animationFrameRef.current = requestAnimationFrame(animate);
-  }
-
-  useEffect(() => {
-    configRef.current = config;
-
-    if (animationFrameRef.current !== null) {
+  const cancelAnimation = () => {
+    if (animationFrameRef.current) {
       cancelAnimationFrame(animationFrameRef.current);
       animationFrameRef.current = null;
     }
+  };
 
-    if (config.animated !== "off") {
-      timeRef.current = performance.now();
+  // Single draw function
+  const draw = useCallback(() => {
+    const drawingContext = getDrawingContext();
+    if (!drawingContext) return;
+
+    timeRef.current = performance.now();
+    flowFieldRef.current = drawFlowField(
+      drawingContext,
+      configRef.current,
+      noiseRef.current,
+      timeRef.current,
+    );
+  }, [getDrawingContext]);
+
+  // Single animation loop that handles both field and particles
+  const animate = useCallback(() => {
+    draw();
+
+    // Update and draw particles if enabled
+    if (configRef.current.showParticles && particlesRef.current.length > 0) {
+      const drawingContext = getDrawingContext();
+      if (drawingContext) {
+        particlesRef.current.forEach((particle) => {
+          particle.update(flowFieldRef.current, configRef.current);
+          particle.draw();
+        });
+      }
+    }
+
+    // Continue animation if needed
+    if (
+      configRef.current.animated !== "off" ||
+      configRef.current.showParticles
+    ) {
       animationFrameRef.current = requestAnimationFrame(animate);
+    }
+  }, [draw, getDrawingContext]);
+
+  // Update config and handle animation
+  useEffect(() => {
+    configRef.current = config;
+
+    cancelAnimation();
+
+    if (config.animated !== "off" || config.showParticles) {
+      animate();
     } else {
       draw();
     }
 
-    return () => {
-      if (animationFrameRef.current !== null) {
-        cancelAnimationFrame(animationFrameRef.current);
+    return cancelAnimation;
+  }, [config, draw, animate]);
+
+  // Handle particle creation/destruction
+  useEffect(() => {
+    if (config.showParticles) {
+      const drawingContext = getDrawingContext();
+      if (drawingContext) {
+        // Only recreate particles if count changed or no particles exist
+        if (
+          !particlesRef.current.length ||
+          particlesRef.current.length !== config.particleCount
+        ) {
+          particlesRef.current = createParticles(
+            drawingContext,
+            config.particleCount,
+            config.radius,
+          );
+        }
+
+        particlesRef.current.forEach((particle) => {
+          particle.radius = config.radius;
+        });
+      }
+    } else {
+      particlesRef.current = [];
+    }
+  }, [
+    config.showParticles,
+    config.particleCount,
+    config.radius,
+    getDrawingContext,
+  ]);
+
+  // Resize listener
+  useEffect(() => {
+    const handleResize = () => {
+      updateCanvasSize();
+      // Recreate particles with new canvas size
+      if (configRef.current.showParticles) {
+        const drawingContext = getDrawingContext();
+        if (drawingContext) {
+          particlesRef.current = createParticles(
+            drawingContext,
+            configRef.current.particleCount,
+            configRef.current.radius,
+          );
+        }
+      }
+      // Redraw immediately for static fields
+      if (
+        configRef.current.animated === "off" &&
+        !configRef.current.showParticles
+      ) {
+        draw();
       }
     };
-  }, [config]);
 
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
+    handleResize();
 
-    const updateCanvasSize = () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-      if (config.animated === "off") draw();
-    };
-
-    updateCanvasSize();
-    window.addEventListener("resize", updateCanvasSize);
-
-    return () => window.removeEventListener("resize", updateCanvasSize);
-  }, []);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, [updateCanvasSize, getDrawingContext, draw]);
 
   return (
     <>
-      <canvas
-        className="fixed inset-0 z-[500] bg-background"
-        ref={canvasRef}
-      ></canvas>
+      <canvas className="fixed inset-0 z-[500] bg-[#54A5D5]" ref={canvasRef} />
       <ControlPanel collapsed={0}>
         <Toggle
           label="Show grid"
-          checked={config.show_grid}
-          onChange={(v) => setConfig((prev) => ({ ...prev, show_grid: v }))}
+          checked={config.showGrid}
+          onChange={(v) => updateConfig({ showGrid: v })}
+        />
+        <Toggle
+          label="Show particles"
+          checked={config.showParticles}
+          onChange={(v) => updateConfig({ showParticles: v })}
         />
         <Select
-          label="Animate"
+          label="Animate Field"
           value={config.animated}
-          onChange={(v) =>
-            setConfig((prev) => ({ ...prev, animated: v as AnimationType }))
-          }
-          options={animationOptions}
+          onChange={(v) => updateConfig({ animated: v as AnimationType })}
+          options={ANIMATION_OPTIONS}
         />
         <RangeSlider
           label="Scale"
           value={config.scale}
-          onChange={(v: number) => setConfig((prev) => ({ ...prev, scale: v }))}
+          onChange={(v: number) => updateConfig({ scale: v })}
           min={0.001}
           max={0.13}
           step={0.009}
         />
         <RangeSlider
           label="Cell Size"
-          value={config.cell_size}
-          onChange={(v: number) =>
-            setConfig((prev) => ({ ...prev, cell_size: v }))
-          }
+          value={config.cellSize}
+          onChange={(v: number) => updateConfig({ cellSize: v })}
           min={4}
           max={100}
           step={1}
         />
         {config.animated !== "off" && (
           <RangeSlider
-            label="Speed"
-            value={config.speed}
-            onChange={(v: number) =>
-              setConfig((prev) => ({ ...prev, speed: v }))
-            }
-            min={0.001}
+            label="Field Speed"
+            value={config.fieldSpeed}
+            onChange={(v: number) => updateConfig({ fieldSpeed: v })}
+            min={0.0001}
             max={0.01}
             step={0.001}
           />
+        )}
+        {config.showParticles && (
+          <>
+            <RangeSlider
+              label="Particles"
+              value={config.particleCount}
+              onChange={(v: number) => updateConfig({ particleCount: v })}
+              min={5}
+              step={10}
+              max={2000}
+            />
+            <RangeSlider
+              label="Particles Speed"
+              value={config.particleSpeed}
+              onChange={(v: number) => updateConfig({ particleSpeed: v })}
+              min={5}
+              step={5}
+              max={50}
+            />
+            <RangeSlider
+              label="Radius"
+              value={config.radius}
+              onChange={(v: number) => updateConfig({ radius: v })}
+              min={1}
+              max={40}
+              step={1}
+            />
+          </>
         )}
       </ControlPanel>
     </>
