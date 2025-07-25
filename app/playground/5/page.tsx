@@ -17,13 +17,16 @@ import { drawFlowField, useCanvas } from "./use-canvas";
 export default function Page() {
   const { canvasRef, getDrawingContext, updateCanvasSize } = useCanvas();
   const [config, setConfig] = useState<FlowFieldConfig>(DEFAULT_CONFIG);
-
   const configRef = useRef<FlowFieldConfig>(config);
   const noiseRef = useRef(new PerlinNoise(Math.random()));
   const animationFrameRef = useRef<number | null>(null);
   const timeRef = useRef<number>(0);
   const particlesRef = useRef<Particle[]>([]);
   const flowFieldRef = useRef<number[][]>([]);
+
+  const lastFrameTimeRef = useRef<number>(performance.now());
+  const frameCountRef = useRef<number>(0);
+  const fpsRef = useRef<number>(0);
 
   const updateConfig = useCallback((updates: Partial<FlowFieldConfig>) => {
     setConfig((prev) => ({ ...prev, ...updates }));
@@ -36,21 +39,46 @@ export default function Page() {
     }
   };
 
-  // Single draw function
+  // Draw function with FPS calculation and rendering
   const draw = useCallback(() => {
     const drawingContext = getDrawingContext();
     if (!drawingContext) return;
 
-    timeRef.current = performance.now();
+    const { ctx } = drawingContext;
+
+    const currentTime = performance.now();
+    timeRef.current = currentTime;
+
+    // Calculate FPS
+    frameCountRef.current += 1;
+    const elapsed = currentTime - lastFrameTimeRef.current;
+    if (elapsed >= 1000) {
+      fpsRef.current = Math.round((frameCountRef.current * 1000) / elapsed);
+      frameCountRef.current = 0;
+      lastFrameTimeRef.current = currentTime;
+    }
+
     flowFieldRef.current = drawFlowField(
       drawingContext,
       configRef.current,
       noiseRef.current,
       timeRef.current,
     );
+
+    ctx.save();
+    ctx.font = "16px Arial";
+    ctx.fillStyle = "white";
+    ctx.textAlign = "right";
+    ctx.textBaseline = "bottom";
+    const canvas = drawingContext.canvas;
+    ctx.fillText(
+      `FPS: ${fpsRef.current}`,
+      canvas.width - 20,
+      canvas.height - 10,
+    );
+    ctx.restore();
   }, [getDrawingContext]);
 
-  // Single animation loop that handles both field and particles
   const animate = useCallback(() => {
     draw();
 
@@ -77,15 +105,12 @@ export default function Page() {
   // Update config and handle animation
   useEffect(() => {
     configRef.current = config;
-
     cancelAnimation();
-
     if (config.animated !== "off" || config.showParticles) {
       animate();
     } else {
       draw();
     }
-
     return cancelAnimation;
   }, [config, draw, animate]);
 
@@ -94,7 +119,6 @@ export default function Page() {
     if (config.showParticles) {
       const drawingContext = getDrawingContext();
       if (drawingContext) {
-        // Only recreate particles if count changed or no particles exist
         if (
           !particlesRef.current.length ||
           particlesRef.current.length !== config.particleCount
@@ -105,7 +129,6 @@ export default function Page() {
             config.radius,
           );
         }
-
         particlesRef.current.forEach((particle) => {
           particle.radius = config.radius;
         });
@@ -145,14 +168,13 @@ export default function Page() {
     };
 
     handleResize();
-
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, [updateCanvasSize, getDrawingContext, draw]);
 
   return (
     <>
-      <canvas className="fixed inset-0 z-[500] bg-[#54A5D5]" ref={canvasRef} />
+      <canvas className="fixed inset-0 z-[500] bg-[#4169e1]" ref={canvasRef} />
       <ControlPanel collapsed={0}>
         <Toggle
           label="Show grid"
@@ -175,8 +197,8 @@ export default function Page() {
           value={config.scale}
           onChange={(v: number) => updateConfig({ scale: v })}
           min={0.001}
-          max={0.13}
-          step={0.009}
+          max={0.01}
+          step={0.0001}
         />
         <RangeSlider
           label="Cell Size"

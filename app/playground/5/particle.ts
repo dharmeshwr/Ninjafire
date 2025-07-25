@@ -2,15 +2,18 @@ import { PARTICLE_COLOR } from "./constants";
 import { CanvasDrawingContext, FlowFieldConfig } from "./types";
 
 export class Particle {
+  private opacity: number;
   constructor(
     public x: number,
     public y: number,
     private ctx: CanvasRenderingContext2D,
     public radius: number = 10,
-  ) {}
+  ) {
+    this.opacity = Math.random();
+  }
 
   draw(): void {
-    this.ctx.fillStyle = PARTICLE_COLOR;
+    this.ctx.fillStyle = `rgba(${PARTICLE_COLOR},${this.opacity})`;
     this.ctx.beginPath();
     this.ctx.arc(this.x, this.y, this.radius, 0, 2 * Math.PI);
     this.ctx.fill();
