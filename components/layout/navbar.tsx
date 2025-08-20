@@ -10,7 +10,7 @@ import { Name } from "../ui/name";
 import { ThemeSwitcher } from "./theme-switcher";
 
 const navItems = {
-  "/playground": { name: "Arts" },
+  "/arts": { name: "Arts" },
   "/blogs": { name: "Blogs" },
   "/projects": { name: "Projects" },
 };

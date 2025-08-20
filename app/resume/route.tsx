@@ -6,7 +6,7 @@ export async function GET() {
   const filepath = path.join(process.cwd(), "public", "resume.pdf");
 
   try {
-    const filecontent = await fs.readFile(filepath);
+    const filecontent = (await fs.readFile(filepath)) as BodyInit;
 
     const response = new NextResponse(filecontent);
     response.headers.set("Content-Type", "application/pdf");

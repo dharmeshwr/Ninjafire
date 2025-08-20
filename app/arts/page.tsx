@@ -11,17 +11,17 @@ export default function Page() {
     {
       id: 6,
       title: "Flow field using Perlin Noise (variant 2)",
-      href: "/playground/6",
+      href: "/arts/6",
     },
     {
       id: 5,
       title: "Flow field using Perlin Noise (variant 1)",
-      href: "/playground/5",
+      href: "/arts/5",
     },
-    { id: 4, title: "Perlin Noise 2D", href: "/playground/4" },
-    { id: 3, title: "Perlin Noise 1D", href: "/playground/3" },
-    { id: 2, title: "Random Circles", href: "/playground/2" },
-    { id: 1, title: "Particle Effect on Text", href: "/playground/1" },
+    { id: 4, title: "Perlin Noise 2D", href: "/arts/4" },
+    { id: 3, title: "Perlin Noise 1D", href: "/arts/3" },
+    { id: 2, title: "Random Circles", href: "/arts/2" },
+    { id: 1, title: "Particle Effect on Text", href: "/arts/1" },
   ];
 
   return (
