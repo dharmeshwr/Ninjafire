@@ -15,6 +15,10 @@ class VideoPreview {
 
     this.timeline = null;
     this.onTimeUpdate = null;
+
+    this.zoomFactor = 1;
+    this.panX = 0;
+    this.panY = 0;
   }
 
   init(canvasElement, onTimeUpdate) {
@@ -79,18 +83,60 @@ class VideoPreview {
     });
   }
 
+  setZoom(factor) {
+    this.zoomFactor = Math.max(1, factor);
+    // Clamp pan based on new zoom
+    const vw = this.video?.videoWidth || 0;
+    const vh = this.video?.videoHeight || 0;
+    if (vw && vh) {
+      const cw = vw / this.zoomFactor;
+      const ch = vh / this.zoomFactor;
+      const maxPanX = (vw - cw) / 2;
+      const maxPanY = (vh - ch) / 2;
+      this.panX = Math.max(-maxPanX, Math.min(maxPanX, this.panX));
+      this.panY = Math.max(-maxPanY, Math.min(maxPanY, this.panY));
+    }
+  }
+
   startRenderLoop() {
     const render = () => {
       if (this.video && this.video.readyState >= 2 && this.ctx) {
         this.ctx.fillStyle = "#000000";
         this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
-        this.ctx.drawImage(
-          this.video,
-          0,
-          0,
-          this.canvas.width,
-          this.canvas.height,
-        );
+
+        const vw = this.video.videoWidth;
+        const vh = this.video.videoHeight;
+        if (vw && vh) {
+          const zoom = this.zoomFactor;
+          const cw = vw / zoom;
+          const ch = vh / zoom;
+          let cx = (vw - cw) / 2 + this.panX;
+          let cy = (vh - ch) / 2 + this.panY;
+
+          // Clamp crop to video bounds
+          cx = Math.max(0, Math.min(vw - cw, cx));
+          cy = Math.max(0, Math.min(vh - ch, cy));
+
+          this.ctx.drawImage(
+            this.video,
+            cx,
+            cy,
+            cw,
+            ch,
+            0,
+            0,
+            this.canvas.width,
+            this.canvas.height,
+          );
+        } else {
+          this.ctx.drawImage(
+            this.video,
+            0,
+            0,
+            this.canvas.width,
+            this.canvas.height,
+          );
+        }
 
         // Update currentTime every frame for smooth playhead movement
         if (!this.isDragging && this.onTimeUpdate) {
@@ -145,6 +191,7 @@ export default function Page() {
   const playheadRef = useRef(null);
 
   const [zoomLevel, setZoomLevel] = useState(5);
+  const [videoZoom, setVideoZoom] = useState(1);
   const [width, setWidth] = useState(100);
   const [ticks, setTicks] = useState([]);
 
@@ -175,6 +222,88 @@ export default function Page() {
         videoPreviewRef.current.video.remove();
     };
   }, []);
+
+  useEffect(() => {
+    videoPreviewRef.current?.setZoom(videoZoom);
+  }, [videoZoom]);
+
+  // Add pan and zoom interactions on canvas
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+
+    let isPanDragging = false;
+    let startMouseX, startMouseY, startPanX, startPanY;
+
+    const handleMouseDown = (e) => {
+      if (videoZoom > 1) {
+        isPanDragging = true;
+        startMouseX = e.clientX;
+        startMouseY = e.clientY;
+        startPanX = videoPreviewRef.current.panX;
+        startPanY = videoPreviewRef.current.panY;
+        canvas.style.cursor = "grabbing";
+      }
+    };
+
+    const handleMouseMove = (e) => {
+      if (isPanDragging) {
+        const deltaX = e.clientX - startMouseX;
+        const deltaY = e.clientY - startMouseY;
+
+        const zoom = videoPreviewRef.current.zoomFactor;
+        const vw = videoPreviewRef.current.video?.videoWidth || 0;
+        const vh = videoPreviewRef.current.video?.videoHeight || 0;
+        const destW = canvas.width;
+        const destH = canvas.height;
+
+        if (vw && vh && zoom > 1) {
+          const cropW = vw / zoom;
+          const cropH = vh / zoom;
+          const scaleX = cropW / destW;
+          const scaleY = cropH / destH;
+
+          const newPanX = startPanX - deltaX * scaleX;
+          const newPanY = startPanY - deltaY * scaleY;
+
+          const maxPanX = (vw - cropW) / 2;
+          const maxPanY = (vh - cropH) / 2;
+
+          videoPreviewRef.current.panX = Math.max(
+            -maxPanX,
+            Math.min(maxPanX, newPanX),
+          );
+          videoPreviewRef.current.panY = Math.max(
+            -maxPanY,
+            Math.min(maxPanY, newPanY),
+          );
+        }
+      }
+    };
+
+    const handleMouseUp = () => {
+      isPanDragging = false;
+      canvas.style.cursor = "default";
+    };
+
+    const handleWheel = (e) => {
+      e.preventDefault();
+      const delta = -Math.sign(e.deltaY) * 0.5; // +0.5 for zoom in (wheel up), -0.5 for out
+      setVideoZoom((prev) => Math.max(1, Math.min(10, prev + delta)));
+    };
+
+    canvas.addEventListener("mousedown", handleMouseDown);
+    document.addEventListener("mousemove", handleMouseMove);
+    document.addEventListener("mouseup", handleMouseUp);
+    canvas.addEventListener("wheel", handleWheel, { passive: false });
+
+    return () => {
+      canvas.removeEventListener("mousedown", handleMouseDown);
+      document.removeEventListener("mousemove", handleMouseMove);
+      document.removeEventListener("mouseup", handleMouseUp);
+      canvas.removeEventListener("wheel", handleWheel);
+    };
+  }, [videoZoom]);
 
   // Tick configurations for each zoom level
   const tickConfigs = [
@@ -482,6 +611,9 @@ export default function Page() {
     (videoDuration > 0 && Math.pow(2, zoomLevel) <= minPixelsPerSecond);
   const isZoomInDisabled = zoomLevel === 9;
 
+  const isVideoZoomOutDisabled = videoZoom <= 1;
+  const isVideoZoomInDisabled = videoZoom >= 10;
+
   return (
     <div className="fixed inset-0 z-50 bg-background p-4 font-mono">
       <div className="mb-4 flex w-full justify-center py-2 text-xl">
@@ -511,7 +643,7 @@ export default function Page() {
           />
 
           <div className="flex items-center gap-3">
-            <span className="text-sm text-gray-400">Zoom:</span>
+            <span className="text-sm text-gray-400">Timeline Zoom:</span>
             <button
               className="rounded border border-neutral-500 bg-neutral-700 px-2 py-0.5 hover:bg-neutral-600"
               onClick={() => setZoomLevel((prev) => Math.max(0, prev - 1))}
@@ -530,6 +662,27 @@ export default function Page() {
               +
             </button>
           </div>
+
+          <div className="flex items-center gap-3">
+            <span className="text-sm text-gray-400">Video Zoom:</span>
+            <button
+              className="rounded border border-neutral-500 bg-neutral-700 px-2 py-0.5 hover:bg-neutral-600"
+              onClick={() => setVideoZoom((prev) => Math.max(1, prev - 0.5))}
+              disabled={isVideoZoomOutDisabled}
+            >
+              -
+            </button>
+            <span className="w-8 text-center font-mono text-sm">
+              {videoZoom.toFixed(1)}
+            </span>
+            <button
+              className="rounded border border-neutral-500 bg-neutral-700 px-2 py-0.5 hover:bg-neutral-600"
+              onClick={() => setVideoZoom((prev) => Math.min(10, prev + 0.5))}
+              disabled={isVideoZoomInDisabled}
+            >
+              +
+            </button>
+          </div>
         </div>
 
         {videoDuration > 0 && (
@@ -539,7 +692,10 @@ export default function Page() {
                 Current Time: {formatTime(currentTime)} /{" "}
                 {formatTime(videoDuration)}
               </div>
-              <div>Zoom: {Math.pow(2, zoomLevel).toFixed(1)}x</div>
+              <div>
+                Timeline Zoom: {Math.pow(2, zoomLevel).toFixed(1)}x | Video
+                Zoom: {videoZoom.toFixed(1)}x
+              </div>
             </div>
 
             <div className="relative pt-4" ref={timelineContainerRef}>

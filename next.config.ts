@@ -18,6 +18,10 @@ const nextConfig: NextConfig = {
   async rewrites() {
     return [
       {
+        source: "/playground",
+        destination: "/arts",
+      },
+      {
         source: "/cv",
         destination: "/resume",
       },
