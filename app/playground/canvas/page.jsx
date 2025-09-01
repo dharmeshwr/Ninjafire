@@ -4,6 +4,9 @@ import { useEffect, useRef } from "react";
 
 export default function Page() {
   let isZoomed = false;
+  let currentScale = 1;
+  let currentTranslateX = 0;
+  let currentTranslateY = 0;
   const ZOOM_LEVEL = 2;
   const canvasRef = useRef(null);
   const inputRef = useRef(null);
@@ -37,28 +40,6 @@ export default function Page() {
     return { x: offsetX, y: offsetY, width: drawWidth, height: drawHeight };
   };
 
-  const drawBackground = () => {
-    const canvas = canvasRef.current;
-    const ctx = canvas?.getContext("2d");
-
-    if (!canvas || !ctx) return;
-
-    const gridSize = 20;
-
-    ctx.strokeStyle = "rgba(255,255,255,0.08)";
-    ctx.lineWidth = 1;
-
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-    for (let x = 0; x < canvas.width; x += gridSize) {
-      for (let y = 0; y < canvas.height; y += gridSize) {
-        ctx.beginPath();
-        ctx.arc(x, y, 1, 0, 2 * Math.PI);
-        ctx.stroke();
-      }
-    }
-  };
-
   const drawImage = () => {
     const canvas = canvasRef.current;
     const ctx = canvas?.getContext("2d");
@@ -68,7 +49,7 @@ export default function Page() {
 
     const { x, y, width, height } = getImageDimensions();
 
-    drawBackground();
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
     ctx.drawImage(image, x, y, width, height);
   };
 
@@ -102,34 +83,60 @@ export default function Page() {
     }
   };
 
+  const draw = () => {
+    const canvas = canvasRef.current;
+    const ctx = canvas?.getContext("2d");
+    if (!canvas || !ctx) return;
+
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.save();
+
+    ctx.translate(currentTranslateX, currentTranslateY);
+    ctx.scale(currentScale, currentScale);
+
+    drawImage();
+
+    ctx.restore();
+  };
+
+  // Updated zoomEffect (now uses/sets shared state for consistency with pan)
   const zoomEffect = (x, y) => {
     const canvas = canvasRef.current;
     const ctx = canvas?.getContext("2d");
-
     if (!canvas || !ctx) return;
 
     const duration = 1000;
     const start = performance.now();
+    const startScale = currentScale;
+    const targetScale = ZOOM_LEVEL;
+    const startTranslateX = currentTranslateX;
+    const startTranslateY = currentTranslateY;
+
+    // World coords of clicked point
+    const worldX = (x - startTranslateX) / startScale;
+    const worldY = (y - startTranslateY) / startScale;
+
+    // Target translate keeps clicked point fixed during zoom
+    const targetTranslateX = x - targetScale * worldX;
+    const targetTranslateY = y - targetScale * worldY;
 
     const animate = (time) => {
-      let progress = (time - start) / duration;
-      if (progress > 1) {
+      let progress = Math.min((time - start) / duration, 1);
+      if (progress === 1) {
         isZoomed = true;
-        progress = 1;
+        currentScale = targetScale;
+        currentTranslateX = targetTranslateX;
+        currentTranslateY = targetTranslateY;
+      } else {
+        const eased = easeOutBack(progress);
+        currentScale = startScale + (targetScale - startScale) * eased;
+        currentTranslateX =
+          startTranslateX + (targetTranslateX - startTranslateX) * eased;
+        currentTranslateY =
+          startTranslateY + (targetTranslateY - startTranslateY) * eased;
       }
 
-      const eased = easeOutBack(progress);
-      const scale = 1 + (ZOOM_LEVEL - 1) * eased;
-
-      ctx.save();
-
-      ctx.translate(x, y);
-      ctx.scale(scale, scale);
-      ctx.translate(-x, -y);
-
-      drawImage();
-
-      ctx.restore();
+      draw();
 
       if (progress < 1) requestAnimationFrame(animate);
     };
@@ -140,15 +147,37 @@ export default function Page() {
   const panEffect = (x, y) => {
     const canvas = canvasRef.current;
     const ctx = canvas?.getContext("2d");
-
     if (!canvas || !ctx) return;
 
     const duration = 1000;
     const start = performance.now();
+    const startTranslateX = currentTranslateX;
+    const startTranslateY = currentTranslateY;
+
+    // World coords of clicked point
+    const worldX = (x - currentTranslateX) / currentScale;
+    const worldY = (y - currentTranslateY) / currentScale;
+
+    // Target translate moves clicked world point to canvas center
+    const centerX = canvas.width / 2;
+    const centerY = canvas.height / 2;
+    const targetTranslateX = centerX - currentScale * worldX;
+    const targetTranslateY = centerY - currentScale * worldY;
 
     const animate = (time) => {
-      const progress = (time - start) / duration;
-      if (progress > 1) progress = 1;
+      let progress = Math.min((time - start) / duration, 1);
+      if (progress === 1) {
+        currentTranslateX = targetTranslateX;
+        currentTranslateY = targetTranslateY;
+      } else {
+        const eased = easeOutBack(progress); // Or use a different easing if preferred (e.g., linear)
+        currentTranslateX =
+          startTranslateX + (targetTranslateX - startTranslateX) * eased;
+        currentTranslateY =
+          startTranslateY + (targetTranslateY - startTranslateY) * eased;
+      }
+
+      draw();
 
       if (progress < 1) requestAnimationFrame(animate);
     };
@@ -184,7 +213,7 @@ export default function Page() {
 
   useEffect(() => {
     setupCanvas();
-    createImage("/profile.png");
+    createImage("https://placewaifu.com/image");
 
     canvasRef.current &&
       canvasRef.current.addEventListener("mousedown", onMouseDown);
@@ -209,42 +238,9 @@ export default function Page() {
         onChange={handleInputFile}
       />
 
-      <span className="absolute bottom-0 left-1/2 translate-x-[-50%] text-sm opacity-30">
-        Press <strong>U</strong> to upload image
+      <span className="absolute bottom-0 left-1/2 translate-x-[-50%] rounded-t-lg bg-white/30 px-2 py-1 text-sm text-black/40 backdrop-blur-md">
+        Press U to upload image
       </span>
     </div>
   );
-}
-
-{
-  /*
-      Most basic zoom logic
-
-      const zoomEffect = (x, y) => {
-        const canvas = canvasRef.current;
-        const ctx = canvas?.getContext('2d')
-
-        if (!canvas || !ctx) return
-
-        let currentZoom = 1
-        const scaler = () => {
-          if (currentZoom >= ZOOM_LEVEL) return
-
-          ctx.save();
-
-          ctx.translate(x, y);
-          ctx.scale(currentZoom, currentZoom);
-          ctx.translate(-x, -y);
-
-
-          drawImage()
-          currentZoom += 0.03
-
-          ctx.restore();
-          requestAnimationFrame(scaler)
-        }
-
-        requestAnimationFrame(scaler)
-      }
-  */
 }
