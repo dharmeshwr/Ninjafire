@@ -19,7 +19,7 @@ export default function Page() {
         </a>
 
         <Balancer className="mb-8 font-serif text-2xl font-medium tracking-tight">
-          {tagline}
+          Im the new version
         </Balancer>
 
         <Summary />
