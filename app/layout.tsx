@@ -1,4 +1,5 @@
 import "../styles/globals.css";
+import "../styles/background.css";
 
 import { Metadata } from "next";
 import { Analytics } from "@vercel/analytics/react";
@@ -8,17 +9,16 @@ import { ThemeProvider } from "next-themes";
 
 import { metaData } from "@/config/site";
 import { cn } from "@/lib/utils";
-import { GetRating } from "@/components/ui/get-rating";
-import { ShowRating } from "@/components/ui/show-rating";
-import { Navbar } from "@/components/layout/navbar";
 
 import {
-  fontBroader,
-  fontCursive,
-  fontInformal,
+  fontGloucester,
+  fontGothicExtras,
   fontMono,
-  fontSans,
+  fontOldEnglish,
+  fontSchwachsinn,
   fontSerif,
+  fontSlab,
+  fontYorktown,
 } from "./fonts";
 
 export const metadata: Metadata = {
@@ -65,12 +65,14 @@ export default function RootLayout({ children }: React.PropsWithChildren) {
       lang="en"
       suppressHydrationWarning
       className={cn(
-        fontSans.variable,
         fontMono.variable,
         fontSerif.variable,
-        fontInformal.variable,
-        fontCursive.variable,
-        fontBroader.variable,
+        fontGothicExtras.variable,
+        fontSchwachsinn.variable,
+        fontSlab.variable,
+        fontOldEnglish.variable,
+        fontYorktown.variable,
+        fontGloucester.variable,
       )}
     >
       <head>
@@ -93,7 +95,7 @@ export default function RootLayout({ children }: React.PropsWithChildren) {
           title="JSON Feed"
         />
       </head>
-      <body className="relative mx-auto mb-1 flex flex-col items-center justify-center overflow-x-hidden bg-background text-foreground antialiased md:py-10 lg:mb-0">
+      <body>
         <Provider>
           <ThemeProvider
             attribute="class"
@@ -101,14 +103,18 @@ export default function RootLayout({ children }: React.PropsWithChildren) {
             enableSystem
             disableTransitionOnChange
           >
-            <Navbar />
-            <main className="flex w-full min-w-0 max-w-screen-sm flex-1 flex-col px-6 sm:px-4 md:px-0">
+            <div className="overlays">
+              <div className="overlay paper" />
+              <div className="overlay halftone" />
+              <div className="overlay ghostink" />
+              <div className="overlay distress" />
+              <div className="overlay border" />
+            </div>
+            <main>
               {children}
               <Analytics />
               <SpeedInsights />
             </main>
-            {process.env.NODE_ENV === "production" && <GetRating />}
-            <ShowRating />
           </ThemeProvider>
         </Provider>
       </body>

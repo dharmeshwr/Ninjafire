@@ -1,33 +1,11 @@
-import Balancer from "react-wrap-balancer";
+import Header from "@/components/layout/header";
+import Sextion1 from "@/components/layout/section-1";
 
-import { socialLinks, tagline } from "@/config/site";
-import { ProfilePicture } from "@/components/ui/profile-picture";
-import { Quote } from "@/components/ui/quote";
-import { Summary } from "@/components/ui/summary";
-import { ClickSpark } from "@/components/layout/click-spark";
-import Footer from "@/components/layout/footer";
-
-export default function Page() {
+export default async function Page() {
   return (
-    <>
-      <ClickSpark />
-      <section className="z-10 md:z-30">
-        <a href={socialLinks.twitter} target="_blank">
-          <ProfilePicture
-            circles={["#f5bb00", "#ec9f05", "#d76a03", "#bf3100"]}
-          />
-        </a>
-
-        <Balancer className="mb-8 font-serif text-2xl font-medium tracking-tight">
-          Im the new version
-        </Balancer>
-
-        <Summary />
-
-        <Quote />
-
-        <Footer />
-      </section>
-    </>
+    <div className="select-none px-4 text-black">
+      <Header />
+      <Sextion1 />
+    </div>
   );
 }

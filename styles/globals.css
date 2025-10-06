@@ -41,24 +41,6 @@
   color: hsl(var(--background));
 }
 
-html {
-  min-width: 360px;
-  scrollbar-gutter: stable;
-}
-
-body {
-  text-rendering: optimizeLegibility;
-  min-height: 100vh;
-}
-
-h2,
-h3,
-h4,
-h5,
-h6 {
-  @apply font-medium tracking-tight !important;
-}
-
 nav::after {
   content: "";
   margin-top: 1.8rem;

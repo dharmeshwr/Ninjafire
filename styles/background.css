@@ -1,0 +1,75 @@
+html {
+  min-width: 360px;
+  scrollbar-gutter: stable;
+}
+
+body {
+  text-rendering: optimizeLegibility;
+  min-height: 100vh;
+  filter: sepia(0.5) contrast(1.05) brightness(0.97);
+}
+
+.overlays {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: -5;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  will-change: opacity, transform;
+  mix-blend-mode: overlay;
+}
+
+.paper {
+  z-index: -4;
+  background: url("/background/paper.jpg") repeat;
+  background-size: 600px;
+  opacity: 1;
+  background-attachment: scroll;
+}
+
+.halftone {
+  z-index: -4;
+  background: url("/background/halftone.jpg") repeat;
+  background-size: 1700px;
+  opacity: 0.5;
+  filter: brightness(0.4) contrast(2);
+}
+
+.distress {
+  background: url("/background/distress.jpg") repeat;
+  background-size: 1300px;
+  opacity: 0.11;
+  filter: contrast(2);
+}
+
+.border {
+  background: url("/background/border.jpg") no-repeat center top / cover;
+  opacity: 1;
+  filter: contrast(1) brightness(0.8);
+  display: none;
+}
+
+.ghostink {
+  background: url("/background/ghostink.jpg") no-repeat right top / cover;
+  opacity: 0.6;
+  filter: contrast(2) brightness(1);
+  display: none;
+}
+
+@media only screen and (max-width: 1000px) {
+  .ghostink,
+  .edge {
+    opacity: 0;
+  }
+}
+
+.content * {
+  filter: sepia(0.2) contrast(5) brightness(0.001) grayscale(100);
+  mix-blend-mode: multiply;
+  opacity: 0.7;
+}

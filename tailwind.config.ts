@@ -9,11 +9,14 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        sans: ["var(--font-sans)", ...fontFamily.sans],
+        serif: ["var(--font-serif)", ...fontFamily.serif],
         mono: ["var(--font-mono)", ...fontFamily.mono],
-        informal: ["var(--font-informal)"],
-        cursive: ["var(--font-cursive)"],
-        broader: ["var(--font-broader)"],
+        slab: ["var(--font-slab)", "serif"],
+        oldEnglish: ["var(--font-old-english)", "cursive"],
+        schwachsinn: ["var(--font-schwachsinn)", "cursive"],
+        yorktown: ["var(--font-yorktown)", "sans-serif"],
+        gloucester: ["var(--font-gloucester)", "sans-serif"],
+        gothic: ["var(--font-gothic-extras)", "sans-serif"],
       },
       typography: {
         quoteless: {
