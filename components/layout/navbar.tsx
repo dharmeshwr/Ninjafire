@@ -4,7 +4,6 @@ import Link from "next/link";
 
 import { cn } from "@/lib/utils";
 
-import { Name } from "../ui/name";
 import { ThemeSwitcher } from "./theme-switcher";
 
 const navItems = {
@@ -23,9 +22,7 @@ export function Navbar() {
     >
       <div className="flex w-full max-w-screen-sm flex-col justify-between md:flex-row md:items-center">
         <Link href="/">
-          <div className="relative">
-            <Name />
-          </div>
+          <div className="relative"></div>
         </Link>
         <div className="mt-6 flex flex-row items-center gap-4 md:ml-auto md:mt-0">
           {Object.entries(navItems).map(([path, { name }]) => (
