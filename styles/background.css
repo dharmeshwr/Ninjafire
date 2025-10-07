@@ -1,13 +1,20 @@
 html {
   min-width: 360px;
   scrollbar-gutter: stable;
+  display: flex;
+  justify-content: center;
 }
 
 body {
   text-rendering: optimizeLegibility;
   min-height: 100vh;
+  max-width: 2300px;
   filter: sepia(0.5) contrast(1.05) brightness(0.97);
 }
+
+/* { 
+   cursor: url(https://cur.cursors-4u.net/holidays/hol-4/hol335.cur), auto !important; 
+} */
 
 .overlays {
   position: absolute;
@@ -72,4 +79,14 @@ body {
   filter: sepia(0.2) contrast(5) brightness(0.001) grayscale(100);
   mix-blend-mode: multiply;
   opacity: 0.7;
+}
+
+.main-heading {
+  font-size: clamp(2.5rem, 7vw, 10rem);
+  line-height: clamp(2.5rem, 7vw, 10rem);
+}
+
+.sec-heading {
+  font-size: clamp(2rem, 2.5vw, 5rem);
+  line-height: clamp(2rem, 2.5vw, 5rem);
 }

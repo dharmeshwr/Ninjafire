@@ -17,8 +17,8 @@ async function fetchQuote() {
     };
 
     return quote;
-  } catch (error) {
-    console.log(error);
+  } catch {
+    console.log("Rate limited");
     return {
       q: "Keep going, no matter what.",
       a: "Unknown",
