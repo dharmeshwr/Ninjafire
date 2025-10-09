@@ -40,7 +40,7 @@ export default function Page() {
     scale: 0.01, // Controls noise frequency
     amplitude: 1, // Controls noise height
     speed: 0.001,
-    cell_size: 40,
+    cell_size: 11,
     show_grid: false,
     animated: animationOptions[0].value,
   });
@@ -180,7 +180,7 @@ export default function Page() {
         className="fixed inset-0 z-[500] bg-white"
         ref={canvasRef}
       ></canvas>
-      <ControlPanel collapsed={0}>
+      <ControlPanel collapsed={0} name="2D Perlin Noise">
         <Toggle
           label="Grid"
           checked={config.show_grid}
@@ -198,9 +198,9 @@ export default function Page() {
           label="Scale"
           value={config.scale}
           onChange={(v: number) => setConfig((prev) => ({ ...prev, scale: v }))}
-          min={0.001}
-          max={0.13}
-          step={0.009}
+          min={0.005}
+          max={0.06}
+          step={0.001}
         />
         <RangeSlider
           label="Amplitude"
@@ -209,8 +209,8 @@ export default function Page() {
             setConfig((prev) => ({ ...prev, amplitude: v }))
           }
           min={0}
-          max={10}
-          step={1}
+          max={4}
+          step={0.05}
         />
 
         <RangeSlider

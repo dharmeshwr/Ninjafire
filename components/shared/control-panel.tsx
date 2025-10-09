@@ -8,6 +8,7 @@ interface Option {
 
 interface ControlPanelProps {
   children: React.ReactNode;
+  name: string;
   className?: string;
   collapsed?: number;
 }
@@ -40,12 +41,12 @@ interface ColorPickerProps {
   onChange: (value: string) => void;
 }
 
-const ControlPanel = ({ children, collapsed = 1 }: ControlPanelProps) => {
+const ControlPanel = ({ children, name, collapsed = 0 }: ControlPanelProps) => {
   const [isCollapsed, setIsCollapsed] = useState(collapsed);
 
   return (
     <div
-      className={`fixed right-4 top-4 z-[999] rounded border border-gray-700 bg-gray-800 font-mono ${isCollapsed == 2 ? "w-[1.55rem]" : "w-96"}`}
+      className={`fixed right-4 top-4 z-[9999] rounded border border-gray-700 bg-gray-800 font-mono ${isCollapsed == 2 ? "w-[1.55rem]" : "w-96"}`}
     >
       <div
         className="flex select-none items-center justify-between border-b border-gray-700 bg-gray-700 p-1"
@@ -62,7 +63,9 @@ const ControlPanel = ({ children, collapsed = 1 }: ControlPanelProps) => {
         )}
         {isCollapsed <= 1 && (
           <div className="flex w-full items-center justify-center gap-2">
-            <span className="text-sm font-medium text-gray-300">config</span>
+            <span className="text-sm font-medium text-gray-300">
+              {name} - config
+            </span>
           </div>
         )}
         <button

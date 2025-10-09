@@ -175,7 +175,7 @@ export default function Page() {
   return (
     <>
       <canvas className="fixed inset-0 z-[500] bg-[#4169e1]" ref={canvasRef} />
-      <ControlPanel collapsed={0}>
+      <ControlPanel collapsed={0} name="Flow Field I">
         <Toggle
           label="Show grid"
           checked={config.showGrid}

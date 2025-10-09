@@ -59,7 +59,7 @@ export const fontOldEnglish = localFont({
 export const fontSchwachsinn = localFont({
   src: [
     {
-      path: "../public/fonts/Schwachsinn.ttf",
+      path: "../public/fonts/Schwachsinn3D.ttf",
       weight: "400",
       style: "normal",
     },

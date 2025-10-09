@@ -106,7 +106,7 @@ export default function Page() {
   return (
     <>
       <canvas className="fixed inset-0 z-[500] bg-black" ref={canvasRef} />
-      <ControlPanel collapsed={0}>
+      <ControlPanel collapsed={0} name="Flow Field II">
         <RangeSlider
           label="Scale"
           value={config.scale}

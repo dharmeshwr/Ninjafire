@@ -1,6 +1,8 @@
 import Image from "next/image";
 import Balancer from "react-wrap-balancer";
 
+import BackgroundMusic from "../layout/background-music";
+
 export default async function Section() {
   return (
     <div>
@@ -27,20 +29,20 @@ export default async function Section() {
             unparalleled.
           </div>
           <div className="[@media_(min-width:800px)_and_(max-width:1200px)]:pl-2">
-            <span className="sec-heading block font-gloucester">
+            <Balancer className="sec-heading block font-gloucester">
               THE TOOLS HE WIELDS WITH MASTERY
-            </span>
+            </Balancer>
             <div className="mt-2 text-justify">
               When it comes to his tech stack, Dharmesh is a true master. He is
               adept at weaving complex web interfaces with ReactJS and NextJS,
-              building robust back-ends with ExpressJS, and crafting desktop
-              applications using ElectronJS. Websites bloom under his touch he
-              is a force to be reckoned with.
+              building robust back-ends with ExpressJS, while deploying them on
+              AWS. On top he can craft desktop applications using ElectronJS.
+              Websites bloom under his touch he is a force to be reckoned with.
             </div>
           </div>
         </div>
 
-        <div className="col-span-1 border-black max-[800px]:my-6 min-[800px]:col-span-2 min-[800px]:border-r min-[800px]:px-2 min-[1200px]:col-span-1">
+        <div className="relative col-span-1 border-black max-[800px]:my-6 min-[800px]:col-span-2 min-[800px]:border-r min-[800px]:px-2 min-[1200px]:col-span-1">
           <div className="flex h-fit justify-center">
             <Image
               src={"/profile-with-frame.png"}
@@ -50,16 +52,17 @@ export default async function Section() {
               className="mix-blend-multiply"
             />
           </div>
+          <BackgroundMusic />
         </div>
 
         <div className="col-span-1 space-y-10 pl-2 min-[800px]:col-span-2 min-[1200px]:col-span-1">
           <div>
-            <span className="sec-heading block font-gloucester mix-blend-multiply">
+            <Balancer className="sec-heading block font-gloucester mix-blend-multiply">
               THE MAN IS UNSTOPPABLE
-            </span>
+            </Balancer>
             <div className="mt-2 text-justify">
               It is understood Dharmesh, is not content with mere theoretical
-              knowledge, As a Software Developer at YogLabs AI Research
+              knowledge, As a Software Developer at Yoglabs AI Research
               Foundation, he plunged headfirst into an AI project designed to
               monitor student progress- a concept that could revolutionize (or
               perhaps complicate) hiring as we know it. His duties included
@@ -71,9 +74,9 @@ export default async function Section() {
           </div>
 
           <div className="border-2 border-black px-1">
-            <span className="block font-yorktown text-3xl italic mix-blend-multiply">
+            <Balancer className="block font-yorktown text-3xl italic mix-blend-multiply">
               Elon Musk&apos;s Mars Vacation Special
-            </span>
+            </Balancer>
             <div className="my-2 text-justify">
               Why settle for a beach when you can dodge asteroids? Elon&apos;s
               got the tickets, one-way rocket rides, zero-gravity selfies, and

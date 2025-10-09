@@ -61,6 +61,11 @@ pre {
   background-color: hsl(var(--background-alt)) !important;
 }
 
+.noscrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
 .noscrollbar ::-webkit-scrollbar {
   display: none;
 }
@@ -129,6 +134,22 @@ table {
 
 hr {
   border-color: hal(var(--foreground)) !important;
+}
+
+.turbulence {
+  filter: url(#turbulence);
+}
+
+.wobble {
+  filter: url(#wobble);
+}
+
+.displacement-map {
+  filter: url(#displacement);
+}
+
+.combined {
+  filter: url(#combined);
 }
 
 .profile-pic-circle {
