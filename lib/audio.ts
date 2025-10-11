@@ -35,7 +35,7 @@ export function useAudioManager() {
     if (bg) bg.pause();
 
     audio.addEventListener("ended", () => {
-      if (bg) bg.play();
+      if (bg && isPlaying) bg.play();
       setSoundEffects((prev) => {
         const newMap = new Map(prev);
         newMap.delete(src);
