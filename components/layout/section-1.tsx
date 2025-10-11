@@ -45,7 +45,7 @@ export default async function Section() {
         <div className="relative col-span-1 border-black max-[800px]:my-6 min-[800px]:col-span-2 min-[800px]:border-r min-[800px]:px-2 min-[1200px]:col-span-1">
           <div className="flex h-fit justify-center">
             <Image
-              src={"/profile-with-frame.png"}
+              src={"/profile-with-frame-transparent.png"}
               alt="profile picture"
               width={600}
               height={600}

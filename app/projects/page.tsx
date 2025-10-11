@@ -1,8 +1,7 @@
-import Header from "@/components/layout/header";
-import Sextion1 from "@/components/layout/section-1";
-import Sextion2 from "@/components/layout/section-2";
+import Image from "next/image";
+import { format } from "date-fns";
 
-export default async function Page() {
+export default function Page() {
   return (
     <div
       style={{
@@ -16,11 +15,79 @@ export default async function Page() {
         <div className="overlay distress" />
         <div className="overlay paper-border" />
       </div>
-      <div className="noscrollbar mx-auto max-w-[2300px] select-none px-4 text-black/80">
+      <div className="noscrollbar mx-auto h-full max-w-[2300px] select-none px-4 text-black/75">
         <Header />
-        <Sextion1 />
-        <Sextion2 />
+        <div className="mt-3">
+          <span className="font-gloucester text-5xl uppercase">
+            More Creations
+          </span>
+          <div className="mt-4">
+            <div className="cursor-pointer pb-2 font-gloucester text-4xl italic hover:underline">
+              <a
+                href={"https://github.com/dharmeshwr/shift"}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Shift - A File manager
+              </a>
+            </div>
+            <div>
+              <Image
+                src={"/projects/shift.png"}
+                alt="A Picture"
+                width={900}
+                height={500}
+                className="mr-4 mix-blend-multiply contrast-100 grayscale transition-all ease-linear min-[1200px]:float-left"
+              />
+              <div className="text-justify font-slab leading-7 min-[600px]:text-lg min-[1000px]:text-xl">
+                Shift, a desktop file manager crafted using ReactJS, Typescript,
+                Jotai and ElectronJS to explore how file systems truly work
+                beneath the surface. It features a dual-view sidebar — one
+                offering a Places view with familiar directories like Downloads,
+                Pictures, and Documents, and another that reveals a Directory
+                Tree, much like what you’d find in VS Code, enabling seamless
+                deep navigation. The header comes packed with smart Navigation
+                Controls for moving back, forward, or jumping straight to your
+                home directory, plus a search bar that lets you zip to any path
+                in an instant. Down below, the footer quietly keeps track of
+                your selected file’s size, along with total and free disk space,
+                so you always know what’s happening under the hood. And of
+                course, Shift doesn’t skip aesthetics — it supports multiple
+                themes like Gruvbox, TokyoNight, Nord, and Solarized, letting
+                you browse your files in style.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="mt-6 font-slab">
+          There were a few more projects he gave to us, but upon evaluation, we
+          found they were merely incomplete or broken pieces of code. So we
+          decided not add those here.
+        </div>
+
+        <div className="flex justify-center pt-4 font-gothic text-7xl font-extrabold leading-6 text-black/70 mix-blend-multiply">
+          y{" "}
+        </div>
       </div>
     </div>
   );
 }
+
+const Header = () => {
+  const date = format(new Date(), "EEEE, MMM dd, yyyy");
+  return (
+    <div className="pt-8 text-sm">
+      <div className="flex w-full items-center justify-between px-6 text-center font-slab uppercase max-[800px]:flex-col">
+        <div>***</div>
+        <div>PROJECTS.</div>
+        <div>UNDEFINED CHRONCILE, {date}.</div>
+        <div>PROJECTS.</div>
+        <div>31</div>
+      </div>
+
+      <hr className="my-0.5 w-full" />
+      <hr className="my-0.5 w-full" />
+    </div>
+  );
+};

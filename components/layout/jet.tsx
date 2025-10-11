@@ -4,34 +4,23 @@ import { useRef, useState } from "react";
 
 export const Jet2Holiday = () => {
   const audioRef = useRef<HTMLAudioElement | null>(null);
-  const [muted, setMuted] = useState(true);
-
-  const handleMouseEnter = () => {
-    if (audioRef.current) {
-      audioRef.current.currentTime = 0;
-      audioRef.current.play().catch(() => {});
-    }
-  };
-
-  const handleMouseLeave = () => {
-    if (audioRef.current) {
-      audioRef.current.pause();
-    }
-  };
+  const [sound, setSound] = useState(false);
 
   const toggleMute = () => {
-    if (audioRef.current) {
-      audioRef.current.muted = !audioRef.current.muted;
-      setMuted(audioRef.current.muted);
+    if (!audioRef.current) return;
+
+    audioRef.current.addEventListener("ended", () => setSound(false));
+    if (!sound) {
+      audioRef.current.play().catch(() => {});
+      setSound(true);
+    } else {
+      audioRef.current.pause();
+      setSound(false);
     }
   };
 
   return (
-    <div
-      className="relative border-2 border-black px-1"
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
-    >
+    <div className="relative border-2 border-black px-1">
       <span className="block pt-2 font-schwachsinn text-5xl italic mix-blend-multiply">
         Jet2Holidays
       </span>
@@ -48,9 +37,9 @@ export const Jet2Holiday = () => {
         className="absolute bottom-1 right-1 text-xs"
         onClick={toggleMute}
       >
-        {muted ? "Muted" : "Mute"}
+        {!sound ? "Muted" : "Mute"}
       </button>
-      <audio ref={audioRef} src="/sounds/jet.mp3" muted preload="auto" />
+      <audio ref={audioRef} src="/sounds/jet.mp3" preload="auto" />
     </div>
   );
 };

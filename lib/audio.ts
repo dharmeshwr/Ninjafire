@@ -5,6 +5,9 @@ import { useAtom } from "jotai";
 export function useAudioManager() {
   const [audios, setAudios] = useAtom(audioAtom);
   const [isPlaying, setIsPlaying] = useState(false);
+  const [soundEffects, setSoundEffects] = useState<
+    Map<string, HTMLAudioElement>
+  >(new Map());
 
   const playBg = (src: string, volume = 0.15) => {
     let audio = audios["bg"];
@@ -17,7 +20,14 @@ export function useAudioManager() {
     audio.play().catch(() => {});
   };
 
-  const playEffect = (src: string, volume = 1) => {
+  const playAudio = (src: string, volume = 0.5) => {
+    // Stop if already playing
+    if (soundEffects.has(src)) {
+      const existingAudio = soundEffects.get(src)!;
+      existingAudio.pause();
+      existingAudio.currentTime = 0;
+    }
+
     const audio = new Audio(src);
     audio.volume = volume;
 
@@ -26,8 +36,43 @@ export function useAudioManager() {
 
     audio.addEventListener("ended", () => {
       if (bg) bg.play();
+      setSoundEffects((prev) => {
+        const newMap = new Map(prev);
+        newMap.delete(src);
+        return newMap;
+      });
     });
+
     audio.play();
+
+    setSoundEffects((prev) => {
+      const newMap = new Map(prev);
+      newMap.set(src, audio);
+      return newMap;
+    });
+  };
+
+  const stopAudio = (src: string) => {
+    const audio = soundEffects.get(src);
+    if (audio) {
+      audio.pause();
+      audio.currentTime = 0;
+
+      setSoundEffects((prev) => {
+        const newMap = new Map(prev);
+        newMap.delete(src);
+        return newMap;
+      });
+
+      // Resume background music if no other sounds are playing
+      if (soundEffects.size === 1) {
+        // Will be 0 after delete
+        const bg = audios["bg"];
+        if (bg && isPlaying) {
+          bg.play();
+        }
+      }
+    }
   };
 
   const stopBg = () => {
@@ -39,10 +84,16 @@ export function useAudioManager() {
     if (isPlaying) {
       stopBg();
     } else {
-      playBg("/sounds/bg.mp3", 0.15);
+      playBg("/sounds/bg.mp3", 0.2);
     }
     setIsPlaying((prev) => !prev);
   };
 
-  return { playBg, playEffect, stopBg, isPlaying, toggleBackgroundMusic };
+  return {
+    playAudio,
+    stopAudio,
+    stopBg,
+    isPlaying,
+    toggleBackgroundMusic,
+  };
 }

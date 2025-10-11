@@ -3,11 +3,11 @@
 import { useAudioManager } from "@/lib/audio";
 
 export default function WeatherBox({ weather }: { weather: string }) {
-  const { playEffect } = useAudioManager();
+  const { playAudio } = useAudioManager();
 
   return (
     <div
-      onClick={() => playEffect("/sounds/wind.wav")}
+      onClick={() => playAudio("/sounds/wind.wav")}
       className="relative flex max-w-48 flex-col items-center justify-center text-center font-slab max-[1200px]:hidden"
     >
       <span>WEATHER</span>

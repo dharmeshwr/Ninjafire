@@ -48,7 +48,7 @@ export default async function Header() {
           </div>
           <div className="max-[1200px]:hidden">CCC</div>
           <div className="order-3 max-[600px]:order-5">
-            Gurugram, India, {date}
+            Narnaul, Haryana, {date}
           </div>
           <div className="order-4 max-[1200px]:hidden">****</div>
           <div className="order-5 max-[600px]:order-3">DAILY, 5 CENTS</div>

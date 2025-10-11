@@ -6,6 +6,7 @@ import { metaData } from "@/config/site";
 
 import { VideoPaper } from "../ui/paper-video";
 import { Jet2Holiday } from "./jet";
+import { Joke } from "./joke";
 import Footer from "./paper-footer";
 
 export default function Section() {
@@ -63,7 +64,7 @@ export default function Section() {
           </div>
         </div>
 
-        <div className="m-2 flex gap-3">
+        <div className="m-2 ml-0 flex gap-3">
           <Jet2Holiday />
         </div>
 
@@ -89,7 +90,7 @@ export default function Section() {
                 alt="A Picture"
                 width={500}
                 height={500}
-                className="my-2 ml-2 mix-blend-multiply contrast-100 grayscale transition-all ease-linear min-[800px]:float-left"
+                className="mr-2 mix-blend-multiply contrast-100 grayscale transition-all ease-linear min-[800px]:float-left"
               />
             </a>
             GitHub Heatmap Designer empowers developers to personalize their
@@ -164,7 +165,7 @@ export default function Section() {
           since he refused to give it to us.
         </div>
 
-        <div className="relative px-1 min-[600px]:text-lg min-[1000px]:text-xl">
+        <div className="relative mr-2 min-[600px]:text-lg min-[1000px]:text-xl">
           <a
             target="_blank"
             rel="noopener noreferrer"
@@ -184,6 +185,10 @@ export default function Section() {
           </a>
         </div>
 
+        <div className="mr-2 flex gap-3">
+          <Joke />
+        </div>
+
         <div className="max-[1200px]:hidden">
           <Footer />
         </div>
@@ -196,10 +201,10 @@ export default function Section() {
             HIS GENERATIVE ARTS{" "}
           </span>
           <div className="relative">
-            <span className="pb-1 min-[600px]:text-lg min-[1000px]:text-xl">
+            <div className="mb-2 min-[600px]:text-lg min-[1000px]:text-xl">
               The man takes great joy in making procedural generation, here are
               some of his best fabrications.
-            </span>
+            </div>
             <div className="grid gap-1 max-[1200px]:grid-cols-4 max-[900px]:grid-cols-2 max-[600px]:grid-cols-1 min-[1200px]:space-y-1">
               <VideoPaper src={"/arts/perlin6.mp4"} href={"/arts/6"} />
               <VideoPaper src={"/arts/perlin5.mp4"} href={"/arts/5"} />
