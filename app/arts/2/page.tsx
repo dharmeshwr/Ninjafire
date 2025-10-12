@@ -188,7 +188,7 @@ export default function Page() {
         className="fixed inset-0 z-[100] bg-background"
         ref={canvasRef}
       ></canvas>
-      <ControlPanel>
+      <ControlPanel name="Random Particles">
         <RangeSlider
           label="Circle Count"
           value={config.circleCount}

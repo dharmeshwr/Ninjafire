@@ -14,12 +14,3 @@ export const getGIFfromTenor = async () => {
 
   return { gif: data.results[0].media_formats.tinygif.url };
 };
-
-export const getQuote = async () => {
-  try {
-    const { data } = await axios.get("https://zenquotes.io/api/today");
-    return data[0];
-  } catch (error) {
-    console.error("Fetch failed:", error);
-  }
-};

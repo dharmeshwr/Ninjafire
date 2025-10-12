@@ -1,101 +1,93 @@
-"use client";
-
-import { useMemo } from "react";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
-
-import { projects, type Project } from "@/config/projects";
-import { capatilize, cn, createQueryString } from "@/lib/utils";
-
-import ProjectList from "./_(components)/projects-list";
-
-enum CategoryType {
-  DATE = "date",
-  TYPE = "type",
-}
-
-const Categories = [CategoryType.TYPE, CategoryType.DATE];
+import Image from "next/image";
+import { format } from "date-fns";
 
 export default function Page() {
-  const router = useRouter();
-  const pathname = usePathname();
-  const searchparams = useSearchParams();
-  let category =
-    (searchparams.get("category") as CategoryType) ?? CategoryType.TYPE;
-
-  if (!Categories.includes(category)) {
-    category = CategoryType.TYPE;
-  }
-
-  function sortProjectsByYear(projects: Record<string, Project[]>) {
-    const sortedKeys = Object.keys(projects).sort(
-      (a, b) => Number(b) - Number(a),
-    );
-
-    return sortedKeys.reduce((acc, key) => {
-      acc[`Year ${key}`] = projects[key];
-      return acc;
-    }, {});
-  }
-
-  const categorizedProjects = useMemo(() => {
-    const grouped = projects.reduce<Record<string, Project[]>>(
-      (accumulate, current) => {
-        const key =
-          category === CategoryType.TYPE
-            ? current[category]
-            : current[category][0].split(" ")[1]; // Extract year from date
-
-        accumulate[key] = accumulate[key] ?? [];
-
-        accumulate[key].push(current);
-
-        return accumulate;
-      },
-      {},
-    );
-
-    return category === CategoryType.DATE
-      ? sortProjectsByYear(grouped)
-      : grouped;
-  }, [category]);
-
   return (
-    <div>
-      <div className="flex justify-between">
-        <h2 className="text-2xl">My Projects</h2>
+    <div
+      style={{
+        cursor:
+          "url('data:image/x-icon;base64,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'), auto",
+      }}
+    >
+      <div className="overlays">
+        <div className="overlay paper" />
+        <div className="overlay halftone" />
+        <div className="overlay distress" />
+        <div className="overlay paper-border" />
+      </div>
+      <div className="noscrollbar mx-auto h-full max-w-[2300px] select-none px-4 text-black/75">
+        <Header />
+        <div className="mt-3">
+          <span className="font-gloucester text-5xl uppercase">
+            More Creations
+          </span>
+          <div className="mt-4">
+            <div className="cursor-pointer pb-2 font-gloucester text-4xl italic hover:underline">
+              <a
+                href={"https://github.com/dharmeshwr/shift"}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Shift - A File manager
+              </a>
+            </div>
+            <div>
+              <Image
+                src={"/projects/shift.png"}
+                alt="A Picture"
+                width={900}
+                height={500}
+                className="mr-4 mix-blend-multiply contrast-100 grayscale transition-all ease-linear min-[1200px]:float-left"
+              />
+              <div className="text-justify font-slab leading-7 min-[600px]:text-lg min-[1000px]:text-xl">
+                Shift, a desktop file manager crafted using ReactJS, Typescript,
+                Jotai and ElectronJS to explore how file systems truly work
+                beneath the surface. It features a dual-view sidebar — one
+                offering a Places view with familiar directories like Downloads,
+                Pictures, and Documents, and another that reveals a Directory
+                Tree, much like what you’d find in VS Code, enabling seamless
+                deep navigation. The header comes packed with smart Navigation
+                Controls for moving back, forward, or jumping straight to your
+                home directory, plus a search bar that lets you zip to any path
+                in an instant. Down below, the footer quietly keeps track of
+                your selected file’s size, along with total and free disk space,
+                so you always know what’s happening under the hood. And of
+                course, Shift doesn’t skip aesthetics — it supports multiple
+                themes like Gruvbox, TokyoNight, Nord, and Solarized, letting
+                you browse your files in style.
+              </div>
+            </div>
+          </div>
+        </div>
 
-        <div className="relative flex justify-center rounded-full border border-foreground/40 bg-foreground/5 p-1 text-sm font-semibold">
-          <span
-            className={cn(
-              "absolute -z-10 h-[calc(100%-0.50rem)] w-[calc(50%-0.25rem)] rounded-full bg-foreground px-2 transition-all duration-200",
-              category === CategoryType.TYPE && "left-1",
-              category === CategoryType.DATE && "left-[3.2rem]",
-            )}
-          />
+        <div className="mt-6 font-slab">
+          There were a few more projects he gave to us, but upon evaluation, we
+          found they were merely incomplete or broken pieces of code. So we
+          decided not add those here.
+        </div>
 
-          {Categories.map((key) => (
-            <button
-              key={key}
-              className={cn(
-                category === key && "text-background",
-                "duration-50 px-2 py-1 transition-all",
-              )}
-              onClick={() => {
-                const queryString = createQueryString(
-                  "category",
-                  key,
-                  searchparams,
-                );
-                router.push(`${pathname}?${queryString}`);
-              }}
-            >
-              {capatilize(key)}
-            </button>
-          ))}
+        <div className="flex justify-center pt-4 font-gothic text-7xl font-extrabold leading-6 text-black/70 mix-blend-multiply">
+          y{" "}
         </div>
       </div>
-
-      <ProjectList data={categorizedProjects} />
     </div>
   );
 }
+
+const Header = () => {
+  const date = format(new Date(), "EEEE, MMM dd, yyyy");
+  return (
+    <div className="pt-8 text-sm">
+      <div className="flex w-full items-center justify-between px-6 text-center font-slab uppercase max-[800px]:flex-col">
+        <div>***</div>
+        <div>PROJECTS.</div>
+        <div>UNDEFINED CHRONCILE, {date}.</div>
+        <div>PROJECTS.</div>
+        <div>31</div>
+      </div>
+
+      <hr className="my-0.5 w-full" />
+      <hr className="my-0.5 w-full" />
+    </div>
+  );
+};

@@ -1,88 +1,75 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import Image from "next/image";
-import { UpdateRating } from "@/actions/rating-action";
-import { Star } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
+import { GetRatingWithPeople, UpdateRating } from "@/actions/rating-action";
 
 import { cn } from "@/lib/utils";
 
-export function GetRating() {
+export default function GetRating() {
   const [starHover, setStarHover] = useState(-1);
   const [rating, setRating] = useState(-1);
-  const [showHand, setShowHand] = useState(false);
+  const [ratingData, setRatingData] = useState({ rating: "0.0", people: "0" });
+  const audioRef = useRef<HTMLAudioElement | null>(null);
 
   useEffect(() => {
-    const hasRated = document.cookie
-      .split(";")
-      .some((cookie) => cookie.trim().startsWith(`hasRated=`));
-    if (hasRated) return;
+    (async () => {
+      const res = await GetRatingWithPeople();
+      if (res.success) {
+        setRatingData({ rating: res.rating, people: res.people });
+      }
+    })();
 
-    const timeoutId = setTimeout(() => setRating(0), 45000);
-    return () => clearTimeout(timeoutId);
+    const ratedCookie = document?.cookie
+      .split(";")
+      .find((cookie) => cookie.trim().startsWith("hasRated="));
+
+    if (ratedCookie) {
+      const ratedValue = Number(ratedCookie.split("=")[1]);
+      setRating(ratedValue);
+    }
   }, []);
 
   const handleRatingChange = async (index: number) => {
+    const ratedCookie = document?.cookie
+      .split(";")
+      .find((cookie) => cookie.trim().startsWith("hasRated="));
+
+    if (ratedCookie) return;
+
     setRating(index);
-
-    const { success } = await UpdateRating(index);
-
-    if (success) {
-      document.cookie = `hasRated=true; max-age=${365 * 24 * 60 * 60}; SameSite=None; Secure; path=/`;
+    await UpdateRating(index);
+    const res = await GetRatingWithPeople();
+    if (res.success) {
+      setRatingData({ rating: res.rating, people: res.people });
+      if (!audioRef.current) {
+        audioRef.current = new Audio("/sounds/tea.mp3");
+      }
+      audioRef.current.currentTime = 0;
+      audioRef.current.volume = 1;
+      audioRef.current.play();
     }
-
-    setTimeout(() => {
-      setShowHand(true);
-      setTimeout(() => {
-        setRating(-1);
-        setShowHand(false);
-      }, 600);
-    }, 700);
   };
 
   return (
-    <>
-      <div
-        className={cn(
-          "fixed bottom-10 z-50 min-w-[19rem] rounded-lg border border-foreground/10 bg-background p-4 shadow-lg transition-all duration-500",
-          rating == 0 ? "translate-y-0" : "pointer-events-none translate-y-36",
-        )}
-      >
-        <span>What would you rate this portfolio ?</span>
-        <div className="mt-2 flex w-full">
-          {Array.from({ length: 5 }).map((_, index) => (
-            <Star
-              key={index}
-              className={cn(
-                "w-full cursor-pointer transition-colors duration-300 ease-in-out",
-                index <= starHover && "text-orange-500",
-                rating > 0 && index <= rating && "text-orange-500",
-              )}
-              onMouseOver={() => setStarHover(index)}
-              onMouseOut={() => setStarHover(-1)}
-              onClick={() => handleRatingChange(index)}
-            />
-          ))}
-        </div>
-      </div>
-      <div
-        className={cn(
-          "fixed bottom-10 z-50 block rounded-lg border border-foreground/10 bg-background p-4 shadow-lg transition-all duration-500",
-          rating > 0 ? "translate-y-0" : "pointer-events-none translate-y-36",
-        )}
-      >
-        <span>Have a lovely day 🤗</span>
-      </div>
-      <Image
-        src={"/hand.png"}
-        alt="*"
-        width={60}
-        height={60}
-        className={cn(
-          "fixed bottom-10 z-50 transition-all duration-500",
-          showHand ? "translate-y-12 rotate-12" : "translate-y-36 rotate-45",
-        )}
-      />
-    </>
+    <div className="text-md w-fit">
+      {Array.from({ length: 5 }).map((_, index) => (
+        <span
+          key={index}
+          className={cn(
+            "cursor-pointer transition-colors duration-300 ease-in-out",
+            index <= starHover && "text-orange-900",
+            rating > 0 && index <= rating && "text-orange-900",
+          )}
+          onMouseOver={() => setStarHover(index)}
+          onMouseOut={() => setStarHover(-1)}
+          onClick={() => handleRatingChange(index)}
+        >
+          (star)
+        </span>
+      ))}
+      <span className="ml-1">
+        - {ratingData.rating} stars from {ratingData.people} people
+      </span>
+    </div>
   );
 }

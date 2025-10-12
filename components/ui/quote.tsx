@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { getQuote } from "@/actions/home-action";
+import { getQuote } from "@/actions/quote-action";
 
 type QuoteProp = {
   q: string;
@@ -53,7 +53,7 @@ export const Quote = () => {
   return (
     <div className="flex flex-col items-center pt-10 text-center">
       <blockquote className="font-semibold">&ldquo;{quote.q}&ldquo;</blockquote>
-      <span className="pt-3 font-cursive text-4xl">&mdash; {quote.a}</span>
+      <span className="font-cursive pt-3 text-4xl">&mdash; {quote.a}</span>
     </div>
   );
 };

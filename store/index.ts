@@ -1,9 +1,5 @@
 import { atom } from "jotai";
 
-import { getMyAge } from "@/lib/utils";
+export type AudioMap = Record<string, HTMLAudioElement>;
 
-const age = getMyAge();
-
-export const globalZIndexAtom = atom(1000);
-export const hoverStateAtom = atom(false);
-export const ageAtom = atom(age);
+export const audioAtom = atom<AudioMap>({});

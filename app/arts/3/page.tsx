@@ -3,7 +3,10 @@
 import { useEffect, useRef, useState } from "react";
 
 import { PerlinNoise } from "@/lib/perlin";
-import ControlPanel, { RangeSlider } from "@/components/shared/control-panel";
+import ControlPanel, {
+  RangeSlider,
+  Toggle,
+} from "@/components/shared/control-panel";
 
 interface Config {
   scale: number;
@@ -13,19 +16,24 @@ interface Config {
 export default function Page() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [config, setConfig] = useState<Config>({
-    scale: 0.01, // Controls noise frequency
-    amplitude: 100, // Controls noise height
+    scale: 0.01,
+    amplitude: 100,
   });
-  const configRef = useRef<Config>(config);
-  const noiseRef = useRef(new PerlinNoise(Math.random()));
+  const [isAnimating, setIsAnimating] = useState(false);
 
-  function draw() {
+  const configRef = useRef(config);
+  const noiseRef = useRef(new PerlinNoise(Math.random()));
+  const animationRef = useRef<number | null>(null);
+  const timeRef = useRef(0);
+
+  function draw(timeOffset = 0) {
     const canvas = canvasRef.current;
     if (!canvas) return;
 
     const c = canvas.getContext("2d");
-    if (!c || !configRef.current) return;
+    if (!c) return;
 
+    const { scale, amplitude } = configRef.current;
     c.clearRect(0, 0, canvas.width, canvas.height);
 
     c.beginPath();
@@ -33,19 +41,41 @@ export default function Page() {
     c.moveTo(0, canvas.height / 2);
 
     for (let x = 1; x < canvas.width; x++) {
-      const val =
-        noiseRef.current.perlin1(x * configRef.current.scale) *
-        configRef.current.amplitude;
+      const val = noiseRef.current.perlin2(x * scale, timeOffset) * amplitude;
       c.lineTo(x, val + canvas.height / 2);
     }
+
     c.stroke();
   }
 
+  // Animate perlin noise over time
+  useEffect(() => {
+    if (isAnimating) {
+      const animate = () => {
+        timeRef.current += 0.01;
+        draw(timeRef.current);
+        animationRef.current = requestAnimationFrame(animate);
+      };
+      animationRef.current = requestAnimationFrame(animate);
+    } else if (animationRef.current) {
+      cancelAnimationFrame(animationRef.current);
+      animationRef.current = null;
+    }
+
+    return () => {
+      if (animationRef.current) {
+        cancelAnimationFrame(animationRef.current);
+      }
+    };
+  }, [isAnimating]);
+
+  // Redraw on config change
   useEffect(() => {
     configRef.current = config;
-    draw();
-  }, [config]);
+    if (!isAnimating) draw(timeRef.current);
+  }, [config, isAnimating]);
 
+  // Handle resize
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
@@ -53,12 +83,11 @@ export default function Page() {
     const updateCanvasSize = () => {
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
-      draw();
+      draw(timeRef.current);
     };
 
     updateCanvasSize();
     window.addEventListener("resize", updateCanvasSize);
-
     return () => window.removeEventListener("resize", updateCanvasSize);
   }, []);
 
@@ -68,11 +97,12 @@ export default function Page() {
         className="fixed inset-0 z-[500] bg-background"
         ref={canvasRef}
       ></canvas>
-      <ControlPanel>
+
+      <ControlPanel collapsed={0} name="1D Perlin Noise">
         <RangeSlider
           label="Scale"
           value={config.scale}
-          onChange={(v: number) => setConfig((prev) => ({ ...prev, scale: v }))}
+          onChange={(v) => setConfig((prev) => ({ ...prev, scale: v }))}
           min={0.001}
           max={1}
           step={0.009}
@@ -80,12 +110,15 @@ export default function Page() {
         <RangeSlider
           label="Amplitude"
           value={config.amplitude}
-          onChange={(v: number) =>
-            setConfig((prev) => ({ ...prev, amplitude: v }))
-          }
+          onChange={(v) => setConfig((prev) => ({ ...prev, amplitude: v }))}
           min={10}
           max={900}
           step={5}
+        />
+        <Toggle
+          label="Animate"
+          checked={isAnimating}
+          onChange={setIsAnimating}
         />
       </ControlPanel>
     </>

@@ -1,0 +1,94 @@
+html {
+  min-width: 360px;
+  scrollbar-gutter: stable;
+}
+
+body {
+  @apply mx-auto;
+  text-rendering: optimizeLegibility;
+  min-height: 100vh;
+  position: relative;
+}
+
+.overlays {
+  @apply mx-auto;
+  max-width: 2300px;
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: -5;
+  filter: sepia(0.5) contrast(1.05) brightness(0.97);
+}
+
+.overlays::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -10;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  will-change: opacity, transform;
+  mix-blend-mode: overlay;
+  z-index: -4;
+}
+
+.paper {
+  background: url("/background/paper.jpg") repeat;
+  background-size: 600px;
+  opacity: 1;
+  background-attachment: scroll;
+}
+
+.halftone {
+  background: url("/background/halftone.jpg") repeat;
+  background-size: 1700px;
+  opacity: 0.5;
+  filter: brightness(0.4) contrast(2);
+}
+
+.distress {
+  background: url("/background/distress.jpg") repeat;
+  background-size: 1300px;
+  opacity: 0.11;
+  filter: contrast(2);
+}
+
+.paper-border {
+  background: url("/background/border.jpg") no-repeat center top / cover;
+  opacity: 1;
+  filter: contrast(1) brightness(0.8);
+}
+
+.ghostink {
+  background: url("/background/ghostink.jpg") no-repeat right top / cover;
+  opacity: 0.6;
+  filter: contrast(2) brightness(1);
+}
+
+@media only screen and (max-width: 1000px) {
+  .ghostink,
+  .edge {
+    opacity: 0;
+  }
+}
+
+.main-heading {
+  font-size: clamp(2.5rem, 7vw, 10rem);
+  line-height: clamp(2.5rem, 7vw, 10rem);
+}
+
+.sec-heading {
+  font-size: clamp(2rem, 2.5vw, 3rem);
+  line-height: clamp(2rem, 2.5vw, 3rem);
+}
+
+.shape-circle {
+  width: 260px;
+  height: 240px;
+  shape-outside: circle(50%);
+  clip-path: circle(50%);
+}

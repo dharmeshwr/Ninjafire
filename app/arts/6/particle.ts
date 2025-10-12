@@ -3,13 +3,15 @@ import { CanvasDrawingContext, FlowFieldConfig } from "./types";
 
 export class Particle {
   private opacity: number;
+  private targetOpacity: number = 0.2; // Target opacity
+  private opacityIncrement: number = 0.005; // Controls fade-in speed
 
   constructor(
     public x: number,
     public y: number,
     private ctx: CanvasRenderingContext2D,
   ) {
-    this.opacity = 0.2;
+    this.opacity = 0; // Start at 0 opacity
   }
 
   draw(opacity: number = this.opacity): void {
@@ -39,6 +41,15 @@ export class Particle {
       this.x += Math.cos(angle) * speed;
       this.y += Math.sin(angle) * speed;
     }
+
+    // Gradually increase opacity until it reaches target
+    if (this.opacity < this.targetOpacity) {
+      this.opacity = Math.min(
+        this.opacity + this.opacityIncrement,
+        this.targetOpacity,
+      );
+    }
+
     this.draw();
     this.wrap();
   }
@@ -49,22 +60,22 @@ export class Particle {
     if (this.x >= width) {
       this.x = 0;
       this.y = Math.random() * height;
-      this.opacity = Math.random() / 5;
+      this.opacity = 0; // Reset to 0 opacity on wrap
     }
     if (this.y >= height) {
       this.y = 0;
       this.x = Math.random() * width;
-      this.opacity = Math.random() / 5;
+      this.opacity = 0; // Reset to 0 opacity on wrap
     }
     if (this.x <= 0) {
       this.x = width;
       this.y = Math.random() * height;
-      this.opacity = Math.random() / 5;
+      this.opacity = 0; // Reset to 0 opacity on wrap
     }
     if (this.y <= 0) {
       this.y = height;
       this.x = Math.random() * width;
-      this.opacity = Math.random() / 5;
+      this.opacity = 0; // Reset to 0 opacity on wrap
     }
   }
 }
