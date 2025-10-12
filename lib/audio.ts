@@ -32,7 +32,7 @@ export function useAudioManager() {
     audio.volume = volume;
 
     const bg = audios["bg"];
-    if (bg) bg.pause();
+    if (bg && isPlaying) bg.pause();
 
     audio.addEventListener("ended", () => {
       if (bg && isPlaying) bg.play();

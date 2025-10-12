@@ -10,6 +10,7 @@ import { ThemeProvider } from "next-themes";
 
 import { metaData } from "@/config/site";
 import { cn } from "@/lib/utils";
+import LoaderWrapper from "@/components/layout/loader";
 
 import {
   fontGloucester,
@@ -104,12 +105,14 @@ export default function RootLayout({ children }: React.PropsWithChildren) {
             enableSystem
             disableTransitionOnChange
           >
-            <ReactLenis root />
-            <main>
-              {children}
-              <Analytics />
-              <SpeedInsights />
-            </main>
+            <LoaderWrapper>
+              <ReactLenis root />
+              <main>
+                {children}
+                <Analytics />
+                <SpeedInsights />
+              </main>
+            </LoaderWrapper>
           </ThemeProvider>
         </Provider>
       </body>

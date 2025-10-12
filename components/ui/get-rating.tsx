@@ -19,7 +19,7 @@ export default function GetRating() {
       }
     })();
 
-    const ratedCookie = document.cookie
+    const ratedCookie = document?.cookie
       .split(";")
       .find((cookie) => cookie.trim().startsWith("hasRated="));
 
@@ -30,6 +30,12 @@ export default function GetRating() {
   }, []);
 
   const handleRatingChange = async (index: number) => {
+    const ratedCookie = document?.cookie
+      .split(";")
+      .find((cookie) => cookie.trim().startsWith("hasRated="));
+
+    if (ratedCookie) return;
+
     setRating(index);
     await UpdateRating(index);
     const res = await GetRatingWithPeople();
