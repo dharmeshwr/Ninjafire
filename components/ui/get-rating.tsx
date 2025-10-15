@@ -41,8 +41,6 @@ export default function GetRating() {
     if (!audioRef.current) {
       audioRef.current = new Audio("/sounds/tea.mp3");
     }
-    audioRef.current.currentTime = 0;
-    audioRef.current.volume = 1;
     audioRef.current.play();
 
     const res = await UpdateRating(index);
@@ -71,6 +69,7 @@ export default function GetRating() {
       <span className="ml-1">
         - {ratingData.rating} stars from {ratingData.people} people
       </span>
+      <audio ref={audioRef} src={"/sounds/tea.mp3"} preload="auto" />
     </div>
   );
 }
