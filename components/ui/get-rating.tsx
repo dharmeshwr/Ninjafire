@@ -37,16 +37,17 @@ export default function GetRating() {
     if (ratedCookie) return;
 
     setRating(index);
-    await UpdateRating(index);
-    const res = await GetRatingWithPeople();
+
+    if (!audioRef.current) {
+      audioRef.current = new Audio("/sounds/tea.mp3");
+    }
+    audioRef.current.currentTime = 0;
+    audioRef.current.volume = 1;
+    audioRef.current.play();
+
+    const res = await UpdateRating(index);
     if (res.success) {
       setRatingData({ rating: res.rating, people: res.people });
-      if (!audioRef.current) {
-        audioRef.current = new Audio("/sounds/tea.mp3");
-      }
-      audioRef.current.currentTime = 0;
-      audioRef.current.volume = 1;
-      audioRef.current.play();
     }
   };
 

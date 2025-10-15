@@ -4,10 +4,9 @@ import { cookies } from "next/headers";
 import { redis } from "@/db";
 
 export const UpdateRating = async (rating: number) => {
+  const previousRating = Number(await redis.get("rating")) || 0;
+  const totalPeopleRated = Number(await redis.get("total_people_rated")) || 0;
   try {
-    const previousRating = Number(await redis.get("rating")) || 0;
-    const totalPeopleRated = Number(await redis.get("total_people_rated")) || 0;
-
     const currentTotalPeople = totalPeopleRated + 1;
     const currentRating =
       (previousRating * totalPeopleRated + rating + 1) / currentTotalPeople;
@@ -25,10 +24,18 @@ export const UpdateRating = async (rating: number) => {
       path: "/",
     });
 
-    return { success: true };
+    return {
+      success: true,
+      rating: currentRating.toFixed(1).toString(),
+      people: currentTotalPeople.toString(),
+    };
   } catch (error) {
     console.error("Something went wrong: ", error);
-    return { success: false };
+    return {
+      success: false,
+      rating: previousRating.toString(),
+      people: totalPeopleRated.toString(),
+    };
   }
 };
 
