@@ -19,7 +19,7 @@ export default function Section() {
         </span>
         <div>
           <a
-            href={"https://rev-kun.vercel.app"}
+            href={"https://revord.org"}
             target="_blank"
             rel="noopener noreferrer"
             className="sec-heading cursor-pointer font-gloucester italic hover:underline"
@@ -28,11 +28,7 @@ export default function Section() {
           </a>
           <div className="space-x-2 pr-2 pt-3 min-[1200px]:text-justify min-[1200px]:leading-8">
             <span>
-              <a
-                href={"https://github.com/netmods/rev"}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
+              <a href={"#"} target="_blank" rel="noopener noreferrer">
                 <Image
                   src={"/projects/revord.svg"}
                   alt="A Picture"
@@ -46,7 +42,7 @@ export default function Section() {
               He made this project in collobration with one of his basement
               dweller friend
               <a
-                href={"https://aryan-snap.vercel.app"}
+                href={"https://tarnished.lol"}
                 target="_blank"
                 className="mx-1 inline-flex cursor-pointer break-words font-bold hover:underline"
               >
