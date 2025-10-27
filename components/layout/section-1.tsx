@@ -1,7 +1,7 @@
-import Image from "next/image";
 import Balancer from "react-wrap-balancer";
 
 import BackgroundMusic from "../layout/background-music";
+import { Profile } from "../ui/profile";
 
 export default async function Section() {
   return (
@@ -43,15 +43,7 @@ export default async function Section() {
         </div>
 
         <div className="relative col-span-1 border-black max-[800px]:my-6 min-[800px]:col-span-2 min-[800px]:border-r min-[800px]:px-2 min-[1200px]:col-span-1">
-          <div className="flex h-fit justify-center">
-            <Image
-              src={"/profile-with-frame-transparent.png"}
-              alt="profile picture"
-              width={600}
-              height={600}
-              className="mix-blend-multiply"
-            />
-          </div>
+          <Profile />
           <BackgroundMusic />
         </div>
 
