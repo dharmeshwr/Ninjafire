@@ -12,10 +12,11 @@ export default function LoaderWrapper({
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const handleLoad = () => setTimeout(() => setLoading(false), 500);
+    const handleLoad = () => setTimeout(() => setLoading(false), 2000);
 
-    if (document.readyState === "complete") handleLoad();
-    else {
+    if (document.readyState === "complete") {
+      handleLoad();
+    } else {
       window.addEventListener("load", handleLoad);
       return () => window.removeEventListener("load", handleLoad);
     }
@@ -34,13 +35,11 @@ export default function LoaderWrapper({
             </div>
             <div className="load">..........................</div>
           </div>
-
           <div className="font-serif text-3xl">
             Hang about a moment, would you?
           </div>
         </div>
       )}
-
       <div
         className={`transition-opacity duration-700 ${
           loading ? "opacity-0" : "opacity-100"
