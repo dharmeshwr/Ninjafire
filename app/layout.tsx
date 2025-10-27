@@ -10,6 +10,7 @@ import { ThemeProvider } from "next-themes";
 
 import { metaData } from "@/config/site";
 import { cn } from "@/lib/utils";
+import DevToolsDetector from "@/components/ui/devtools-ascii";
 import LoaderWrapper from "@/components/layout/loader";
 
 import {
@@ -111,6 +112,7 @@ export default function RootLayout({ children }: React.PropsWithChildren) {
                 {children}
                 <Analytics />
                 <SpeedInsights />
+                <DevToolsDetector />
               </main>
             </LoaderWrapper>
           </ThemeProvider>
