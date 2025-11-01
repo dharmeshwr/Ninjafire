@@ -21,6 +21,10 @@ export default function LoaderWrapper({
     }
   }, []);
 
+  if (process.env.NODE_ENV === "development") {
+    return <>{children}</>;
+  }
+
   return (
     <>
       {loading && (
