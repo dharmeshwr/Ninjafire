@@ -5,7 +5,6 @@ import { Metadata } from "next";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Provider } from "jotai";
-import { ReactLenis } from "lenis/dist/lenis-react";
 import { ThemeProvider } from "next-themes";
 
 import { metaData } from "@/config/site";
@@ -107,7 +106,6 @@ export default function RootLayout({ children }: React.PropsWithChildren) {
             disableTransitionOnChange
           >
             <LoaderWrapper>
-              <ReactLenis root />
               <main>
                 {children}
                 <Analytics />

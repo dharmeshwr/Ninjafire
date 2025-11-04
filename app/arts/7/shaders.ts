@@ -2,8 +2,8 @@ export const fragmentShaderSource = /* glsl */ `
 precision highp float;
 
 uniform vec2 u_resolution;
-uniform float u_zr_offset;
-uniform float u_zi_offset;
+uniform float u_zr;
+uniform float u_zi;
 uniform vec2 u_pan;
 uniform float u_zoom;
 
@@ -27,8 +27,8 @@ void main() {
     
     vec3 color = vec3(0.0);
     
-    float zr = u_zr_offset;
-    float zi = u_zi_offset;
+    float zr = u_zr;
+    float zi = u_zi;
     float cr = c.x;
     float ci = c.y;
     const int max_iteration = 100;

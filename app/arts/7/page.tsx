@@ -183,7 +183,7 @@ export default function Page() {
       </span>
       <canvas
         ref={canvasRef}
-        className="m-auto w-full min-w-[80rem] rounded"
+        className="w-full min-w-[80rem] rounded"
         style={{ aspectRatio: "7/4" }}
       />
 
@@ -205,6 +205,9 @@ export default function Page() {
           step={0.1}
         />
       </ControlPanel>
+      <div className="absolute bottom-0 right-0 text-red-600">
+        {config.zoom.toFixed(3)}x
+      </div>
     </div>
   );
 }
