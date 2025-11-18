@@ -11,7 +11,7 @@ export default async function Header() {
   const date = format(new Date(), "EEEE, MMM dd, yyyy");
 
   return (
-    <div className="pt-8">
+    <div className="select-none pt-8">
       <div className="flex w-full items-center justify-between px-6">
         <div className="flex flex-col items-center justify-center text-center font-slab max-[1200px]:hidden">
           <span className="block whitespace-nowrap">
@@ -29,7 +29,7 @@ export default async function Header() {
             <Logo />
             <span>Chronicle</span>
           </div>
-          <div className="mx-auto mt-2 flex w-full items-center justify-center text-center font-slab leading-3 max-[700px]:w-3/4 max-[700px]:pt-2 max-[700px]:leading-5">
+          <div className="mx-auto mt-2 flex w-full items-center justify-center text-center font-slab max-[700px]:w-3/4 max-[700px]:pt-2 max-[700px]:leading-5">
             {quote?.q}
           </div>
         </div>

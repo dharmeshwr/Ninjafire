@@ -6,8 +6,8 @@ import { metaData } from "@/config/site";
 
 import { VideoPaper } from "../ui/paper-video";
 import { Jet2Holiday } from "./jet";
-import { Joke } from "./joke";
 import Footer from "./paper-footer";
+import { Riddle } from "./riddle";
 
 export default function Section() {
   return (
@@ -24,7 +24,9 @@ export default function Section() {
             rel="noopener noreferrer"
             className="sec-heading cursor-pointer font-gloucester italic hover:underline"
           >
-            <Balancer>Revord - Make Mind-Blowing and Viral Videos</Balancer>
+            <Balancer>
+              Revord - Make Mind-Blowing and Viral Tutorials Videos
+            </Balancer>
           </a>
           <div className="space-x-2 pr-2 pt-3 min-[1200px]:text-justify min-[1200px]:leading-8">
             <span>
@@ -49,11 +51,11 @@ export default function Section() {
                 @Aryan
               </a>
               , Revord is a powerful ElectronJS desktop application that
-              designed for creators, and educators,Rev enables users to produce
-              engaging tutorials, and demos with ease by automatically generates
-              zoom and pan effects based on mouse interactions, supports
-              real-time annotations with tools like pen and arrow on the
-              desktop, and offers seamless screenshot editing with crop and
+              designed for creators, and educators,Revord enables users to
+              produce engaging tutorials, and demos with ease by automatically
+              generates zoom and pan effects based on mouse interactions,
+              supports real-time annotations with tools like pen and arrow on
+              the desktop, and offers seamless screenshot editing with crop and
               pixelate features. With cross-platform support on Windows, Linux
               and MacOS.
             </div>
@@ -182,7 +184,7 @@ export default function Section() {
         </div>
 
         <div className="mr-2 flex gap-3">
-          <Joke />
+          <Riddle />
         </div>
 
         <div className="max-[1200px]:hidden">

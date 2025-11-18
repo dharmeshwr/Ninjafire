@@ -12,7 +12,7 @@ body {
 
 .overlays {
   @apply mx-auto;
-  max-width: 2300px;
+  max-width: 1900px;
   position: absolute;
   inset: 0;
   pointer-events: none;
@@ -77,8 +77,8 @@ body {
 }
 
 .main-heading {
-  font-size: clamp(2.5rem, 7vw, 10rem);
-  line-height: clamp(2.5rem, 7vw, 10rem);
+  font-size: clamp(2.5rem, 7vw, 8.5rem);
+  line-height: clamp(2.5rem, 7vw, 8.5rem);
 }
 
 .sec-heading {

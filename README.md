@@ -1,3 +1,13 @@
-## HELLO BATMAN, THE CITY NEEDS YOU
+## BATMAN, THE CITY NEEDS YOU
 
-Todo: refactor the project cards, make a resume endpoint
+Things I Can Add -
+
+- stocks
+- matches
+
+- web series listing
+
+- crosswords
+- puzzles
+
+- weather report

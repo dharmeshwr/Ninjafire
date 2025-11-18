@@ -15,7 +15,7 @@ export default function Page() {
         <div className="overlay distress" />
         <div className="overlay paper-border" />
       </div>
-      <div className="noscrollbar mx-auto h-full max-w-[2300px] select-none px-4 text-black/75">
+      <div className="noscrollbar mx-auto h-full max-w-[1900px] select-none px-4 text-black/75">
         <Header />
         <div className="mt-3">
           <span className="font-gloucester text-5xl uppercase">

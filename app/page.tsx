@@ -16,7 +16,8 @@ export default async function Page() {
         <div className="overlay distress" />
         <div className="overlay paper-border" />
       </div>
-      <div className="noscrollbar mx-auto max-w-[2300px] select-none px-4 text-black/80">
+
+      <div className="noscrollbar mx-auto max-w-[1900px] px-4 text-black/80">
         <Header />
         <Sextion1 />
         <Sextion2 />
