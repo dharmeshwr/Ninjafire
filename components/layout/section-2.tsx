@@ -5,13 +5,14 @@ import Balancer from "react-wrap-balancer";
 import { metaData } from "@/config/site";
 
 import { VideoPaper } from "../ui/paper-video";
+import { AnimeBroadcast } from "./anime-list";
 import { Jet2Holiday } from "./jet";
 import Footer from "./paper-footer";
 import { Riddle } from "./riddle";
 
 export default function Section() {
   return (
-    <div className="grid grid-cols-1 py-4 font-slab min-[600px]:text-lg min-[1000px]:text-xl min-[1200px]:grid-cols-3">
+    <div className="grid grid-cols-1 py-4 font-slab text-lg min-[1000px]:text-xl min-[1200px]:grid-cols-3">
       <div className="col-span-2 space-y-5">
         <span className="sec-heading block font-gloucester">
           {" "}
@@ -28,7 +29,7 @@ export default function Section() {
               Revord - Make Mind-Blowing and Viral Tutorials Videos
             </Balancer>
           </a>
-          <div className="space-x-2 pr-2 pt-3 min-[1200px]:text-justify min-[1200px]:leading-8">
+          <div className="space-x-2 pr-2 pt-3 leading-7 min-[1200px]:text-justify">
             <span>
               <a href={"#"} target="_blank" rel="noopener noreferrer">
                 <Image
@@ -99,6 +100,54 @@ export default function Section() {
           </div>
         </div>
 
+        <div className="relative mr-2 min-[600px]:text-lg min-[1000px]:text-xl">
+          <AnimeBroadcast />
+        </div>
+
+        <div className="min-[1200px]:leading-8">
+          If you want to contact him, You can find him on
+          <a
+            target="_blank"
+            rel="noopener noreferrer"
+            href={metaData.links.twitter}
+            className="mx-1 inline-block cursor-pointer font-bold"
+          >
+            [Twitter]
+          </a>
+          ,
+          <a
+            target="_blank"
+            rel="noopener noreferrer"
+            href={metaData.links.github}
+            className="mx-1 inline-block cursor-pointer font-bold"
+          >
+            [GitHub]
+          </a>
+          or
+          <a
+            target="_blank"
+            rel="noopener noreferrer"
+            href={metaData.links.email}
+            className="mx-1 inline-block cursor-pointer font-bold"
+          >
+            [dharmeshwr@gmail.com]
+          </a>
+          and we personally dug up his
+          <a
+            target="_blank"
+            rel="noopener noreferrer"
+            href={metaData.links.linkedin}
+            className="mx-1 inline-block cursor-pointer font-bold"
+          >
+            [LinkedIn]
+          </a>
+          since he refused to give it to us.
+        </div>
+
+        <div className="mr-2 hidden gap-3 min-[1550px]:flex">
+          <Riddle />
+        </div>
+
         <Link href={"/projects"}>
           <Balancer>
             <span
@@ -121,71 +170,6 @@ export default function Section() {
             </span>
           </Balancer>
         </Link>
-
-        <div className="min-[1200px]:leading-8">
-          If you want to contact him, no need to go hunting for his details —
-          he’s already quite public. You can find him on
-          <a
-            target="_blank"
-            rel="noopener noreferrer"
-            href={metaData.links.twitter}
-            className="mx-1 inline-block cursor-pointer"
-          >
-            [Twitter]
-          </a>
-          ,
-          <a
-            target="_blank"
-            rel="noopener noreferrer"
-            href={metaData.links.github}
-            className="mx-1 inline-block cursor-pointer"
-          >
-            [GitHub]
-          </a>
-          or
-          <a
-            target="_blank"
-            rel="noopener noreferrer"
-            href={metaData.links.email}
-            className="mx-1 inline-block cursor-pointer"
-          >
-            [dharmeshwr@gmail.com]
-          </a>
-          and we personally dug up his
-          <a
-            target="_blank"
-            rel="noopener noreferrer"
-            href={metaData.links.linkedin}
-            className="mx-1 inline-block cursor-pointer"
-          >
-            [LinkedIn]
-          </a>
-          since he refused to give it to us.
-        </div>
-
-        <div className="relative mr-2 min-[600px]:text-lg min-[1000px]:text-xl">
-          <a
-            target="_blank"
-            rel="noopener noreferrer"
-            href={"https://youtu.be/YFkeOBqfQBw?si=KUxm61cpVeW5kuz_"}
-          >
-            <span className="sec-heading block pt-2 font-gloucester mix-blend-multiply">
-              Apna College&apos;s didi finally decides to wake up
-            </span>
-            <div className="my-2 min-[1200px]:text-justify min-[1200px]:leading-8">
-              After 2 whole years of ignoring her mistakes, brushing off
-              criticism, and taking zero responsibility, she finally woke up—but
-              only when the situation exploded internationally. That’s when Big
-              Daddy Primeagen stepped in and exposed the full story. The
-              community turned on her, slamming her for sparking the chaos and
-              doing nothing to stop it.
-            </div>
-          </a>
-        </div>
-
-        <div className="mr-2 flex gap-3">
-          <Riddle />
-        </div>
 
         <div className="max-[1200px]:hidden">
           <Footer />
@@ -215,6 +199,10 @@ export default function Section() {
             </div>
             <div className="flex justify-center pt-4 font-gothic text-7xl font-extrabold leading-6 text-black/90 mix-blend-multiply">
               w{" "}
+            </div>
+
+            <div className="mr-2 flex gap-3 min-[1550px]:hidden">
+              <Riddle />
             </div>
           </div>
         </div>

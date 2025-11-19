@@ -3,6 +3,7 @@
 import "@/styles/loader.css";
 
 import { useEffect, useState } from "react";
+import Balancer from "react-wrap-balancer";
 
 export default function LoaderWrapper({
   children,
@@ -39,8 +40,8 @@ export default function LoaderWrapper({
             <div className="load">..........................</div>
           </div>
 
-          <div className="font-serif text-3xl">
-            Hang about a moment, would you?
+          <div className="text-center font-serif text-3xl">
+            <Balancer> Hang about a moment, would you? </Balancer>
           </div>
         </div>
       )}

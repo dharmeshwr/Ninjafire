@@ -21,7 +21,7 @@ export const Jet2Holiday = () => {
 
   return (
     <div className="relative border-2 border-black px-1">
-      <span className="block pt-2 font-schwachsinn text-5xl italic mix-blend-multiply">
+      <span className="block pt-2 font-schwachsinn text-5xl mix-blend-multiply">
         Jet2Holidays
       </span>
       <div className="my-2 text-justify">

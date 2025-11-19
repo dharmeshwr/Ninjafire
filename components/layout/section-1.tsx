@@ -11,7 +11,7 @@ export default async function Section() {
         A NEW FORCE EMERGES FROM THE SHADOWS
       </Balancer>
 
-      <div className="max-[500px]:textmd grid grid-cols-1 font-slab text-lg min-[800px]:grid-cols-4 min-[1200px]:grid-cols-3 min-[1550px]:text-xl">
+      <div className="grid grid-cols-1 font-slab text-lg min-[800px]:grid-cols-4 min-[1200px]:grid-cols-3 min-[1550px]:text-xl">
         <div className="col-span-1 grid grid-cols-1 max-[800px]:space-y-6 min-[800px]:col-span-4 min-[800px]:grid-cols-2 min-[1550px]:col-span-1 min-[1550px]:grid-cols-1 min-[1550px]:pr-2 [@media_(min-width:800px)_and_(max-width:1550px)]:pb-4">
           <div className="text-justify [@media_(min-width:800px)_and_(max-width:1550px)]:pr-7">
             <p className="mb-1 block text-center font-gloucester text-3xl uppercase min-[1550px]:hidden">
