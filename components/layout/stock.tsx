@@ -7,7 +7,7 @@ export default async function Stocks() {
 
   return (
     <div className="border border-black p-1">
-      <Balancer className="mb-3 block font-yorktown text-3xl uppercase italic mix-blend-multiply">
+      <Balancer className="mb-3 block font-yorktown text-3xl uppercase mix-blend-multiply">
         Stocks Update
       </Balancer>
 
@@ -26,12 +26,14 @@ export default async function Stocks() {
             >
               <div className="text-[1.1rem] font-bold">{ticker}</div>
 
-              <div className="col-span-1 text-left font-medium">
+              <div className="col-span-1 text-left text-[1.1rem] font-medium">
                 ${data.close.toFixed(2)}
               </div>
 
               <div
-                className={"col-span-2 flex items-center justify-center gap-1"}
+                className={
+                  "col-span-2 flex items-center justify-center gap-1 text-[1.1rem]"
+                }
               >
                 {isPositive ? (
                   <ArrowUpIcon size={18} className="shrink-0" />

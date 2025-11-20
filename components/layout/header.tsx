@@ -4,6 +4,7 @@ import { format } from "date-fns";
 
 import Logo from "../ui/logo";
 import WeatherBox from "../ui/weather";
+import { Address } from "./address";
 
 export default async function Header() {
   const weather = await getWeather();
@@ -48,7 +49,7 @@ export default async function Header() {
           </div>
           <div className="max-[1200px]:hidden">CCC</div>
           <div className="order-3 max-[600px]:order-5">
-            Narnaul, Haryana, {date}
+            <Address />, {date}
           </div>
           <div className="order-4 max-[1200px]:hidden">****</div>
           <div className="order-5 max-[600px]:order-3">DAILY, 5 CENTS</div>

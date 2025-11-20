@@ -11,7 +11,7 @@ export default async function Section() {
         A NEW FORCE EMERGES FROM THE SHADOWS
       </Balancer>
 
-      <div className="grid grid-cols-1 font-slab text-lg min-[800px]:grid-cols-4 min-[1200px]:grid-cols-3 min-[1550px]:text-xl">
+      <div className="grid grid-cols-1 font-slab text-lg min-[800px]:grid-cols-4 min-[1550px]:grid-cols-3 min-[1550px]:text-xl">
         <div className="col-span-1 grid grid-cols-1 max-[800px]:space-y-6 min-[800px]:col-span-4 min-[800px]:grid-cols-2 min-[1550px]:col-span-1 min-[1550px]:grid-cols-1 min-[1550px]:pr-2 [@media_(min-width:800px)_and_(max-width:1550px)]:pb-4">
           <div className="text-justify [@media_(min-width:800px)_and_(max-width:1550px)]:pr-7">
             <p className="mb-1 block text-center font-gloucester text-3xl uppercase min-[1550px]:hidden">
@@ -37,7 +37,7 @@ export default async function Section() {
             can creates solid backend system using various pattern with
             <i className="mx-1">ExpressJS</i>, can puts everything online using{" "}
             <i className="mx-1">AWS </i> or any hosting platform, and can even
-            make native desktop apps that work on Windows, Mac, and Linux with{" "}
+            make desktop apps that work on Windows, Mac, and Linux with{" "}
             <i className="mx-1">ElectronJS</i>. Pretty much anything he builds
             ends up looking and working super clean and professional.
           </div>
@@ -45,13 +45,13 @@ export default async function Section() {
             <p className="mb-1 text-center font-gloucester text-3xl uppercase">
               His interests
             </p>
-            He’s super into linux, neovim and scripting, regenerative arts,
-            open-source stuff, playing and making little games — basically, he
-            never stops learning and building.
+            min-[800px]:col-span-2 He’s super into linux, neovim and scripting,
+            regenerative arts, open-source stuff, playing and making little
+            games — basically, he never stops learning and building.
           </div>
         </div>
 
-        <div className="relative col-span-1 max-[800px]:my-6 min-[800px]:col-span-2 min-[800px]:px-2 min-[1200px]:col-span-1">
+        <div className="relative col-span-1 max-[800px]:my-6 min-[800px]:col-span-2 min-[800px]:px-2 min-[1550px]:col-span-1">
           <Profile />
           <BackgroundMusic />
         </div>
@@ -68,7 +68,7 @@ export default async function Section() {
               at
               <i className="mr-1"> Yoglabs AI Research Foundation. </i>
               He build a smart AI system that keeps track of how well students
-              are doing — something that could totally change the way companies
+              are doing, something that could totally change the way companies
               hire people in the future.
               <br />
               <br />

@@ -11,6 +11,7 @@ import { metaData } from "@/config/site";
 import { cn } from "@/lib/utils";
 import DevToolsDetector from "@/components/ui/devtools-ascii";
 import LoaderWrapper from "@/components/layout/loader";
+import ScreenDetector from "@/components/shared/screen-detector";
 
 import {
   fontGloucester,
@@ -111,6 +112,7 @@ export default function RootLayout({ children }: React.PropsWithChildren) {
                 <Analytics />
                 <SpeedInsights />
                 <DevToolsDetector />
+                <ScreenDetector />
               </main>
             </LoaderWrapper>
           </ThemeProvider>

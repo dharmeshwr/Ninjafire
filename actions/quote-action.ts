@@ -35,7 +35,6 @@ export async function getQuote() {
     return cachedQuote.quote;
   }
 
-  console.log("Calling the function", cachedQuote?.date, today);
   return await fetchQuote();
 }
 
