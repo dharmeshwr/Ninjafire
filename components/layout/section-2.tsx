@@ -152,6 +152,15 @@ export default function Section() {
           >
             [GitHub]
           </a>
+          ,
+          <a
+            target="_blank"
+            rel="noopener noreferrer"
+            href={metaData.links.linkedin}
+            className="mx-1 inline-block cursor-pointer font-bold"
+          >
+            [LinkedIn]
+          </a>
           or
           <a
             target="_blank"
@@ -161,18 +170,16 @@ export default function Section() {
           >
             [dharmeshwr@gmail.com]
           </a>
-          and we personally dug up his
+          and for a complete summary, here is the
           <a
             target="_blank"
             rel="noopener noreferrer"
-            href={metaData.links.linkedin}
+            href={"/resume"}
             className="mx-1 inline-block cursor-pointer font-bold"
           >
-            [LinkedIn]
+            [Resume]
           </a>
-          since he refused to give it to us.
         </div>
-
         <div className="mr-2 hidden gap-3 min-[1550px]:flex">
           <Riddle />
         </div>

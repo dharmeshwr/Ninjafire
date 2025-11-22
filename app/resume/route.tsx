@@ -12,7 +12,7 @@ export async function GET() {
     response.headers.set("Content-Type", "application/pdf");
     response.headers.set(
       "Content-Disposition",
-      "attachment; filename=Dharmesh's Resume",
+      "inline; filename=Dharmesh's Resume",
     );
 
     return response;
