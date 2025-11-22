@@ -23,27 +23,29 @@ export default function Section() {
             href={"https://revord.org"}
             target="_blank"
             rel="noopener noreferrer"
-            className="sec-heading cursor-pointer font-gloucester italic hover:underline"
+            className="sec-heading cursor-pointer font-gloucester hover:underline"
           >
             <Balancer>
-              Revord - Make Mind-Blowing and Viral Tutorials Videos
+              REVORD - Make Mind-Blowing and Viral Tutorials Videos
             </Balancer>
           </a>
           <div className="space-x-2 pr-2 pt-3 leading-7 min-[1200px]:text-justify">
             <span>
-              <a href={"#"} target="_blank" rel="noopener noreferrer">
-                <Image
-                  src={"/projects/revord.svg"}
-                  alt="A Picture"
-                  width={190}
-                  height={190}
-                  className="shape-circle mr-2 mt-2 mix-blend-multiply grayscale transition-all ease-linear min-[400px]:float-left"
-                />
-              </a>
+              <Image
+                src={"/projects/revord.svg"}
+                alt="A Picture"
+                width={190}
+                height={190}
+                className="shape-circle mr-2 mt-2 mix-blend-multiply grayscale transition-all ease-linear min-[400px]:float-left"
+              />
             </span>
             <div>
-              He made this project in collobration with one of his basement
-              dweller friend
+              Revord is a cross-platform app (Windows, Linux, macOS) for
+              creators and educators. It simplifies tutorial and demo creation
+              with auto-generated zoom/pan effects from mouse movements,
+              real-time annotations (pen, arrow), and easy screenshot editing
+              (crop, pixelate). He made this project in collobration with one of
+              his basement dweller friend
               <a
                 href={"https://tarnished.lol"}
                 target="_blank"
@@ -51,14 +53,6 @@ export default function Section() {
               >
                 @Aryan
               </a>
-              , Revord is a powerful ElectronJS desktop application that
-              designed for creators, and educators,Revord enables users to
-              produce engaging tutorials, and demos with ease by automatically
-              generates zoom and pan effects based on mouse interactions,
-              supports real-time annotations with tools like pen and arrow on
-              the desktop, and offers seamless screenshot editing with crop and
-              pixelate features. With cross-platform support on Windows, Linux
-              and MacOS.
             </div>
           </div>
         </div>
@@ -69,13 +63,48 @@ export default function Section() {
 
         <div>
           <a
+            href={"https://drapes-ui.vercel.app"}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="sec-heading cursor-pointer font-gloucester hover:underline"
+          >
+            <Balancer>DRAPES UI- Easy To Use Shaders Backgrounds</Balancer>
+          </a>
+          <div className="pr-2 pt-4 min-[1200px]:text-justify min-[1200px]:leading-8">
+            <a
+              href={"https://github.com/netmods/drapes-ui"}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Image
+                src={"/projects/drapes.png"}
+                alt="A Picture"
+                width={500}
+                height={500}
+                className="mb-5 mr-2 mix-blend-multiply contrast-100 grayscale transition-all ease-linear min-[800px]:float-left"
+              />
+            </a>
+            <span>
+              Drapes UI offers ready-to-use live backgrounds for your websites,
+              built entirely on HTML Canvas with zero dependencies and powered
+              by React and Tailwind. It includes a control panel to personalize
+              the background according to your theme, and you can easily
+              integrate it by simply copying and pasting the code into your
+              codebase. Available in both TSX and JSX formats, it delivers a
+              fresh new background every week.
+            </span>
+          </div>
+        </div>
+
+        <div>
+          <a
             href={"https://github-designer.vercel.app"}
             target="_blank"
             rel="noopener noreferrer"
-            className="sec-heading cursor-pointer font-gloucester italic hover:underline"
+            className="sec-heading cursor-pointer font-gloucester hover:underline"
           >
             <Balancer>
-              GitHub Heatmap Designer - Turn Your Heatmap into Pixel Art
+              GITHUB HEATMAP DESIGNER - Turn Your Heatmap into Pixel Art
             </Balancer>
           </a>
           <div className="pr-2 pt-4 min-[1200px]:text-justify min-[1200px]:leading-8">
@@ -92,15 +121,15 @@ export default function Section() {
                 className="mr-2 mix-blend-multiply contrast-100 grayscale transition-all ease-linear min-[800px]:float-left"
               />
             </a>
-            GitHub Heatmap Designer empowers developers to personalize their
-            GitHub contribution graphs with creative patterns, messages, or
-            pixel art. Built for fun and profile enhancement, it lets users
-            visualize and edit their contributions heatmap, applying changes by
-            automatically generating repositories and timed commits.
+            GitHub Heatmap Designer helps you to personalize their GitHub
+            contribution graphs with creative patterns, messages, or pixel art.
+            Built for fun and profile enhancement, it lets users visualize and
+            edit their contributions heatmap, applying changes by automatically
+            generating repositories and timed commits.
           </div>
         </div>
 
-        <div className="relative mr-2 min-[600px]:text-lg min-[1000px]:text-xl">
+        <div className="relative mr-2 pt-5 min-[600px]:text-lg min-[1000px]:text-xl">
           <AnimeBroadcast />
         </div>
 
