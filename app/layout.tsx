@@ -32,7 +32,7 @@ export const metadata: Metadata = {
   },
   description: metaData.description,
   openGraph: {
-    images: "/og?title=Dharmesh&font=train",
+    images: "/og.png",
     title: metaData.title,
     description: metaData.description,
     url: metaData.baseUrl,
