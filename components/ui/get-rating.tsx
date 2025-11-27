@@ -66,6 +66,7 @@ export default function GetRating() {
           (star)
         </span>
       ))}
+      <br className="hidden max-[400px]:block" />
       <span className="ml-1">
         - {ratingData.rating} stars from {ratingData.people} people
       </span>

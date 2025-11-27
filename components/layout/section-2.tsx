@@ -12,7 +12,7 @@ import { Riddle } from "./riddle";
 
 export default function Section() {
   return (
-    <div className="grid grid-cols-1 py-4 font-slab text-lg min-[1000px]:text-xl min-[1200px]:grid-cols-3">
+    <div className="grid grid-cols-1 py-4 font-slab text-lg min-[1200px]:grid-cols-3 min-[1550px]:text-xl">
       <div className="col-span-2 space-y-5">
         <span className="sec-heading block font-gloucester">
           {" "}
@@ -219,7 +219,7 @@ export default function Section() {
             HIS GENERATIVE ARTS{" "}
           </span>
           <div className="relative">
-            <div className="mb-2 min-[600px]:text-lg min-[1000px]:text-xl">
+            <div className="mb-2">
               The man takes great joy in making procedural generation, here are
               some of his best fabrications.
             </div>
