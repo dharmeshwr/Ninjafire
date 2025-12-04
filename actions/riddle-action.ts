@@ -20,7 +20,7 @@ async function fetchRiddle() {
       answer: data.answer,
     };
     return cachedRiddle;
-  } catch (error) {
+  } catch (error: any) {
     console.error("Fetch failed:", error.response.data.message);
     return {
       date: new Date().toISOString().slice(0, 10),
