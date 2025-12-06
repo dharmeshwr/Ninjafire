@@ -24,8 +24,8 @@ async function fetchRiddle() {
     console.error("Fetch failed:", error.response.data.message);
     return {
       date: new Date().toISOString().slice(0, 10),
-      riddle: error.response.data.message,
-      answer: "Seven",
+      riddle: "I’m tall when I’m young, and I’m short when I’m old. What am I?",
+      answer: "A candle",
     };
   }
 }
