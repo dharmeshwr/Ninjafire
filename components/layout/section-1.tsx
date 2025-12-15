@@ -45,9 +45,9 @@ export default async function Section() {
             <p className="mb-1 text-center font-gloucester text-3xl uppercase">
               His interests
             </p>
-            min-[800px]:col-span-2 He’s super into linux, neovim and scripting,
-            regenerative arts, open-source stuff, playing and making little
-            games — basically, he never stops learning and building.
+            He’s super into linux, neovim and scripting, regenerative arts,
+            open-source stuff, playing and making little games — basically, he
+            never stops learning and building.
           </div>
         </div>
 
