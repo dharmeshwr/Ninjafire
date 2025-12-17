@@ -1,15 +1,14 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 
 import useGazeTracking from "@/hooks/use-gaze-tracking";
 
 export const Profile = () => {
-  const containerRef = useRef<HTMLDivElement | null>(null);
   const [displayedSrc, setDisplayedSrc] = useState("/profile/index.png");
 
-  const { currentImage } = useGazeTracking(containerRef, "/profile/faces/");
+  const { currentImage } = useGazeTracking("/profile/faces/");
 
   useEffect(() => {
     if (currentImage) {
@@ -22,7 +21,7 @@ export const Profile = () => {
   };
 
   return (
-    <div className="flex h-fit justify-center" ref={containerRef}>
+    <div className="flex h-fit justify-center">
       <Image
         src={displayedSrc}
         alt="profile picture"
