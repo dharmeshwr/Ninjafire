@@ -1,5 +1,4 @@
 import { getQuote } from "@/actions/quote-action";
-import { getWeather } from "@/actions/weather-action";
 import { format } from "date-fns";
 
 import Logo from "../ui/logo";
@@ -7,7 +6,6 @@ import WeatherBox from "../ui/weather";
 import { Address } from "./address";
 
 export default async function Header() {
-  const weather = await getWeather();
   const quote = await getQuote();
   const date = format(new Date(), "EEEE, MMM dd, yyyy");
 
@@ -35,7 +33,11 @@ export default async function Header() {
           </div>
         </div>
 
-        <WeatherBox weather={weather} />
+        <WeatherBox
+          weather={
+            "Cloudy and cool with light winds and scattered showers likely"
+          }
+        />
       </div>
 
       <div className="mt-4">

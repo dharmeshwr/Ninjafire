@@ -27,8 +27,8 @@ const COLORS = {
 const MOCK_NODES = Array.from({ length: NODE_COUNT }, (_, i) => ({
   id: `node-${i}`,
   label: `Note ${i}`,
-  x: Math.random() * window.innerWidth,
-  y: Math.random() * window.innerHeight,
+  x: typeof window === "undefined" ? 0 : Math.random() * window.innerWidth,
+  y: typeof window === "undefined" ? 0 : Math.random() * window.innerHeight,
 }));
 
 const createWalls = (width: number, height: number) => {
@@ -192,7 +192,7 @@ export default function Nodes() {
 
   useEffect(() => {
     const canvas = canvasRef.current;
-    if (!canvas) return;
+    if (typeof window === "undefined" || !canvas) return;
 
     // Create physics engine
     const engine = Matter.Engine.create({ enableSleeping: false });
