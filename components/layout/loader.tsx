@@ -3,6 +3,7 @@
 import "@/styles/loader.css";
 
 import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
 import Balancer from "react-wrap-balancer";
 
 export default function LoaderWrapper({
@@ -11,6 +12,7 @@ export default function LoaderWrapper({
   children: React.ReactNode;
 }) {
   const [loading, setLoading] = useState(true);
+  const pathname = usePathname();
 
   useEffect(() => {
     const handleLoad = () => setTimeout(() => setLoading(false), 500);
@@ -22,7 +24,7 @@ export default function LoaderWrapper({
     }
   }, []);
 
-  if (process.env.NODE_ENV === "development") {
+  if (process.env.NODE_ENV === "development" || pathname !== "/") {
     return <>{children}</>;
   }
 
