@@ -179,7 +179,7 @@ export default function Page() {
     const length = buffer.length * buffer.numberOfChannels * 2;
     const arrayBuffer = new ArrayBuffer(44 + length);
     const view = new DataView(arrayBuffer);
-    const channels = [];
+    const channels: Float32Array[] = [];
     let offset = 0;
     let pos = 0;
 
