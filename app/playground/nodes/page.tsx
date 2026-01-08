@@ -12,6 +12,9 @@ const PHYSICS_CONFIG = {
   frictionAir: 0.1,
   restitution: 0.3,
   friction: 0.1,
+  repulsionStrength: 0.8,
+  repulsionRange: 150,
+  centralGravityStrength: 0.0003,
 };
 
 const COLORS = {
@@ -131,6 +134,45 @@ const createConnections = (bodies: Matter.Body[]) => {
   return constraints;
 };
 
+const applyRepulsion = (allBodies: Matter.Body[]) => {
+  const centerX = window.innerWidth / 2;
+  const centerY = window.innerHeight / 2;
+
+  allBodies.forEach((bodyA) => {
+    // Skip walls and static bodies
+    if (bodyA.isStatic) return;
+
+    // Apply repulsion between nodes
+    allBodies.forEach((bodyB) => {
+      if (bodyA === bodyB || bodyB.isStatic) return;
+
+      const dx = bodyA.position.x - bodyB.position.x;
+      const dy = bodyA.position.y - bodyB.position.y;
+      const distance = Math.sqrt(dx * dx + dy * dy);
+
+      if (distance < PHYSICS_CONFIG.repulsionRange! && distance > 0) {
+        const force = PHYSICS_CONFIG.repulsionStrength! / (distance * distance);
+        const forceX = (dx / distance) * force;
+        const forceY = (dy / distance) * force;
+
+        Matter.Body.applyForce(bodyA, bodyA.position, {
+          x: forceX,
+          y: forceY,
+        });
+      }
+    });
+
+    // Apply central gravity to pull nodes back toward center
+    const toCenterX = centerX - bodyA.position.x;
+    const toCenterY = centerY - bodyA.position.y;
+
+    Matter.Body.applyForce(bodyA, bodyA.position, {
+      x: toCenterX * PHYSICS_CONFIG.centralGravityStrength!,
+      y: toCenterY * PHYSICS_CONFIG.centralGravityStrength!,
+    });
+  });
+};
+
 const handleHoverEffects = (
   bodies: Matter.Body[],
   canvas: HTMLCanvasElement,
@@ -223,6 +265,10 @@ export default function Nodes() {
     // Setup mouse interaction
     const { mouse, mouseConstraint } = setupMouseInteraction(engine, render);
     Matter.Composite.add(engine.world, mouseConstraint);
+
+    Matter.Events.on(render, "beforeUpdate", () => {
+      applyRepulsion(bodies);
+    });
 
     Matter.Events.on(render, "beforeRender", () => {
       handleHoverEffects(bodies, canvas, mouse, mouseConstraint);

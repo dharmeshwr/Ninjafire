@@ -75,9 +75,9 @@ const ControlPanel = ({ children, name, collapsed = 0 }: ControlPanelProps) => {
           }}
         >
           {isCollapsed <= 1 ? (
-            <X className="size-4 text-gray-400" />
+            <X className="size-4 text-gray-400 outline-none" />
           ) : (
-            <Settings className="size-4 text-gray-400" />
+            <Settings className="size-4 text-gray-400 outline-none" />
           )}
         </button>
       </div>
