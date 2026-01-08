@@ -331,8 +331,8 @@ export default function Page() {
     initAudio();
 
     const phases = ["red", "green", "blue"] as const;
-    let startRow = startPos?.row ?? 0;
-    let startCol = startPos?.col ?? 0;
+    const startRow = startPos?.row ?? 0;
+    const startCol = startPos?.col ?? 0;
     let startPhaseIndex = startPos?.phase
       ? phases.indexOf(startPos.phase as any)
       : 0;
