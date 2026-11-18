@@ -20,7 +20,7 @@ export default function Section() {
         </span>
         <div>
           <a
-            href={"https://revord.org"}
+            href={"https://revord.app"}
             target="_blank"
             rel="noopener noreferrer"
             className="sec-heading cursor-pointer font-gloucester hover:underline"
@@ -63,7 +63,7 @@ export default function Section() {
 
         <div>
           <a
-            href={"https://drapes-ui.vercel.app"}
+            href={"https://drapes.cc"}
             target="_blank"
             rel="noopener noreferrer"
             className="sec-heading cursor-pointer font-gloucester hover:underline"
